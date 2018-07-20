@@ -51,7 +51,7 @@ namespace S32PSave
         public string PN;
     }
 
-    class Util
+    public class Util
     {
         //public static string DB_MesDataCenterConnectionString = "Provider=SQLNCLI11;Data Source=172.20.23.107;Persist Security Info=True;User ID=sa;Initial Catalog=MesDataCenter;Password=data'songyy";
         //public static string DB_HTPSDBConnectionString = "Provider=SQLNCLI11;Data Source=172.20.23.107;Persist Security Info=True;User ID=sa;Initial Catalog=HTPSDB;Password=data'songyy";
@@ -225,6 +225,23 @@ namespace S32PSave
             ret.MO = MO;
             ret.PN = PN;
             return ret;
+        }
+
+        /// <summary>
+        /// 获取已经保存的对应料号和工单的数量
+        /// </summary>
+        /// <param name="MO">工单</param>
+        /// <param name="PN">料号</param>
+        /// <param name="testNo">测试次数</param>
+        /// <returns>已经保存的数量</returns>
+        public static int getSavedNumber(string MO, string PN,int testNo)
+        {
+            string querySql = "SELECT count(ID) FROM S32PSave WHERE MO=? AND PN=? AND testNo=?";
+            OleDbParameter[] b = new OleDbParameter[3];
+            b[0] = new OleDbParameter("0", MO);
+            b[1] = new OleDbParameter("1", PN);
+            b[2] = new OleDbParameter("2", testNo);
+           return (int)DbHelperOleDb.GetSingle(querySql, DB_MesDataCenterConnectionString, b);
         }
 
         private static string slashRepalce(string source) {

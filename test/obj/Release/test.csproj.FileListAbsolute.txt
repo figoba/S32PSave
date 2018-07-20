@@ -1,0 +1,10 @@
+D:\gitProjects\S32PSave\test\bin\Release\test.dll
+D:\gitProjects\S32PSave\test\bin\Release\test.pdb
+D:\gitProjects\S32PSave\test\bin\Release\32p_analyze.dll
+D:\gitProjects\S32PSave\test\bin\Release\S32PSave.exe
+D:\gitProjects\S32PSave\test\bin\Release\virtualIIC.dll
+D:\gitProjects\S32PSave\test\bin\Release\S32PSave.pdb
+D:\gitProjects\S32PSave\test\bin\Release\S32PSave.XmlSerializers.dll
+D:\gitProjects\S32PSave\test\obj\Release\test.csprojResolveAssemblyReference.cache
+D:\gitProjects\S32PSave\test\obj\Release\test.dll
+D:\gitProjects\S32PSave\test\obj\Release\test.pdb

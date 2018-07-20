@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.textSN = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
@@ -118,6 +118,8 @@
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.labelX18 = new DevComponents.DotNetBar.LabelX();
+            this.txtMoSum = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -326,6 +328,8 @@
             // 
             this.tabControlPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tabControlPanel1.CanvasColor = System.Drawing.Color.Transparent;
+            this.tabControlPanel1.Controls.Add(this.txtMoSum);
+            this.tabControlPanel1.Controls.Add(this.labelX18);
             this.tabControlPanel1.Controls.Add(this.tabControl2);
             this.tabControlPanel1.Controls.Add(this.labelCableStatus);
             this.tabControlPanel1.Controls.Add(this.progressBarX1);
@@ -420,10 +424,10 @@
             // 
             // chartSDD11Full
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartSDD11Full.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartSDD11Full.Legends.Add(legend3);
+            chartArea5.Name = "ChartArea1";
+            this.chartSDD11Full.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chartSDD11Full.Legends.Add(legend5);
             this.chartSDD11Full.Location = new System.Drawing.Point(4, 0);
             this.chartSDD11Full.Name = "chartSDD11Full";
             this.chartSDD11Full.Size = new System.Drawing.Size(999, 336);
@@ -456,10 +460,10 @@
             // 
             // chartSDD21Full
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartSDD21Full.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartSDD21Full.Legends.Add(legend4);
+            chartArea6.Name = "ChartArea1";
+            this.chartSDD21Full.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chartSDD21Full.Legends.Add(legend6);
             this.chartSDD21Full.Location = new System.Drawing.Point(4, 0);
             this.chartSDD21Full.Name = "chartSDD21Full";
             this.chartSDD21Full.Size = new System.Drawing.Size(999, 336);
@@ -519,7 +523,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(832, 25);
+            this.button1.Location = new System.Drawing.Point(831, 56);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(63, 21);
             this.button1.TabIndex = 23;
@@ -1296,7 +1300,7 @@
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(98, 24);
             this.labelX12.TabIndex = 19;
-            this.labelX12.Text = "Ver:1.28";
+            this.labelX12.Text = "Ver:1.30";
             // 
             // labelX13
             // 
@@ -1309,7 +1313,37 @@
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(150, 22);
             this.labelX13.TabIndex = 20;
-            this.labelX13.Text = "Date:20180707";
+            this.labelX13.Text = "Date:20180720";
+            // 
+            // labelX18
+            // 
+            this.labelX18.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.labelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX18.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX18.ForeColor = System.Drawing.Color.Black;
+            this.labelX18.Location = new System.Drawing.Point(821, 9);
+            this.labelX18.Name = "labelX18";
+            this.labelX18.Size = new System.Drawing.Size(54, 33);
+            this.labelX18.TabIndex = 30;
+            this.labelX18.Text = "MO sum";
+            // 
+            // txtMoSum
+            // 
+            this.txtMoSum.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtMoSum.Border.Class = "TextBoxBorder";
+            this.txtMoSum.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMoSum.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMoSum.ForeColor = System.Drawing.Color.Black;
+            this.txtMoSum.Location = new System.Drawing.Point(881, 11);
+            this.txtMoSum.Name = "txtMoSum";
+            this.txtMoSum.Size = new System.Drawing.Size(141, 26);
+            this.txtMoSum.TabIndex = 31;
             // 
             // frmMain
             // 
@@ -1433,6 +1467,8 @@
         private DevComponents.Editors.ComboItem comboItem9;
         private DevComponents.Editors.ComboItem comboItem10;
         private DevComponents.Editors.ComboItem comboItem11;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtMoSum;
+        private DevComponents.DotNetBar.LabelX labelX18;
     }
 }
 

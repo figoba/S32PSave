@@ -383,6 +383,39 @@ namespace Core.DBUtility
         }
 
         /// <summary>
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
+        /// </summary>
+        /// <param name="SQLString">计算查询结果语句</param>
+        /// <returns>查询结果（object）</returns>
+        public static object GetSingle(string SQLString,string connectionString, params OleDbParameter[] cmdParms)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+                using (OleDbCommand cmd = new OleDbCommand())
+                {
+                    try
+                    {
+                        PrepareCommand(cmd, connection, null, SQLString, cmdParms);
+                        object obj = cmd.ExecuteScalar();
+                        cmd.Parameters.Clear();
+                        if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return obj;
+                        }
+                    }
+                    catch (System.Data.OleDb.OleDbException e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// 执行查询语句，返回OleDbDataReader
         /// </summary>
         /// <param name="strSQL">查询语句</param>

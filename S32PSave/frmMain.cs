@@ -76,6 +76,8 @@ namespace S32PSave
         public string saveS32pPath = "";
         public int testNo = -1;
         public const string configFilePath = "config.xml";
+        public int MONumber = -1;//工单数量
+        public int MOTolerance=20;//工单数量误差百分比
         public Dictionary<string, testParams> testparamList;
         public frmMain()
         {
@@ -954,6 +956,7 @@ namespace S32PSave
                 textSN.BackColor = Color.Gray;
                 textSN.ForeColor = Color.White;
                 addStatus("MO,PN matched");
+                MONumber = ret.MONumber;
                 //spec = Util.getPNSpec(PN);
                 //if (spec == null)
                 //{
@@ -967,6 +970,7 @@ namespace S32PSave
                
             }
             else {
+                MONumber = -1;
                 autoSNStatusSet();
                 MessageBoxEx.Show(ret.msg);
             }
@@ -1376,6 +1380,7 @@ namespace S32PSave
             textSN.Enabled = true;
             textSN.BackColor = this.BackColor;
             textSN.ForeColor = this.ForeColor;
+            txtMoSum.BackColor = this.BackColor;
         }
        private bool getSN(string MO,string PN){
            SNData snData=Util.getITSN(MO, PN);
@@ -1390,6 +1395,13 @@ namespace S32PSave
            string sn = snData.label;
         textSN.Text = sn;
         addStatus("get sn: " + sn + " from WCF success!");
+        
+           int moSum=Util.getSavedNumber(MO, PN, int.Parse(cmbTestNo.Text));
+           txtMoSum.Text = moSum.ToString();
+           if (moSum > (MOTolerance + 100) * MONumber / 100) {
+               txtMoSum.BackColor = Color.LightCyan;
+               MessageBoxEx.Show("please note that:used sn mumber is more than MO num");
+           }
         return true;
        }
 
@@ -1599,6 +1611,8 @@ namespace S32PSave
                txtVisaAddress.Text = readConfig.VisaAddress;
                visaAddress = txtVisaAddress.Text;
                cmbResolution.SelectedIndex = readConfig.ResolutionIndex;
+               MOTolerance=readConfig.MoTolerance>0?MOTolerance:0;
+              
                return true;
            }
        }
@@ -1622,6 +1636,7 @@ namespace S32PSave
            saveConfig.Skin = cmbSkin.SelectedIndex;
            saveConfig.VisaAddress = txtVisaAddress.Text;
            saveConfig.ResolutionIndex = cmbResolution.SelectedIndex;
+           saveConfig.MoTolerance = MOTolerance;
            return Util.saveConfig(saveConfig, configFilePath);
        }
 

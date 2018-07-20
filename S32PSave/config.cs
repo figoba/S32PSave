@@ -108,6 +108,17 @@ namespace S32PSave
             get { return resolutionIndex; }
             set { resolutionIndex = value; }
         }
+        private int moTolerance;
+
+        public int MoTolerance
+        {
+            get { return moTolerance; }
+            set { moTolerance = value; }
+        }
+
+    
+
+      
     }
 
     #region 数据库测试记录
