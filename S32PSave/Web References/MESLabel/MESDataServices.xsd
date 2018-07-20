@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.20.123:8081/MESDataServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DAL" />
+  <xs:element name="GetDataFromSFC">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="spName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="parameters" nillable="true" type="q1:ArrayOfSqlParam" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataFromSFCResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetDataFromSFCResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertDataToSFC">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="spName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DAL" minOccurs="0" name="parameters" nillable="true" type="q2:ArrayOfSqlParam" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertDataToSFCResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertDataToSFCResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTiptopBOMInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PartNO" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTiptopBOMInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTiptopBOMInfoResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCheckEquipment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="EquipmentNO" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCheckEquipmentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCheckEquipmentResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+        <xs:element minOccurs="0" name="ValidQuantity" type="xs:int" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecEquipmentUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="EquipmentNO" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProudctId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecEquipmentUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExecEquipmentUpdateResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+        <xs:element minOccurs="0" name="ValidQuantity" type="xs:int" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecEquipmentOAUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="EquipmentNO" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="OAUrl" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecEquipmentOAUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExecEquipmentOAUpdateResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEncrytString">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strText" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEncrytStringResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetEncrytStringResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertCADVersion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ComputerName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PartNO" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertCADVersionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertCADVersionResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPLMECN">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ECNID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPLMECNResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetPLMECNResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetECNBom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PartNO" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetECNBomResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetECNBomResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecECNBomUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dtBom" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="ECNID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PARTNUMBER" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecECNBomUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExecECNBomUpdateResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecMOProduceItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="MOID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecMOProduceItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExecMOProduceItemResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="outScanQuantity" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecEBUMOProduceItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="MOID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecEBUMOProduceItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExecEBUMOProduceItemResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="outScanQuantity" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetMoidAlter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Profitcenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Moid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PartID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ReMark" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetMoidAlterResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SetMoidAlterResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCheckAssysData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BarCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="StationId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCheckAssysDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCheckAssysDataResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecTestResultProc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BarCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="StationId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecTestResultProcResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExecTestResultProcResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckEquLife">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EquipmentNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="times" type="xs:int" />
+        <xs:element minOccurs="0" name="type" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckEquLifeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckEquLifeResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSystemAddress">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UpdateType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSystemAddressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSystemAddressResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSetting">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ParameterType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SettingCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSettingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSettingResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SFS01" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSFCFileResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecMaterialIssue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SFB01" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ReelBarCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecMaterialIssueResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExecMaterialIssueResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="RequirementQuantity" type="xs:float" />
+        <xs:element minOccurs="0" name="TransactionQuantity" type="xs:float" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactoryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SFS01" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSFCStatusResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHWOutQty">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HWPONumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PartID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHWOutQtyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetHWOutQtyResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="outQty" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rtMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckSfcMoPN">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strMOID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPartId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFactoryID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strOutPartId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckSfcMoPNResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckSfcMoPNResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strOutPartId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCNewFSN">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strMOID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPSN" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strStationID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="blnInstant" type="xs:boolean" />
+        <xs:element minOccurs="0" name="strUserID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFactoryID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFSN" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCNewFSNResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSFCNewFSNResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFSN" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PrintSFCFSNLabel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strFSN" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="blnTestResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="blnTestMashine" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strStationID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="blnPrint" type="xs:boolean" />
+        <xs:element minOccurs="0" name="blnSaveTestRecord" type="xs:boolean" />
+        <xs:element minOccurs="0" name="strFactoryID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintContent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PrintSFCFSNLabelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PrintSFCFSNLabelResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintContent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PrintSFCFSNLabelN">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strFSN" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strStationID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strUserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFactoryID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="iPrintCount" type="xs:int" />
+        <xs:element minOccurs="0" name="strFSNPE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintContent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PrintSFCFSNLabelNResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PrintSFCFSNLabelNResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFSNPE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintContent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PrintSFCFSNPocket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strFSN" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strStationID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strUserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFactoryID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="iPrintCount" type="xs:int" />
+        <xs:element minOccurs="0" name="strFSNPE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintContent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PrintSFCFSNPocketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PrintSFCFSNPocketResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFSNPE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintContent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RePrintSFCFSNPocket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strFSN" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strStationID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strUserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFactoryID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strProfitCenter" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="iPrintCount" type="xs:int" />
+        <xs:element minOccurs="0" name="strFSNPE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintContent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RePrintSFCFSNPocketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RePrintSFCFSNPocketResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFSNPE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPrintContent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckUserAuthority">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strUserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strPwd" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckUserAuthorityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckUserAuthorityResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCFChildTPart">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strParentPartId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCFChildTPartResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSFCFChildTPartResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCFChildMoid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strParentMoid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSFCFChildMoidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSFCFChildMoidResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckMoUNTreatedNG">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strMOID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckMoUNTreatedNGResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckMoUNTreatedNGResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServiceInterface">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ServiceParamList" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServiceInterfaceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServiceInterfaceResult" nillable="true" type="xs:anyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

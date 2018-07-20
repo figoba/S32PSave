@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MESDataServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.20.123:8081/MESDataServices.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.20.123:8081/MESDataServices.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.20.123:8081/MESDataServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DAL" />
+      <xsd:import schemaLocation="http://192.168.20.123:8081/MESDataServices.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMESDataServices_GetDataFromSFC_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataFromSFC" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetDataFromSFC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataFromSFCResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_InsertDataToSFC_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertDataToSFC" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_InsertDataToSFC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertDataToSFCResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetTiptopBOMInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTiptopBOMInfo" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetTiptopBOMInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTiptopBOMInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetCheckEquipment_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckEquipment" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetCheckEquipment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckEquipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecEquipmentUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecEquipmentUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecEquipmentUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecEquipmentUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecEquipmentOAUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecEquipmentOAUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecEquipmentOAUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecEquipmentOAUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetEncrytString_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEncrytString" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetEncrytString_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEncrytStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_InsertCADVersion_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertCADVersion" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_InsertCADVersion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertCADVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetPLMECN_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPLMECN" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetPLMECN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPLMECNResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetECNBom_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetECNBom" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetECNBom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetECNBomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecECNBomUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecECNBomUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecECNBomUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecECNBomUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecMOProduceItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecMOProduceItem" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecMOProduceItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecMOProduceItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecEBUMOProduceItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecEBUMOProduceItem" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecEBUMOProduceItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecEBUMOProduceItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_SetMoidAlter_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetMoidAlter" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_SetMoidAlter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetMoidAlterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetCheckAssysData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckAssysData" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetCheckAssysData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckAssysDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecTestResultProc_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecTestResultProc" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecTestResultProc_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecTestResultProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_CheckEquLife_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckEquLife" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_CheckEquLife_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckEquLifeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSystemAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemAddress" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSystemAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSetting_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSetting" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSetting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSettingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCFile" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecMaterialIssue_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecMaterialIssue" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ExecMaterialIssue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecMaterialIssueResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCStatus" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetHWOutQty_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHWOutQty" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetHWOutQty_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHWOutQtyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_CheckSfcMoPN_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSfcMoPN" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_CheckSfcMoPN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSfcMoPNResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCNewFSN_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCNewFSN" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCNewFSN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCNewFSNResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_PrintSFCFSNLabel_InputMessage">
+    <wsdl:part name="parameters" element="tns:PrintSFCFSNLabel" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_PrintSFCFSNLabel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PrintSFCFSNLabelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_PrintSFCFSNLabelN_InputMessage">
+    <wsdl:part name="parameters" element="tns:PrintSFCFSNLabelN" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_PrintSFCFSNLabelN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PrintSFCFSNLabelNResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_PrintSFCFSNPocket_InputMessage">
+    <wsdl:part name="parameters" element="tns:PrintSFCFSNPocket" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_PrintSFCFSNPocket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PrintSFCFSNPocketResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_RePrintSFCFSNPocket_InputMessage">
+    <wsdl:part name="parameters" element="tns:RePrintSFCFSNPocket" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_RePrintSFCFSNPocket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RePrintSFCFSNPocketResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_CheckUserAuthority_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckUserAuthority" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_CheckUserAuthority_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckUserAuthorityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCFChildTPart_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCFChildTPart" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCFChildTPart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCFChildTPartResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCFChildMoid_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCFChildMoid" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_GetSFCFChildMoid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSFCFChildMoidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_CheckMoUNTreatedNG_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckMoUNTreatedNG" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_CheckMoUNTreatedNG_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckMoUNTreatedNGResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ServiceInterface_InputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceInterface" />
+  </wsdl:message>
+  <wsdl:message name="IMESDataServices_ServiceInterface_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceInterfaceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMESDataServices">
+    <wsdl:operation name="GetDataFromSFC">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetDataFromSFC" message="tns:IMESDataServices_GetDataFromSFC_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetDataFromSFCResponse" message="tns:IMESDataServices_GetDataFromSFC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertDataToSFC">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/InsertDataToSFC" message="tns:IMESDataServices_InsertDataToSFC_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/InsertDataToSFCResponse" message="tns:IMESDataServices_InsertDataToSFC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTiptopBOMInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetTiptopBOMInfo" message="tns:IMESDataServices_GetTiptopBOMInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetTiptopBOMInfoResponse" message="tns:IMESDataServices_GetTiptopBOMInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckEquipment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetCheckEquipment" message="tns:IMESDataServices_GetCheckEquipment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetCheckEquipmentResponse" message="tns:IMESDataServices_GetCheckEquipment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecEquipmentUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/ExecEquipmentUpdate" message="tns:IMESDataServices_ExecEquipmentUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/ExecEquipmentUpdateResponse" message="tns:IMESDataServices_ExecEquipmentUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecEquipmentOAUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/ExecEquipmentOAUpdate" message="tns:IMESDataServices_ExecEquipmentOAUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/ExecEquipmentOAUpdateResponse" message="tns:IMESDataServices_ExecEquipmentOAUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEncrytString">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetEncrytString" message="tns:IMESDataServices_GetEncrytString_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetEncrytStringResponse" message="tns:IMESDataServices_GetEncrytString_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertCADVersion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/InsertCADVersion" message="tns:IMESDataServices_InsertCADVersion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/InsertCADVersionResponse" message="tns:IMESDataServices_InsertCADVersion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPLMECN">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetPLMECN" message="tns:IMESDataServices_GetPLMECN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetPLMECNResponse" message="tns:IMESDataServices_GetPLMECN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetECNBom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetECNBom" message="tns:IMESDataServices_GetECNBom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetECNBomResponse" message="tns:IMESDataServices_GetECNBom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecECNBomUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/ExecECNBomUpdate" message="tns:IMESDataServices_ExecECNBomUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/ExecECNBomUpdateResponse" message="tns:IMESDataServices_ExecECNBomUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecMOProduceItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/ExecMOProduceItem" message="tns:IMESDataServices_ExecMOProduceItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/ExecMOProduceItemResponse" message="tns:IMESDataServices_ExecMOProduceItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecEBUMOProduceItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/ExecEBUMOProduceItem" message="tns:IMESDataServices_ExecEBUMOProduceItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/ExecEBUMOProduceItemResponse" message="tns:IMESDataServices_ExecEBUMOProduceItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMoidAlter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/SetMoidAlter" message="tns:IMESDataServices_SetMoidAlter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/SetMoidAlterResponse" message="tns:IMESDataServices_SetMoidAlter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckAssysData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetCheckAssysData" message="tns:IMESDataServices_GetCheckAssysData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetCheckAssysDataResponse" message="tns:IMESDataServices_GetCheckAssysData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecTestResultProc">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/ExecTestResultProc" message="tns:IMESDataServices_ExecTestResultProc_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/ExecTestResultProcResponse" message="tns:IMESDataServices_ExecTestResultProc_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckEquLife">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/CheckEquLife" message="tns:IMESDataServices_CheckEquLife_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/CheckEquLifeResponse" message="tns:IMESDataServices_CheckEquLife_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetSystemAddress" message="tns:IMESDataServices_GetSystemAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetSystemAddressResponse" message="tns:IMESDataServices_GetSystemAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSetting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetSetting" message="tns:IMESDataServices_GetSetting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetSettingResponse" message="tns:IMESDataServices_GetSetting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCFile" message="tns:IMESDataServices_GetSFCFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCFileResponse" message="tns:IMESDataServices_GetSFCFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecMaterialIssue">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/ExecMaterialIssue" message="tns:IMESDataServices_ExecMaterialIssue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/ExecMaterialIssueResponse" message="tns:IMESDataServices_ExecMaterialIssue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCStatus" message="tns:IMESDataServices_GetSFCStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCStatusResponse" message="tns:IMESDataServices_GetSFCStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHWOutQty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetHWOutQty" message="tns:IMESDataServices_GetHWOutQty_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetHWOutQtyResponse" message="tns:IMESDataServices_GetHWOutQty_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSfcMoPN">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/CheckSfcMoPN" message="tns:IMESDataServices_CheckSfcMoPN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/CheckSfcMoPNResponse" message="tns:IMESDataServices_CheckSfcMoPN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCNewFSN">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCNewFSN" message="tns:IMESDataServices_GetSFCNewFSN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCNewFSNResponse" message="tns:IMESDataServices_GetSFCNewFSN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintSFCFSNLabel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/PrintSFCFSNLabel" message="tns:IMESDataServices_PrintSFCFSNLabel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/PrintSFCFSNLabelResponse" message="tns:IMESDataServices_PrintSFCFSNLabel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintSFCFSNLabelN">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/PrintSFCFSNLabelN" message="tns:IMESDataServices_PrintSFCFSNLabelN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/PrintSFCFSNLabelNResponse" message="tns:IMESDataServices_PrintSFCFSNLabelN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintSFCFSNPocket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/PrintSFCFSNPocket" message="tns:IMESDataServices_PrintSFCFSNPocket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/PrintSFCFSNPocketResponse" message="tns:IMESDataServices_PrintSFCFSNPocket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RePrintSFCFSNPocket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/RePrintSFCFSNPocket" message="tns:IMESDataServices_RePrintSFCFSNPocket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/RePrintSFCFSNPocketResponse" message="tns:IMESDataServices_RePrintSFCFSNPocket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAuthority">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/CheckUserAuthority" message="tns:IMESDataServices_CheckUserAuthority_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/CheckUserAuthorityResponse" message="tns:IMESDataServices_CheckUserAuthority_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCFChildTPart">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCFChildTPart" message="tns:IMESDataServices_GetSFCFChildTPart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCFChildTPartResponse" message="tns:IMESDataServices_GetSFCFChildTPart_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCFChildMoid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCFChildMoid" message="tns:IMESDataServices_GetSFCFChildMoid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/GetSFCFChildMoidResponse" message="tns:IMESDataServices_GetSFCFChildMoid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckMoUNTreatedNG">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/CheckMoUNTreatedNG" message="tns:IMESDataServices_CheckMoUNTreatedNG_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/CheckMoUNTreatedNGResponse" message="tns:IMESDataServices_CheckMoUNTreatedNG_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ServiceInterface">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMESDataServices/ServiceInterface" message="tns:IMESDataServices_ServiceInterface_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMESDataServices/ServiceInterfaceResponse" message="tns:IMESDataServices_ServiceInterface_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMESDataServices" type="tns:IMESDataServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDataFromSFC">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetDataFromSFC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertDataToSFC">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/InsertDataToSFC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTiptopBOMInfo">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetTiptopBOMInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckEquipment">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetCheckEquipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecEquipmentUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/ExecEquipmentUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecEquipmentOAUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/ExecEquipmentOAUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEncrytString">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetEncrytString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertCADVersion">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/InsertCADVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPLMECN">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetPLMECN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetECNBom">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetECNBom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecECNBomUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/ExecECNBomUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecMOProduceItem">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/ExecMOProduceItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecEBUMOProduceItem">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/ExecEBUMOProduceItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMoidAlter">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/SetMoidAlter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckAssysData">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetCheckAssysData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecTestResultProc">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/ExecTestResultProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckEquLife">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/CheckEquLife" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemAddress">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetSystemAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSetting">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetSetting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCFile">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetSFCFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecMaterialIssue">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/ExecMaterialIssue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCStatus">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetSFCStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHWOutQty">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetHWOutQty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSfcMoPN">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/CheckSfcMoPN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCNewFSN">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetSFCNewFSN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintSFCFSNLabel">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/PrintSFCFSNLabel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintSFCFSNLabelN">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/PrintSFCFSNLabelN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintSFCFSNPocket">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/PrintSFCFSNPocket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RePrintSFCFSNPocket">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/RePrintSFCFSNPocket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAuthority">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/CheckUserAuthority" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCFChildTPart">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetSFCFChildTPart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSFCFChildMoid">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/GetSFCFChildMoid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckMoUNTreatedNG">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/CheckMoUNTreatedNG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServiceInterface">
+      <soap:operation soapAction="http://tempuri.org/IMESDataServices/ServiceInterface" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MESDataServices">
+    <wsdl:port name="BasicHttpBinding_IMESDataServices" binding="tns:BasicHttpBinding_IMESDataServices">
+      <soap:address location="http://192.168.20.123:8081/MESDataServices.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

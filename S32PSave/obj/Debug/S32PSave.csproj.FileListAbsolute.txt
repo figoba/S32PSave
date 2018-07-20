@@ -1,0 +1,12 @@
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\bin\Debug\S32PSave.exe.config
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\bin\Debug\S32PSave.exe
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\bin\Debug\S32PSave.pdb
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\bin\Debug\32p_analyze.dll
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\bin\Debug\InteropAssembly.dll
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\obj\Debug\S32PSave.csprojResolveAssemblyReference.cache
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\obj\Debug\S32PSave.frmMain.resources
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\obj\Debug\S32PSave.frmSetting.resources
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\obj\Debug\S32PSave.Properties.Resources.resources
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\obj\Debug\S32PSave.csproj.GenerateResource.Cache
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\obj\Debug\S32PSave.exe
+d:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\obj\Debug\S32PSave.pdb

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DAL" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DAL" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.20.123:8081/MESDataServices.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+  <xs:complexType name="ArrayOfSqlParam">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SqlParam" nillable="true" type="tns:SqlParam" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSqlParam" nillable="true" type="tns:ArrayOfSqlParam" />
+  <xs:complexType name="SqlParam">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data" name="_dateType" type="q1:DbType" />
+      <xs:element name="_fieldName" nillable="true" type="xs:string" />
+      <xs:element name="_fieldValue" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SqlParam" nillable="true" type="tns:SqlParam" />
+</xs:schema>

@@ -1,0 +1,17 @@
+d:\用户目录\我的文档\visual studio 2012\Projects\S32PSave\S32PSave\bin\x86\Release\S32PSave.exe.config
+d:\用户目录\我的文档\visual studio 2012\Projects\S32PSave\S32PSave\obj\x86\Release\S32PSave.frmMain.resources
+d:\用户目录\我的文档\visual studio 2012\Projects\S32PSave\S32PSave\obj\x86\Release\S32PSave.Properties.Resources.resources
+d:\用户目录\我的文档\visual studio 2012\Projects\S32PSave\S32PSave\obj\x86\Release\S32PSave.csproj.GenerateResource.Cache
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\bin\x86\Release\S32PSave.exe.config
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\bin\x86\Release\S32PSave.exe
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\bin\x86\Release\S32PSave.XmlSerializers.dll
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\bin\x86\Release\S32PSave.pdb
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\bin\x86\Release\32p_analyze.dll
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\bin\x86\Release\virtualIIC.dll
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Release\S32PSave.csprojResolveAssemblyReference.cache
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Release\S32PSave.frmMain.resources
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Release\S32PSave.Properties.Resources.resources
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Release\S32PSave.csproj.GenerateResource.Cache
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Release\S32PSave.exe
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Release\S32PSave.pdb
+D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Release\S32PSave.XmlSerializers.dll
