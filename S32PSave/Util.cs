@@ -217,7 +217,7 @@ namespace S32PSave
             string b=a.GetSFCNewFSN(MO, "", stationID, true, true, userID, factoryID, profitCenter, ref strFSN);
             string[] aret = strFSN.Split('#');
             ret.FSN = strFSN;
-            ret.label = slashRepalce(aret[0]);
+            ret.label = aret[0];
             ret.showDate = aret[1];
             ret.sn = aret[2];
             ret.customerData = aret[3];
@@ -244,7 +244,7 @@ namespace S32PSave
            return (int)DbHelperOleDb.GetSingle(querySql, DB_MesDataCenterConnectionString, b);
         }
 
-        private static string slashRepalce(string source) {
+        public static string slashRepalce(string source) {
             StringBuilder rBuilder = new StringBuilder(source); 
             foreach (char rInvalidChar in Path.GetInvalidFileNameChars())
                 rBuilder.Replace(rInvalidChar.ToString(), "-");

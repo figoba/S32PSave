@@ -411,7 +411,7 @@ namespace S32PSave
             plts.MeasureS32pFile();
 
             int fileNumber = plts.GetActiveFileIndex();
-            string dataFile = @saveFolderPath + "\\" + textSN.Text + "_" + cmbTestNo.Text + ".s32p";
+            string dataFile = @saveFolderPath + "\\" + Util.slashRepalce(textSN.Text) + "_" + cmbTestNo.Text + ".s32p";
             if (File.Exists(dataFile))
             {
                 File.Delete(dataFile);
@@ -436,7 +436,7 @@ namespace S32PSave
             if (!calibrated)
             {
                 addStatus("start calibrate");
-                calibrated = calibrate(@saveFolderPath + "\\" + textSN.Text + "_" + cmbTestNo.Text + ".s32p", snpPort, spec, textPN.Text.Trim(),ref results);
+                calibrated = calibrate(dataFile, snpPort, spec, textPN.Text.Trim(), ref results);
                 if (calibrated)
                 {
                     setResult(true);
@@ -459,7 +459,7 @@ namespace S32PSave
                     addStatus("data check set true,start data check");
                     //System.GC.Collect();
                     //addStatus("clean memory success");
-                    bool checkResult = calibrate(@saveFolderPath + "\\" + textSN.Text + "_" + cmbTestNo.Text + ".s32p", snpPort, spec, textPN.Text.Trim(),ref  results);
+                    bool checkResult = calibrate(dataFile, snpPort, spec, textPN.Text.Trim(), ref  results);
                     if (checkResult)
                     {
                         setResult(true);
@@ -1343,6 +1343,21 @@ namespace S32PSave
             }
         }
 
+        private delegate void MsgExCallback(string msg);
+
+        private void MsgEx(string msg)
+        {
+            if (this.InvokeRequired)
+            {
+                MsgExCallback d=new MsgExCallback(MsgEx);
+                this.Invoke(d, new object[] {msg});
+            }
+            else
+            {
+                MessageBoxEx.Show(msg);
+            }
+        }
+
         private delegate void SetaddStatusCallback(string msg);
         private void addStatus(string msg) {
             if (rTextStatus.InvokeRequired)
@@ -1384,6 +1399,7 @@ namespace S32PSave
         }
        private bool getSN(string MO,string PN){
            SNData snData=Util.getITSN(MO, PN);
+          
            if (!Util.saveSNRecord(snData))
            {
                addStatus("save sn data to DB fail!");
@@ -1398,7 +1414,9 @@ namespace S32PSave
         
            int moSum=Util.getSavedNumber(MO, PN, int.Parse(cmbTestNo.Text));
            txtMoSum.Text = moSum.ToString();
-           if (moSum > (MOTolerance + 100) * MONumber / 100) {
+           if (moSum > (MOTolerance + 100) * MONumber / 100)
+           {
+               
                txtMoSum.BackColor = Color.LightCyan;
                MessageBoxEx.Show("please note that:used sn mumber is more than MO num");
            }
@@ -1874,7 +1892,7 @@ namespace S32PSave
         private void cmbTestNo_SelectedIndexChanged(object sender, EventArgs e)
         {
             testNo = this.cmbTestNo.SelectedIndex + 1;
-            saveS32pPath = @saveFolderPath + "\\" + textSN.Text + "_" + cmbTestNo.Text + ".s32p";
+            saveS32pPath = @saveFolderPath + "\\" + Util.slashRepalce(textSN.Text) + "_" + cmbTestNo.Text + ".s32p";
         }
 
         private void txtVisaAddress_TextChanged(object sender, EventArgs e)

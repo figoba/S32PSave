@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.textSN = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
@@ -47,6 +47,8 @@
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.tabMain = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.txtMoSum = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX18 = new DevComponents.DotNetBar.LabelX();
             this.tabControl2 = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel10 = new DevComponents.DotNetBar.TabControlPanel();
             this.chartSDD11Full = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -118,8 +120,6 @@
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.labelX18 = new DevComponents.DotNetBar.LabelX();
-            this.txtMoSum = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -365,6 +365,36 @@
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
             // 
+            // txtMoSum
+            // 
+            this.txtMoSum.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtMoSum.Border.Class = "TextBoxBorder";
+            this.txtMoSum.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMoSum.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMoSum.ForeColor = System.Drawing.Color.Black;
+            this.txtMoSum.Location = new System.Drawing.Point(881, 11);
+            this.txtMoSum.Name = "txtMoSum";
+            this.txtMoSum.Size = new System.Drawing.Size(141, 26);
+            this.txtMoSum.TabIndex = 31;
+            // 
+            // labelX18
+            // 
+            this.labelX18.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.labelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX18.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX18.ForeColor = System.Drawing.Color.Black;
+            this.labelX18.Location = new System.Drawing.Point(797, 9);
+            this.labelX18.Name = "labelX18";
+            this.labelX18.Size = new System.Drawing.Size(77, 33);
+            this.labelX18.TabIndex = 30;
+            this.labelX18.Text = "MO sum";
+            // 
             // tabControl2
             // 
             this.tabControl2.BackColor = System.Drawing.Color.Transparent;
@@ -424,10 +454,10 @@
             // 
             // chartSDD11Full
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chartSDD11Full.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chartSDD11Full.Legends.Add(legend5);
+            chartArea3.Name = "ChartArea1";
+            this.chartSDD11Full.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartSDD11Full.Legends.Add(legend3);
             this.chartSDD11Full.Location = new System.Drawing.Point(4, 0);
             this.chartSDD11Full.Name = "chartSDD11Full";
             this.chartSDD11Full.Size = new System.Drawing.Size(999, 336);
@@ -460,10 +490,10 @@
             // 
             // chartSDD21Full
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chartSDD21Full.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chartSDD21Full.Legends.Add(legend6);
+            chartArea4.Name = "ChartArea1";
+            this.chartSDD21Full.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartSDD21Full.Legends.Add(legend4);
             this.chartSDD21Full.Location = new System.Drawing.Point(4, 0);
             this.chartSDD21Full.Name = "chartSDD21Full";
             this.chartSDD21Full.Size = new System.Drawing.Size(999, 336);
@@ -1300,7 +1330,7 @@
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(98, 24);
             this.labelX12.TabIndex = 19;
-            this.labelX12.Text = "Ver:1.30";
+            this.labelX12.Text = "Ver:1.31";
             // 
             // labelX13
             // 
@@ -1313,37 +1343,7 @@
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(150, 22);
             this.labelX13.TabIndex = 20;
-            this.labelX13.Text = "Date:20180720";
-            // 
-            // labelX18
-            // 
-            this.labelX18.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.labelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX18.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX18.ForeColor = System.Drawing.Color.Black;
-            this.labelX18.Location = new System.Drawing.Point(821, 9);
-            this.labelX18.Name = "labelX18";
-            this.labelX18.Size = new System.Drawing.Size(54, 33);
-            this.labelX18.TabIndex = 30;
-            this.labelX18.Text = "MO sum";
-            // 
-            // txtMoSum
-            // 
-            this.txtMoSum.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtMoSum.Border.Class = "TextBoxBorder";
-            this.txtMoSum.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtMoSum.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMoSum.ForeColor = System.Drawing.Color.Black;
-            this.txtMoSum.Location = new System.Drawing.Point(881, 11);
-            this.txtMoSum.Name = "txtMoSum";
-            this.txtMoSum.Size = new System.Drawing.Size(141, 26);
-            this.txtMoSum.TabIndex = 31;
+            this.labelX13.Text = "Date:20180728";
             // 
             // frmMain
             // 
