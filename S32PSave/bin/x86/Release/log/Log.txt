@@ -1,0 +1,90 @@
+2018/5/10 14:26:44
+error msg:can not find data start flag: # Hz S  RI   R 50
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.getPoints()
+
+
+
+
+
+2018/5/10 14:26:47
+error msg:can not find data start flag: # Hz S  RI   R 50
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.getPoints()
+
+
+
+
+
+2018/5/10 14:26:48
+error msg:can not find data start flag: # Hz S  RI   R 50
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.getPoints()
+
+
+
+
+
+2018/5/10 14:26:49
+error msg:can not find data start flag: # Hz S  RI   R 50
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.getPoints()
+
+
+
+
+
+2018/5/10 14:26:50
+error msg:can not find data start flag: # Hz S  RI   R 50
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.getPoints()
+
+
+
+
+
+2018/5/10 17:12:46
+error msg:SNP file not exist: D:\comS32p\30awg 2m\30awg\XX1-4_2.s32p
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP..ctor(String SNPFilePath, SNPPort snpPort)
+
+
+
+
+
+2018/5/11 10:18:19
+error msg:SNP file not exist: D:\comS32p\30awg 2m\30awg\XX1-4_2.s32p
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP..ctor(String SNPFilePath, SNPPort snpPort)
+
+
+
+
+
+2018/5/12 10:08:21
+error msg:SNP file not exist: D:\comS32p\30awg 2m\30awg\XX1-4_2.s32p
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP..ctor(String SNPFilePath, SNPPort snpPort)
+
+
+
+
+
+2018/5/12 10:09:46
+error msg:SNP file not exist: D:\comS32p\30awg 2m\30awg\XX1-4_2.s32p
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP..ctor(String SNPFilePath, SNPPort snpPort)
+
+
+
+
+
+2018/5/12 10:23:03
+error msg:SNP file not exist: D:\comS32p\30awg 2m\30awg\XX1-4_2.s32p
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP..ctor(String SNPFilePath, SNPPort snpPort)
+
+
+
+
+

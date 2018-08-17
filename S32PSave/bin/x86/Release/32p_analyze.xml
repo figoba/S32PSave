@@ -1,0 +1,280 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>32p_analyze</name>
+    </assembly>
+    <members>
+        <member name="T:_32p_analyze.SNPPort">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:_32p_analyze.detailItem">
+            <summary>
+            详细测试项目和对的名称
+            </summary>
+        </member>
+        <member name="T:_32p_analyze.DetailItemType">
+            <summary>
+            测试项目类型分类
+            </summary>
+        </member>
+        <member name="M:_32p_analyze.SConvert.getDelayArray(_32p_analyze.formatedData,System.Single,System.Int32,System.Boolean)">
+             <summary>
+            获取delay全部数据
+             </summary>
+             <param name="sPara">formatedData格式数据</param>
+             <param name="timeStep">时间间隔</param>
+             <param name="points">点数</param>
+             <param name="isDiff">是否为差分形式</param>
+        </member>
+        <member name="M:_32p_analyze.SConvert.getDelay(_32p_analyze.formatedData,System.Single,System.Boolean)">
+             <summary>
+            获取delay数据
+             </summary>
+             <param name="sPara">formatedData格式数据</param>
+             <param name="timeStep">时间间隔</param>   
+             <param name="isDiff">是否为差分形式</param>
+        </member>
+        <member name="M:_32p_analyze.SConvert.getResistance(System.Boolean,_32p_analyze.formatedData,System.Double,System.Double,System.Int32,System.Double)">
+             <summary>
+            阻抗转换
+             </summary>
+             <param name="isTDD">是否转换差分阻抗</param>
+             <param name="sPara">formatedData格式数据</param>
+             <param name="riseTime">上升时间</param>
+             <param name="timeStep">时间间隔</param>
+             <param name="tEnd">点数</param>
+             <param name="offset">修正值</param>
+        </member>
+        <member name="M:_32p_analyze.SConvert.getTCCConvert(_32p_analyze.formatedData,System.Double,System.Double,System.Int32,System.Double)">
+             <summary>
+            共模阻抗转换
+             </summary>
+             <param name="sPara">formatedData格式数据</param>
+             <param name="riseTime">上升时间</param>
+             <param name="timeStep">时间间隔</param>
+             <param name="tEnd">点数</param>
+             <param name="offset">修正值</param>
+        </member>
+        <member name="M:_32p_analyze.SConvert.getTDDConvert(_32p_analyze.formatedData,System.Double,System.Double,System.Int32,System.Double)">
+             <summary>
+            差分阻抗转换
+             </summary>
+             <param name="sPara">formatedData格式数据</param>
+             <param name="riseTime">上升时间</param>
+             <param name="timeStep">时间间隔</param>
+             <param name="tEnd">点数</param>
+             <param name="offset">修正值</param>
+        </member>
+        <member name="M:_32p_analyze.SConvert.indexArray``1(``0[0:,0:],System.Int32,System.Boolean)">
+            <summary>
+            索引数组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sourceArray"></param>
+            <param name="index"></param>
+            <param name="rowIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:_32p_analyze.SConvert.arrayCombine``1(System.Boolean,``0[][])">
+            <summary>
+            同样大小的一维数组合并成二维数组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="isbyRow">按行还是列合并</param>
+            <param name="args">待合并的一维数组</param>
+            <returns></returns>
+        </member>
+        <member name="F:_32p_analyze.SNP._next32">
+            <summary>
+            next constant define
+            </summary>
+        </member>
+        <member name="F:_32p_analyze.SNP._fext32">
+            <summary>
+            fext constant define
+            </summary>
+        </member>
+        <member name="M:_32p_analyze.SNP.#ctor(System.String,_32p_analyze.SNPPort)">
+            <summary>
+            初始化入口
+            </summary>
+            <param name="SNPFilePath">SNP文件路径</param>
+            <param name="snpPort">接线类型</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.getPoints">
+            <summary>
+            获取频率点
+            </summary>
+        </member>
+        <member name="M:_32p_analyze.SNP.getLineCount(System.String)">
+            <summary>
+            获取SNP文件行数
+            </summary>     
+        </member>
+        <member name="M:_32p_analyze.SNP.getRowLength">
+            <summary>
+            获取每个频率点的数据个数
+            </summary>     
+        </member>
+        <member name="M:_32p_analyze.SNP.getDataType">
+            <summary>
+            获取SNP文件格式ma,MA,RI,dB之一
+            </summary>
+        </member>
+        <member name="M:_32p_analyze.SNP.getData">
+            <summary>
+            获取格式化后的全部单端数据，包括实部和虚部
+            </summary>     
+        </member>
+        <member name="M:_32p_analyze.SNP.getPNAPortMap">
+            <summary>
+            返回1,3,2,4的接线顺序表
+            </summary>      
+        </member>
+        <member name="M:_32p_analyze.SNP.getDiffCalcu(System.String)">
+            <summary>
+            获取差分SDD21之类的单端计算表达式
+            </summary>      
+        </member>
+        <member name="M:_32p_analyze.SNP.getCalcArray(System.String[])">
+            <summary>
+            获取计算系数及符号
+            </summary>     
+        </member>
+        <member name="M:_32p_analyze.SNP.getFormatedData">
+            <summary>
+            获取格式化后的全部单端数据，包括实部和虚部
+            </summary>   
+        </member>
+        <member name="M:_32p_analyze.SNP.getDiff(System.String[])">
+            <summary>
+            获取频域参数，差分形式
+            </summary>
+            <param name="diffItem">频域参数数组</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.getSingle(System.String[])">
+            <summary>
+            获取频域参数，单端形式
+            </summary>
+            <param name="singleItem">频域参数数组</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.getColumn(System.String)">
+            <summary>
+            根据参数名，获取格式化的单端数据中的列索引
+            </summary>
+            <param name="singleItem">单端名称</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.delayConvertToSpara(System.String,System.Boolean)">
+            <summary>
+            将delay参数转成对应转换的差分或单端参数
+            </summary>
+            <param name="delayItem">delay参数名称，如DELAY21等</param>
+            <param name="isDiff">是否使用单端数据计算</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.TimeConvertToSpara(System.String,System.Boolean)">
+            <summary>
+            将时域参数转成对应转换的差分或共模参数
+            </summary>
+            <param name="timeItem">时域参数名称，如TDD11等</param>
+            <param name="isTDD">是否使用差分数据计算</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.getDelayArray(System.Boolean,System.String[],System.Single,System.Int32)">
+            <summary>
+            获取delay全部数据，横轴为时间，纵轴为电压
+            </summary>
+            <param name="isDiff">是否使用差分数据</param>
+            <param name="delayItem">delay参数名称，如DELAY21等</param>
+            <param name="timeStep">时间间隔</param>
+            <param name="points">点数</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.getDelay(System.Boolean,System.String[],System.Single)">
+            <summary>
+            获取delay数据
+            </summary>
+            <param name="isDiff">是否使用差分数据</param>
+            <param name="delayItem">delay参数名称，如DELAY21等</param>
+            <param name="timeStep">时间间隔</param>       
+        </member>
+        <member name="M:_32p_analyze.SNP.getTDD(System.String[],System.Double,System.Double,System.Int32,System.Double)">
+            <summary>
+            获取差分阻抗
+            </summary>
+            <param name="TimeDomainItem">差分阻抗名称</param>
+            <param name="riseTime">上升时间</param>
+            <param name="timeStep">时间间隔，可选</param>
+            <param name="tEnd">点数，可选</param>
+            <param name="offset">修正值</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.getTCC(System.String[],System.Double,System.Double,System.Int32,System.Double)">
+            <summary>
+            获取差分阻抗
+            </summary>
+            <param name="TimeDomainItem">共模阻抗名称</param>
+            <param name="riseTime">上升时间</param>
+            <param name="timeStep">时间间隔，可选</param>
+            <param name="tEnd">点数，可选</param>
+            <param name="offset">修正值</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.getResistance(System.Boolean,System.String[],System.Double,System.Double,System.Int32,System.Double)">
+            <summary>
+            获取阻抗
+            </summary>
+            <param name="isTDD">是否差分</param>
+            <param name="TimeDomainItem">阻抗名称</param>
+            <param name="riseTime">上升时间</param>
+            <param name="timeStep">时间间隔，可选</param>
+            <param name="tEnd">点数，可选</param>
+            <param name="offset">修正值</param>
+        </member>
+        <member name="M:_32p_analyze.SNP.EasyGetfreData(System.String,System.String[]@)">
+            <summary>
+            返回所有对应的频域参数
+            例如对于S32P的SDD21(衰减),实际上还包含SDD43，SDD65
+            等8个，本接口可一次返回全部8个参数，无需像调用
+            getDiff时需要显示指明SDD21,SDD43等8个参数
+            支持SDD21等16个差分参数，还有NEXT，FEXT，MDNEXT，
+            MDFEXT等。
+            </summary>
+            <param name="testItem">频域参数</param>
+            <param name="pairNames">对应的pair名称，按列排</param>
+            <returns></returns>
+        </member>
+        <member name="M:_32p_analyze.SNP.EasyGetTimeData(System.String,System.String[]@,System.Double,System.Double,System.Int32,System.Double)">
+            <summary>
+            返回所有的阻抗，仅支持TDD11,22和TCC11,22
+            11表示P1端，22表示P2端
+            </summary>
+            <param name="testItem">阻抗参数</param>
+            <param name="pairNames">对应的pair名称,按列排</param>
+            <param name="riseTime">上升时间</param>
+            <param name="timeStep">时间间隔,可选</param>
+            <param name="tEnd">点数,可选</param>
+            <param name="offset">修正值,可选</param>
+            <returns></returns>
+        </member>
+        <member name="M:_32p_analyze.SNP.EasyGetILD(_32p_analyze.IldSpec,System.String[]@)">
+            <summary>
+            返回所有ILD数据
+            </summary>
+            <param name="ildSpec">ILD规范</param>
+            <param name="pairNames">对应的pair名称,按列排</param>
+            <returns></returns>
+        </member>
+        <member name="M:_32p_analyze.SNP.GetDetailTestItems(System.String)">
+            <summary>
+            获取测试的详细项目,比如S对于S32P文件的SDD21会返回SDD21,SDD43到SDD16_15共8个
+            delay表示查分,delays表示单端
+            </summary>
+            <param name="shortItem"></param>
+            <returns>详细的测试项目</returns>
+        </member>
+        <member name="M:_32p_analyze.SNP.getExtension(System.String)">
+            <summary>
+            从文件的绝对路径中获取扩展名
+            </summary>
+            <param name="filePath">文件的绝对路径</param>        
+        </member>
+    </members>
+</doc>

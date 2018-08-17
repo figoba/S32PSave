@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <FileSavePath>C:\Users\Administrator\Desktop</FileSavePath>
+  <FileSavePath>C:\Users\Administrator\Desktop\</FileSavePath>
   <MaxTestNum>4</MaxTestNum>
   <ClearSN>true</ClearSN>
   <AdapterIndex>1</AdapterIndex>
@@ -14,4 +14,5 @@
   <Skin>9</Skin>
   <VisaAddress>TCPIP0::LOCALHOST::hislip1::INSTR</VisaAddress>
   <ResolutionIndex>1</ResolutionIndex>
+  <MoTolerance>0</MoTolerance>
 </config>

@@ -71,8 +71,8 @@ namespace test
         [TestMethod()]
         public void getSavedNumberTest()
         {
-            string MO = "E511D-180401404"; // TODO: 初始化为适当的值
-            string PN = "L64QF035-SD-R"; // TODO: 初始化为适当的值
+            string PN = "L01HE014-SD-R";
+            string MO = "E511D-180800235";
             int testNo = 1; // TODO: 初始化为适当的值
             int expected = 40; // TODO: 初始化为适当的值
             int actual;
@@ -93,6 +93,19 @@ namespace test
             actual = Util.getConfig(configPath);
             Assert.AreEqual(0, actual.MoTolerance);
            
+        }
+
+        /// <summary>
+        /// getITSN 的测试
+        /// </summary>
+        [TestMethod()]
+        public void getITSNTest()
+        {
+            string PN = "L01HE014-SD-R";
+            string MO = "E511D-180800235";
+            SNData actual;
+            actual= Util.getITSN(MO, PN);
+            Assert.IsNotNull(actual);
         }
     }
 }

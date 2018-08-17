@@ -53,6 +53,7 @@ namespace S32PSave
 
         #region SI
         Dictionary<string, plotData> spec = new Dictionary<string, plotData>();
+        TDD[]tdds=new TDD[2];
         public bool calibrated = false;
         public SNPPort snpPort = SNPPort.X1234;
         #endregion
@@ -79,12 +80,40 @@ namespace S32PSave
         public int MONumber = -1;//工单数量
         public int MOTolerance=20;//工单数量误差百分比
         public Dictionary<string, testParams> testparamList;
+
+        public Dictionary<string, Chart> chartDic = new Dictionary<string, Chart>();
+        
         public frmMain()
         {
             InitializeComponent();
         }
 
-     
+        enum TestStatus
+        {
+            Fail,
+            Pass,
+            Working
+        }
+
+        private void StatusSet(TestStatus testStatus)
+        {
+            switch (testStatus)
+            {
+                case TestStatus.Fail:
+                    sw.Stop();
+                    setResult("Fail",Color.Red);
+                    btnStart.Enabled = true;
+                    break;
+                case TestStatus.Pass:
+                    setResult("PASS",Color.Green);
+                    break;
+                case TestStatus.Working:
+                    setResult("Working",Color.Blue);
+                    break;
+
+            }
+           
+        }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -93,15 +122,13 @@ namespace S32PSave
                 return;
             }
 
-            saveS32pPath = @saveFolderPath + "\\" + textSN.Text + "_" + cmbTestNo.Text + ".s32p";
+            
             addStatus("start test");
             sw.Start();
             setCableStatus("");
             setProgress(0, false);
             btnStart.Enabled = false;
           
-            chartSDD11Full.Series.Clear();
-            chartSDD21Full.Series.Clear();
             setProgress(3, false);
             if (chkAutoSN.Checked)
             {
@@ -110,7 +137,18 @@ namespace S32PSave
                 }
                 setProgress(5, false);
             }
-
+            else
+            {
+                if (textSN.Text.Trim().Equals(""))
+                {
+                    labelResult.Text = "Fail";
+                    labelResult.BackColor = Color.Red;
+                    btnStart.Enabled = true;
+                    MessageBoxEx.Show("SN不能为空");
+                    return;
+                }
+            }
+            saveS32pPath = @saveFolderPath + "\\" + Util.slashRepalce(textSN.Text) + "_" + cmbTestNo.Text + ".s32p";
             if (chkWriteSN.Checked) {
                 if (!writeSN(textSN.Text.Trim())) {
                     MessageBoxEx.Show("写入SN失败，请确认烧录盒子或线缆连接是否OK后再重试");
@@ -122,17 +160,12 @@ namespace S32PSave
                 setProgress(15, false);
             }
 
+            StatusSet(TestStatus.Working);
            
-            labelResult.Text = "Working";
-            labelResult.BackColor = Color.Blue;
+            //labelResult.Text = "Working";
+            //labelResult.BackColor = Color.Blue;
 
-            //if (!setTrigger())
-            //{
-            //    addStatus("set trigger Mode Fail");
-            //    labelResult.Text = "Fail";
-            //    labelResult.BackColor = Color.Red;
-            //    return;
-            //}
+         
 
             setProgress(35, false);
 
@@ -140,8 +173,8 @@ namespace S32PSave
             setProgress(45, false);
 
             timer1.Enabled = true;
-            rTextStatus.AppendText(Util.formatMsg("start get S32P") + "\n");
-
+            addStatus("start get S32P");
+           
             Thread threadGetS32p = new Thread(new ThreadStart(getS32p));
             threadGetS32p.Start();
 
@@ -152,9 +185,11 @@ namespace S32PSave
         {
          
             #if DEBUG
+        
                         button1.Visible = true;
+            
             #endif
-
+            charts_ini();
             setCableStatus("");
             btn_Calibrate.Enabled = false;
             skinStyle_ini();
@@ -193,6 +228,8 @@ namespace S32PSave
             }
            
             saveBaseFolderPath = s32pSaveFolder;
+
+#if !DEBUG
             PNA835 = new AgilentPNA835x.Application();
             scpiParser = (IScpiStringParser2)PNA835.ScpiStringParser;
             testparamList = getTestParas();
@@ -216,7 +253,7 @@ namespace S32PSave
             //MessageBox.Show(testparamList[firstChannel].channelName);
             channelSelStr = "CALC:PAR:SEL '" + testparamList[firstChannel].channelName + "'";
             channelSel = (Sdd21.trace + 1).ToString();
-
+#endif
             volume = saveBaseFolderPath.Substring(0, saveBaseFolderPath.IndexOf(':'));
             //btnStart.Enabled = true;
         }
@@ -265,14 +302,16 @@ namespace S32PSave
                 calibrated = calibrate(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref results);
                 if (calibrated)
                 {
-                    setResult(true);
+                    StatusSet(TestStatus.Pass);
+                    //setResult(true);
                     setStart(true);
                     setCali(false);
                     addStatus("calibrate PASS,now you can start test");
                 }
                 else
                 {
-                    setResult(false);
+                    StatusSet(TestStatus.Fail);
+                    //setResult(false);
                     setStart(false);
                     setCali(true);
                     // btnStart.Enabled = false;
@@ -288,13 +327,13 @@ namespace S32PSave
                     bool checkResult = calibrate(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref  results);
                     if (checkResult)
                     {
-                        setResult(true);
+                        StatusSet(TestStatus.Pass);
                         testResult = "PASS";
                         addStatus("data check PASS");
                     }
                     else
                     {
-                        setResult(false);
+                        StatusSet(TestStatus.Fail);
                         testResult = "Fail";
                         addStatus("data check Fail");
                     }
@@ -303,17 +342,11 @@ namespace S32PSave
                 else
                 {
                     addStatus("data check set false, data check cancel");
-                    setResult(true);
+                    StatusSet(TestStatus.Pass);
 
                 }
-                if (saveTestRecord(testResult))
-                {
-                    addStatus("insert test record success");
-                }
-                else
-                {
-                    addStatus("insert test record fail");
-                }
+
+                addStatus(saveTestRecord(testResult) ? "insert test record success" : "insert test record fail");
                 setStart(true);
             }
         }
@@ -345,43 +378,21 @@ namespace S32PSave
             }
         }
 
-        //private void testPLTSWrapper() {
-        //    Thread temp = new Thread(new ThreadStart(testPLTS));
-        //    temp.Start();
-        //}
 
-        //private  void testPLTS() {
-        //    string visaAddress = "TCPIP0::LOCALHOST::hislip1::INSTR";
-        //    //PLTS plts = new PLTS();
-        //    plts.Connect(visaAddress);
-        //    plts.MeasureS32pFile();
-
-        //    int fileNumber = plts.GetActiveFileIndex();
-        //    string dataFile = "C:\\plts.s32p";
-        //    plts.ExportFile(fileNumber, 32, dataFile);
-        //    plts.CloseAllFiles();
-        //    //plts.Disconnect();
-        //    MessageBox.Show("save finished");
-        //}
-        
-
-        private void getS32p() {
-
-           
-           
-           
-
+        private void getS32p()
+        {
+            string noText = null;
+            cmbTestNo.Invoke(new MethodInvoker(() => { noText = cmbTestNo.Text; }));
+            //string dataFile = @saveFolderPath + "\\" + Util.slashRepalce(textSN.Text) + "_" + noText + ".s32p";
+#if !DEBUG
             if (accSock != null && chkEEPROM.Checked)
             {
                 if (accSock.Connected)
                 {
                     string Msg = Util.setTestJson(textSN.Text, cmbTestNo.Text, "1");
                     addStatus("start EEPROM Writing....");
-                  
                     sendMsg(Msg);
-                    //rTextStatus.AppendText(Util.formatMsg("TCP/IP send finish") + "\n");
-                }
-
+                 }
             }
 
             PLTS plts = new PLTS();
@@ -392,92 +403,83 @@ namespace S32PSave
             if (!plts.Connected)
             {
                 MessageBoxEx.Show("请先连接PNA设备");
-                setResult(false);
+                StatusSet(TestStatus.Fail);
                 setStart(true);
             }
 
-         
 
-          
-
-           //// scpiParser.Execute(channelSelStr);
-           //// string saveStr = "CALC:DATA:SNP:PORTs:Save '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32','"+@saveFolderPath +"\\"+ textSN.Text +"_"+cmbTestNo.Text+ ".s32p" + "';*OPC?";
-           ////// MessageBox.Show(saveStr);
-           //// scpiParser.Execute(saveStr);
-
-            //Thread.Sleep(20000);
             addStatus("start PLTS");
             plts.CloseAllFiles();
             plts.MeasureS32pFile();
 
             int fileNumber = plts.GetActiveFileIndex();
-            string dataFile = @saveFolderPath + "\\" + Util.slashRepalce(textSN.Text) + "_" + cmbTestNo.Text + ".s32p";
-            if (File.Exists(dataFile))
+            
+            if (File.Exists(saveS32pPath))
             {
-                File.Delete(dataFile);
+                File.Delete(saveS32pPath);
             }
-            plts.ExportFile(fileNumber, 32, dataFile, cmbResolution.SelectedItem.ToString());
-            addStatus("finished get S32P");
-            setCableStatus("请拔出线缆");
-           // plts.CloseAllFiles();
+            plts.ExportFile(fileNumber, 32, saveS32pPath, cmbResolution.SelectedItem.ToString());
             plts.Disconnect();
             plts = null;
+#endif
 
-           
 
-            
-            //setStart(true);
-           // btnStart.Enabled = true;
-            
+            addStatus("finished get S32P");
+            setCableStatus("请拔出线缆");
+          
             timer1.Enabled = false;
             addStatus("timer set false");
             setProgress(170, false);
-             Dictionary<string, bool> results=new Dictionary<string,bool>();
+            Dictionary<string, bool> results = new Dictionary<string, bool>();
             if (!calibrated)
             {
                 addStatus("start calibrate");
-                calibrated = calibrate(dataFile, snpPort, spec, textPN.Text.Trim(), ref results);
+                calibrated = calibrate(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref results);
                 if (calibrated)
                 {
-                    setResult(true);
+                    StatusSet(TestStatus.Pass);
                     setStart(true);
                     setCali(false);
                     addStatus("calibrate PASS,now you can start test");
-                 }
-                else {
-                    setResult(false);
+                }
+                else
+                {
+                    StatusSet(TestStatus.Fail);
                     setStart(false);
                     setCali(true);
-                   // btnStart.Enabled = false;
+                    // btnStart.Enabled = false;
                     addStatus("calibrate Fail,please try again");
                 }
             }
-            else {
-                string testResult="";
+            else
+            {
+                string testResult = "";
                 if (chkDataCheck.Checked)
                 {
                     addStatus("data check set true,start data check");
                     //System.GC.Collect();
                     //addStatus("clean memory success");
-                    bool checkResult = calibrate(dataFile, snpPort, spec, textPN.Text.Trim(), ref  results);
+                    bool checkResult = calibrate(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref results);
                     if (checkResult)
                     {
-                        setResult(true);
-                        testResult="PASS";
+                        StatusSet(TestStatus.Pass);
+                       // setResult(true);
+                        testResult = "PASS";
                         addStatus("data check PASS");
                     }
-                    else {
-                        setResult(false);
-                        testResult="Fail";
+                    else
+                    {
+                        StatusSet(TestStatus.Fail);
+                        //setResult(false);
+                        testResult = "Fail";
                         addStatus("data check Fail");
                     }
-                   
                 }
                 else
                 {
                     addStatus("data check set false, data check cancel");
-                    setResult(true);
-                   
+                    StatusSet(TestStatus.Pass);
+                    //setResult(true);
                 }
 
                 if (saveTestRecord(testResult))
@@ -488,9 +490,9 @@ namespace S32PSave
                 {
                     addStatus("insert test record fail");
                 }
+
                 setStart(true);
             }
-
 
 
             setProgress(200, false);
@@ -499,39 +501,28 @@ namespace S32PSave
             TimeSpan ts2 = sw.Elapsed;
             addStatus("used time is:" + ts2.TotalMilliseconds + " ms");
             sw.Reset();
-          
 
-           
-            if (accSock != null) {
+
+            if (accSock != null)
+            {
                 if (accSock.Connected)
                 {
-                    string Msg = Util.setTestJson(textSN.Text, cmbTestNo.Text,"0");
+                    string Msg = Util.setTestJson(textSN.Text, cmbTestNo.Text, "0");
                     addStatus("start send TCP/IP....");
                     sendMsg(Msg);
                     addStatus("TCP/IP send finish");
-                  
                 }
-            
             }
-
-
-           
-
-
-
 
 
             if (clearSN)
             {
-                this.textSN.Text = "";
+                clearSNtext();
+                // this.textSN.Text = "";
             }
 
             setSNFocus();
-           // this.textSN.Focus();
-            
-            
-           
-
+            // this.textSN.Focus();
         }
 
         private bool saveTestRecord(string result){
@@ -680,7 +671,7 @@ namespace S32PSave
         {
             if (PN_change) {
                 PNChange(textPN.Text.Trim());
-                spec = Util.getPNSpec(textPN.Text.Trim());
+                spec = Util.getPNSpec(textPN.Text.Trim(),ref tdds);
                 if (spec != null)
                 {
                     addStatus("get PN spec from DB success!");
@@ -1012,7 +1003,7 @@ namespace S32PSave
         private void button1_Click(object sender, EventArgs e)
         {
            SNData a= Util.getITSN("E511D-180700157", "L99HE001-SD-R");
-           MessageBox.Show(a.label);
+           //MessageBox.Show(a.label);
 
             test100();
             //setProgress(3,true);
@@ -1025,17 +1016,17 @@ namespace S32PSave
 
        
         private void test100() {
-            Dictionary<string, plotData> spec = Util.getPNSpec("Figo33");
+            Dictionary<string, plotData> spec = Util.getPNSpec("Figo33",ref tdds);
             for (int i = 0; i < 1; i++)
             {
-
+                addStatus("----------------------------------");
                 test(spec);
                 //System.GC.Collect();
                 Process CurrentProcess = Process.GetCurrentProcess();
                 //var p1 = new PerformanceCounter("Process", "Working Set - Private", "S32PSave.exe");
                 //string bb = (p1.NextValue() / 1024 / 1024).ToString("0.0") + "MB";
                 string aa = (CurrentProcess.WorkingSet64 / 1024 / 1024).ToString() + "M (" + (CurrentProcess.WorkingSet64 / 1024).ToString() + "KB)";
-                addStatus("----------------------------------");
+                
                 addStatus("testtime is:" + i.ToString() + "                use memory is:" + aa);
                 addStatus("----------------------------------");
                
@@ -1049,7 +1040,7 @@ namespace S32PSave
         {
             string filePath = @"B:\myData.mdf";
             chkDataCheck.Checked = true;
-            setResult(true);
+            StatusSet(TestStatus.Pass);
             this.textSN.Text = "";
             timer1.Enabled = false;
             setSNFocus();
@@ -1057,14 +1048,14 @@ namespace S32PSave
            // plotData temp = Util.read(filePath);
             //chartSDD21.Series.Clear();
            
-            chartClear(chartSDD21Full);
-            chartClear(chartSDD11Full);
+           // chartClear(chartSDD21Full);
+            //chartClear(chartSDD11Full);
             //chartSDD21Full.Series.Clear();
             //chartSDD11Full.Series.Clear();
 
-            string s32pFilepath = @"B:\SPAN\l56th059-sd-r\11_1.s32p";
-          
-            diffCheck(s32pFilepath, SNPPort.X1234, spec);
+            string s32pFilepath = @"D:\copyFiles\85MX1D08D_1.s32p";
+
+            snpCheck(s32pFilepath, SNPPort.X1234, spec,true);
         }
 
         delegate void setProgressCallback(int value,bool step);
@@ -1152,27 +1143,21 @@ namespace S32PSave
         }
 
 
-        delegate void setResultCallback(bool result);
-        private void setResult(bool result) {
+        delegate void setResultCallback(string text, Color color);
+        private void setResult(string text,Color color) {
             if (labelResult.InvokeRequired)
             {
                 setResultCallback d = new setResultCallback(setResult);
-                this.Invoke(d, new object[] { result });
+                this.Invoke(d, new object[] { text,color });
             }
             else {
-                if (result)
-                {
-                    labelResult.Text = "PASS";
-                    labelResult.BackColor = Color.Green;
-                }
-                else {
-                    labelResult.Text = "Fail";
-                    labelResult.BackColor = Color.Red;
-                }
+                labelResult.Text = text;
+                labelResult.BackColor = color;
+              
             }
         }
         delegate void SetchartClearCallback(Chart chart);
-        delegate void SetDrawLineCallBack(Chart chart,plotData temp,string serialName);
+        delegate void SetDrawLineCallBack(Chart chart,plotData temp,string serialName,LineType lineType);
         private void chartClear(Chart chart) {
             if (chart.InvokeRequired)
             {
@@ -1281,9 +1266,23 @@ namespace S32PSave
         }
 
         private void charts_ini() {
-          
-            drawDataIni(chartSDD21Full);
-            drawDataIni(chartSDD11Full);
+            chartDic = new Dictionary<string, Chart>()
+            {
+                {"SINGLE",chartSingle},
+                {"SDD21",chartSDD21Full},
+                {"SDD11",chartSDD11Full},
+                {"TDD11",chartTDD11Full},
+                {"TDD22",chartTDD22Full}
+            };
+
+            foreach (KeyValuePair<string,Chart>chart in chartDic)
+            {
+                chart.Value.ChartAreas[0].AxisY.IsStartedFromZero = false;
+            }
+            
+            //drawDataIni(chartSDD21Full);
+            //drawDataIni(chartSDD11Full);
+            //drawDataIniTDD(chartTDD11Full);
         }
 
         private Dictionary<string, bool> diffCheck(string s32pFilepath, SNPPort snpPort, Dictionary<string, plotData> spec)
@@ -1312,14 +1311,78 @@ namespace S32PSave
             Dictionary<string, bool> result = Util.judge(spec, data);
             for (int i = 0; i < data["SDD21"].Length; i++)
             {
-                DrawLine(chartSDD21Full, data["SDD21"][i], SDD21[i]);
+                DrawLine(chartSDD21Full, data["SDD21"][i], SDD21[i],LineType.Fre);
             }
             drawSpec("SDD21", spec, chartSDD21Full);
             for (int i = 0; i < data["SDD11"].Length; i++)
             {
-                DrawLine(chartSDD11Full, data["SDD11"][i], SDD11[i]);
+                DrawLine(chartSDD11Full, data["SDD11"][i], SDD11[i],LineType.Fre);
             }
             drawSpec("SDD11", spec, chartSDD11Full);
+
+            foreach (var testResult in result)
+            {
+                addStatus(testResult.Key + ":" + Util.boolToString(testResult.Value));
+                // rTextStatus.AppendText(Util.formatMsg(testResult.Key + ":" + Util.boolToString(testResult.Value)) + "\n");
+            }
+            data = null;
+            return result;
+
+        }
+
+       
+
+        private Dictionary<string, bool> snpCheck(string s32pFilepath, SNPPort snpPort, Dictionary<string, plotData> spec,bool checkTDD)
+        {
+            addStatus("start clear charts");
+  
+            foreach (KeyValuePair<string, Chart> chart in chartDic)
+            {
+                chartClear(chart.Value);
+            }
+
+            Dictionary<string,string[]>pairNameDictionary=new Dictionary<string, string[]>();
+
+            string[] testItems = checkTDD ? new[] { "SINGLE", "SDD21", "SDD11", "TDD11", "TDD22" } : new[] { "SINGLE", "SDD21", "SDD11" };
+
+            bool action = false;
+            string msg = "";
+            Dictionary<string, plotData[]> data = Util.getAnalyzedData(
+                testItems, s32pFilepath, snpPort, spec, tdds, ref action, ref msg, ref pairNameDictionary);
+          
+            if (!action)
+            {
+                addStatus(msg);
+                MessageBoxEx.Show(msg);
+                return null;
+            }
+            Dictionary<string, bool> result = Util.judge(spec, data);
+            addStatus("finished judge data");
+           
+            foreach (string testItem in testItems)
+            {
+               Chart tempChart = chartDic[testItem];
+                plotData[] temp = data[testItem];
+                for (int i = 0; i < temp.Length; i++)
+                {
+                   // addStatus("chart " + testItem + i+" start");
+                    if (pairNameDictionary.ContainsKey(testItem))
+                    {
+                        LineType lineType = testItem.StartsWith("T") ? LineType.Time : LineType.Fre;
+                        DrawLine(tempChart, temp[i], pairNameDictionary[testItem][i], lineType);
+                       
+                    }
+                    else
+                    {
+                        addStatus(testItem+" not exsit");
+                    }
+ 
+                }
+
+                drawSpec(testItem, spec, tempChart);
+            }
+
+         
 
             foreach (var testResult in result)
             {
@@ -1335,11 +1398,11 @@ namespace S32PSave
         private void drawSpec(string itemName, Dictionary<string, plotData> spec, Chart chart)
         {
             if (spec.ContainsKey(itemName + "_UPPER")) {
-                DrawLine(chart, spec[itemName + "_UPPER"], itemName + "_UPPER");
+                DrawLine(chart, spec[itemName + "_UPPER"], itemName + "_UPPER",LineType.Spec);
             }
             if (spec.ContainsKey(itemName + "_LOWER"))
             {
-                DrawLine(chart, spec[itemName + "_LOWER"], itemName + "_LOWER");
+                DrawLine(chart, spec[itemName + "_LOWER"], itemName + "_LOWER",LineType.Spec);
             }
         }
 
@@ -1516,7 +1579,7 @@ namespace S32PSave
 
            addStatus("wait s32p File used time is:"+fileCheckTime.ToString()+"ms");
 
-           results = diffCheck(s32pFilepath, snpPort, spec);
+           results = snpCheck(s32pFilepath, snpPort, spec, chkTDDCheck.Checked);
            if (results == null) {
                addStatus("analyze fail,please try again");
                return false;
@@ -1810,61 +1873,145 @@ namespace S32PSave
 
        }
 
-       private  void DrawLine(Chart chart, plotData temp, string seriName)
+
+       private void drawDataIniTDD(Chart chart)
+       {
+           //标题
+           //chart.Titles.Add("a柱状图数据分析");
+           //chart.Titles.Add("b柱状图数据分析");
+           //chart.Titles.Add("SDD21");
+           //chart.Titles[0].ForeColor = Color.White;
+           //chart.Titles[0].Font = new Font("微软雅黑", 12f, FontStyle.Regular);
+           //chart.Titles[0].Alignment = ContentAlignment.TopCenter;
+
+           chart.Visible = false;
+
+
+           //chart.Titles[1].ForeColor = Color.White;
+           //chart.Titles[1].Font = new Font("微软雅黑", 8f, FontStyle.Regular);
+           //chart.Titles[1].Alignment = ContentAlignment.TopRight;
+
+           //控件背景
+           chart.BackColor = Color.Transparent;
+           //图表区背景
+           chart.ChartAreas[0].BackColor = Color.Transparent;
+           chart.ChartAreas[0].BorderColor = Color.Transparent;
+           //X轴标签间距
+           // chart.ChartAreas[0].AxisX.Interval=5000000000;
+           //chart.ChartAreas[0].AxisX.LabelStyle.IsStaggered = true;
+           chart.ChartAreas[0].AxisX.LabelStyle.Angle = 0;
+           chart.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 14f, FontStyle.Regular);
+           chart.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
+
+
+           //X坐标轴颜色
+           chart.ChartAreas[0].AxisX.LineColor = ColorTranslator.FromHtml("#38587a"); ;
+           chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
+           chart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
+           //X坐标轴标题
+           //chart.ChartAreas[0].AxisX.Title = "数量(宗)";
+           //chart.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
+           //chart.ChartAreas[0].AxisX.TitleForeColor = Color.White;
+           //chart.ChartAreas[0].AxisX.TextOrientation = TextOrientation.Horizontal;
+           //chart.ChartAreas[0].AxisX.ToolTip = "数量(宗)";
+           //X轴网络线条
+           chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+           chart.ChartAreas[0].AxisX.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");
+
+           //Y坐标轴颜色
+           chart.ChartAreas[0].AxisY.LineColor = ColorTranslator.FromHtml("#38587a");
+           chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
+           chart.ChartAreas[0].AxisY.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
+           //Y坐标轴标题
+           chart.ChartAreas[0].AxisY.Title = "resistance";
+           chart.ChartAreas[0].AxisY.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
+           chart.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
+           chart.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
+           chart.ChartAreas[0].AxisY.ToolTip = "resistance";
+           //Y轴网格线条
+           chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+           chart.ChartAreas[0].AxisY.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");
+           chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
+           //chart.ChartAreas[0].AxisY.Minimum = 80;
+
+           chart.ChartAreas[0].AxisY2.LineColor = Color.Transparent;
+           chart.ChartAreas[0].BackGradientStyle = GradientStyle.TopBottom;
+
+
+           //Legend legend = new Legend("legend");
+           //legend.Title = "legendTitle";
+
+
+           //chart.Legends.Add(legend);
+           //chart.Legends[0].Position.Auto = false;
+
+
+
+       }
+
+     
+
+        private enum LineType
+        {
+            Fre,
+            Time,
+            Spec
+        }
+
+       private void DrawLine(Chart chart, plotData temp, string seriName,LineType lineType)
        {
            if (chart.InvokeRequired)
            {
                SetDrawLineCallBack d = new SetDrawLineCallBack(DrawLine);
-               chart.Invoke(d, new object[] { chart, temp, seriName });
+               chart.Invoke(d, new object[] { chart, temp, seriName,lineType });
            }
-           else {
+           else
+           {
                //绑定数据
                int index = chart.Series.Count;
                chart.Series.Add(seriName);
-               //chart.Titles.Add(seriName);
-
-               Series currentSeries = chart.Series[index];
+                Series currentSeries = chart.Series[index];
                //chart.Titles[index].Alignment = System.Drawing.ContentAlignment.TopRight;
-               currentSeries.XValueType = ChartValueType.Double;  //设置X轴上的值类型
+               currentSeries.XValueType = ChartValueType.Single;  //设置X轴上的值类型
                currentSeries.Label = "#VAL";                //设置显示X Y的值    
                currentSeries.LabelForeColor = Color.Black;
                currentSeries.ToolTip = "#VALX:#VAL";     //鼠标移动到对应点显示数值
                currentSeries.ChartType = SeriesChartType.FastLine;    //图类型(折线)
-
-
-
-
-               //currentSeries.Color = Color.Red;
                currentSeries.LegendText = seriName;
                //chart.Series[0].IsValueShownAsLabel = true;
                currentSeries.LabelForeColor = Color.Black;
                currentSeries.CustomProperties = "DrawingStyle = Cylinder";
                currentSeries.Points.DataBindXY(temp.xData, temp.yData);
 
-               int length = temp.yData.Length;
-               //double[] a = new double[length];
-               //for (int i = 0; i < length; i++)
-               //{
-               //    a[i] = 2 * temp.yData[i];
-               //}
-
-
-               for (int i = 1; i < 7; i++)
+               switch (lineType)
                {
-
-                   CustomLabel label = new CustomLabel();
-                   label.Text = (i * 5).ToString() + "Ghz";
-                   label.ToPosition = i * 10000000000;
-                   chart.ChartAreas[0].AxisX.CustomLabels.Add(label);
-                   label.GridTicks = GridTickTypes.Gridline;
-
-
-
+                   case LineType.Fre:
+                       for (int i = 1; i < 10; i++)
+                       {
+                           CustomLabel label = new CustomLabel();
+                           label.Text = (i * 5).ToString() + "Ghz";
+                           label.ToPosition = i * 10000000000;
+                           chart.ChartAreas[0].AxisX.CustomLabels.Add(label);
+                           label.GridTicks = GridTickTypes.Gridline;
+                       }
+                       break;
+                   case LineType.Time:
+                       for (int i = 1; i < 10; i++)
+                       {
+                           CustomLabel label = new CustomLabel();
+                           label.Text = (i * 1).ToString() + "ns";
+                           label.ToPosition = (float)i * 2;
+                           chart.ChartAreas[0].AxisX.CustomLabels.Add(label);
+                           label.GridTicks = GridTickTypes.Gridline;
+                       }
+                     break;
+                    
                }
+
                chart.Visible = true;
            }
 
-         
+
        }
 
        private  void EmputyLine(Chart chart)

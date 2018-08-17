@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="32p_analyze">
-      <HintPath>..\S32PSave\bin\x86\Debug\dll\32p_analyze.dll</HintPath>
-    </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.3, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL" />
     <Reference Include="Interop.AgilentPNA835x">
       <HintPath>..\S32PSave\bin\x86\Debug\dll\Interop.AgilentPNA835x.dll</HintPath>

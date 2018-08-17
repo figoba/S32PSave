@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileSavePath>C:\Users\Administrator\Desktop</FileSavePath>
+  <MaxTestNum>4</MaxTestNum>
+  <ClearSN>true</ClearSN>
+  <AdapterIndex>1</AdapterIndex>
+  <ComIndex>0</ComIndex>
+  <ConnectMap>1</ConnectMap>
+  <WriteSN>false</WriteSN>
+  <WriteEEPROM>false</WriteEEPROM>
+  <Port>7777</Port>
+  <CalPath>D:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave\S32PSave\bin\x86\Debug\S32PSave.exe</CalPath>
+  <CalFileEnable>true</CalFileEnable>
+  <Skin>9</Skin>
+  <VisaAddress>TCPIP0::LOCALHOST::hislip1::INSTR</VisaAddress>
+  <ResolutionIndex>1</ResolutionIndex>
+</config>

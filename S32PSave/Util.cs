@@ -51,13 +51,29 @@ namespace S32PSave
         public string PN;
     }
 
+    public struct TDD
+    {
+        public string startTime;
+        public string stopTime;
+        public int points;
+        public string riseTime;
+        public string offset;
+        public string impedance;
+
+    }
+
     public class Util
     {
-        //public static string DB_MesDataCenterConnectionString = "Provider=SQLNCLI11;Data Source=172.20.23.107;Persist Security Info=True;User ID=sa;Initial Catalog=MesDataCenter;Password=data'songyy";
-        //public static string DB_HTPSDBConnectionString = "Provider=SQLNCLI11;Data Source=172.20.23.107;Persist Security Info=True;User ID=sa;Initial Catalog=HTPSDB;Password=data'songyy";
-
+#if DEBUG
+        public static string DB_MesDataCenterConnectionString = "Provider=SQLNCLI11;Data Source=172.20.23.107;Persist Security Info=True;User ID=sa;Initial Catalog=MesDataCenter;Password=data'songyy";
+        public static string DB_HTPSDBConnectionString = "Provider=SQLNCLI11;Data Source=172.20.23.107;Persist Security Info=True;User ID=sa;Initial Catalog=HTPSDB;Password=data'songyy";
+#else
         public static string DB_MesDataCenterConnectionString = "Provider=SQLOLEDB;server=172.20.23.107,1433;Initial Catalog=MesDataCenter;uid=sa;pwd=data'songyy";
         public static string DB_HTPSDBConnectionString = "Provider=SQLOLEDB;server=172.20.23.107,1433;Initial Catalog=HTPSDB;uid=sa;pwd=data'songyy";
+
+#endif
+
+
        
         public static string computerName = Environment.MachineName;
         public static string formatMsg(string msgIn) {
@@ -301,20 +317,115 @@ namespace S32PSave
         {
             return "HF-"+DateTime.Now.ToString("yyyyMMdd") + sn;
         }
-        public static Dictionary<string, plotData> getPNSpec(string PN)
+
+        public static TDD[] getTdd(string tdr)
+        {
+            TDD[]ret=new TDD[2];
+            
+            string[] temp = tdr.Split('\t');
+            ret[0].startTime = temp[0];
+            ret[0].stopTime = temp[1];
+            ret[0].points = (int)double.Parse(temp[2]);
+            ret[0].riseTime = temp[3];
+            ret[0].offset = temp[4];
+            ret[0].impedance = temp[7];
+            if ((int)double.Parse(temp[10]) == 1)
+            {
+                ret[1].startTime = temp[8];
+                ret[1].stopTime = temp[9];
+                ret[1].points = (int)double.Parse(temp[10]);
+                ret[1].riseTime = temp[11];
+                ret[1].offset = temp[12];
+                ret[1].impedance = temp[15];
+            }
+            else
+            {
+                ret[1] = ret[0];
+            }
+
+            return ret;
+        }
+
+        public  static plotData[]  GetTddSpec(TDD tdd)
+        {
+            plotData[] ret=new plotData[2];
+            double step = (float.Parse(tdd.stopTime) - float.Parse(tdd.startTime))/(tdd.points-1);
+            float[] timeArray=new float[tdd.points];
+            //for (int i = 0; i < timeArray.Length; i++)
+            //{
+            //    timeArray[i] = i * step;
+            //}
+            var cc = tdd.impedance.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(t => t.Split('#').ToArray()).ToArray();
+            double upperPoint1 = double.Parse((cc[0][1]));
+            double upperPoint2 = double.Parse((cc[1][1]));
+            double upperPoint3 = (double.Parse(tdd.stopTime) - upperPoint2) / 2 + upperPoint2;
+            double upperValue1 = double.Parse((cc[0][2]));
+            double upperValue2 = double.Parse((cc[1][2]));
+
+            double lowerPoint1 = double.Parse((cc[0][3]));
+            double lowerPoint2 = double.Parse((cc[1][3]));
+            double lowerPoint3 = (double.Parse(tdd.stopTime) - lowerPoint2) / 2 + lowerPoint2;
+            double lowerValue1 = double.Parse((cc[0][4]));
+            double lowerValue2 = double.Parse((cc[1][4]));
+
+
+            List<float> x = new List<float>();
+            List<float> y = new List<float>();
+            double pointX = upperPoint1;
+            while (pointX<=upperPoint2)
+            {
+                x.Add(float.Parse(pointX.ToString()));
+                y.Add(float.Parse(upperValue1.ToString()));
+                pointX = pointX + step;
+            }
+            while (pointX <= upperPoint3)
+            {
+                x.Add(float.Parse(pointX.ToString()));
+                y.Add(float.Parse(upperValue2.ToString()));
+                pointX = pointX + step;
+            }
+
+            ret[0].xData = x.ToArray();
+            ret[0].yData = y.ToArray();
+
+            x.Clear();
+            y.Clear();
+            pointX = lowerPoint1;
+            while (pointX <= lowerPoint2)
+            {
+                x.Add(float.Parse(pointX.ToString()));
+                y.Add(float.Parse(lowerValue1.ToString()));
+                pointX = pointX + step;
+            }
+            while (pointX <= lowerPoint3)
+            {
+                x.Add(float.Parse(pointX.ToString()));
+                y.Add(float.Parse(lowerValue2.ToString()));
+                pointX = pointX + step;
+            }
+            ret[1].xData = x.ToArray();
+            ret[1].yData = y.ToArray();
+            return ret;
+        }
+
+        public static Dictionary<string, plotData> getPNSpec(string PN,ref TDD[] tdds)
         {
             if (!PingIpOrDomainName("172.20.23.107"))
             {
                 MessageBoxEx.Show("无法连接到IP地址172.20.23.107,请检查网络");
                 return null;
             }
-            string strSql = "select frequency from vna32port where LuxsharePN='" + PN + "'";
+            string strSql = "select frequency,TDR from vna32port where LuxsharePN='" + PN + "'";
             DataTable dt= DbHelperOleDb.Query(strSql,DB_HTPSDBConnectionString).Tables[0];
             if (dt.Rows.Count != 1) {
                 return null;
             }
-            string aa = dt.Rows[0]["frequency"].ToString();
-            string bb = aa.Split('\t')[0];
+            string frequency = dt.Rows[0]["frequency"].ToString();
+            string tdr = dt.Rows[0]["TDR"].ToString();
+            tdds = getTdd(tdr);
+            plotData[] tdd1 = GetTddSpec(tdds[0]);
+            plotData[] tdd2 = GetTddSpec(tdds[1]);
+            string bb = frequency.Split('\t')[0];
             var cc = bb.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(t=>t.Split('#').ToArray()).ToArray();
             Dictionary<string, plotData> ret = new Dictionary<string, plotData>();
 
@@ -332,6 +443,10 @@ namespace S32PSave
                 temp.yData = y.ToArray();
                 ret.Add(cc[0][i].ToUpper(), temp);
             }
+            ret.Add("TDD11_UPPER",tdd1[0]);
+            ret.Add("TDD11_LOWER", tdd1[1]);
+            ret.Add("TDD22_UPPER", tdd2[0]);
+            ret.Add("TDD22_LOWER", tdd2[1]);
             return ret;
         
         }
@@ -398,6 +513,130 @@ namespace S32PSave
         }
         #endregion
 
+        public static Dictionary<string, plotData[]>
+            getAnalyzedData(string[] testItems, string snpFilepath, SNPPort snpPort, Dictionary<string, plotData> spec, 
+                TDD[] tdds ,
+                ref bool action, ref string msg,ref Dictionary<string,string[]> pairNameDictionary)
+        {
+            int pairNum = 8;
+            pairNameDictionary.Clear();
+            string[] pairNames = new string[pairNum];
+            Dictionary<string, plotData[]> ret = new Dictionary<string, plotData[]>();
+            try
+            {
+                SNP snpClass = new SNP(snpFilepath, snpPort);
+                foreach (string item in testItems)
+                {
+                    if (item.StartsWith("T"))
+                    {
+                        TDD tdd = item.ToUpper().Equals("TDD11") ? tdds[0] : tdds[1];
+                        timeDomainData tData = snpClass.EasyGetTimeData(item, out pairNames, double.Parse(tdd.riseTime), (double.Parse(tdd.stopTime) - double.Parse(tdd.startTime)) / (tdd.points - 1), tdd.points, double.Parse(tdd.offset));
+                        int tColumns = tData.resistance.GetLength(1);
+                        int tRows = tData.resistance.GetLength(0);
+                        float[] offset = new float[tRows];
+                        if (spec.ContainsKey(item + "_OFFSET"))
+                        {
+                            for (int row = 0; row < tRows; row++)
+                            {
+                                offset[row] = spec[item + "_OFFSET"].yData[row];
+                            }
+                        }
+
+                        plotData[] tItem = new plotData[tColumns];
+                        for (int curveNo = 0; curveNo < tColumns; curveNo++)
+                        {
+                            float[] y = new float[tRows];
+                            for (int row = 0; row < tRows; row++)
+                            {
+                                y[row] = tData.resistance[row, curveNo] + offset[row];
+                            }
+                            tItem[curveNo].yData = y;
+                            tItem[curveNo].xData = tData.time;
+                            y = null;
+                           
+                        }
+
+                        ret.Add(item, tItem);
+                        pairNameDictionary.Add(item, pairNames);
+
+                    }
+                    else if (item.Equals("SINGLE"))
+                    {
+                        string[] pairNameSingles = new[]
+                        {
+                            "S1_17","S2_18","S3_19","S4_20",
+                            "S5_21","S6_22","S7_23","S8_24",
+                            "S9_25","S10_26","S11_27","S12_28",
+                            "S13_29","S14_30","S15_31","S16_32"
+                        };
+                        formatedData sfData = snpClass.getSingle(pairNameSingles);
+                        int sColumns = sfData.dB.GetLength(1);
+                        int sRows = sfData.dB.GetLength(0);
+                        plotData[] singleItem = new plotData[sColumns];
+                        for (int curveNo = 0; curveNo < sColumns; curveNo++)
+                        {
+                            float[] y = new float[sRows];
+                            for (int row = 0; row < sRows; row++)
+                            {
+                                y[row] = sfData.dB[row, curveNo];
+                            }
+                            singleItem[curveNo].yData = y;
+                            singleItem[curveNo].xData = sfData.fre;
+                            y = null;
+                        }
+                        ret.Add(item, singleItem);
+                        pairNameDictionary.Add(item, pairNameSingles);
+                      }
+                    else
+                    {
+                        
+                        formatedData fData = snpClass.EasyGetfreData(item, out pairNames);
+                        int columns = fData.dB.GetLength(1);
+                        int rows = fData.dB.GetLength(0);
+                        float[] offset = new float[rows];
+                        if (spec.ContainsKey(item + "_OFFSET"))
+                        {
+                            for (int row = 0; row < rows; row++)
+                            {
+                                offset[row] = spec[item + "_OFFSET"].yData[row];
+                            }
+                        }
+
+                        plotData[] diffItem = new plotData[columns];
+                        for (int curveNo = 0; curveNo < columns; curveNo++)
+                        {
+                            float[] y = new float[rows];
+                            for (int row = 0; row < rows; row++)
+                            {
+                                y[row] = fData.dB[row, curveNo] + offset[row];
+                            }
+                            diffItem[curveNo].yData = y;
+                            diffItem[curveNo].xData = fData.fre;
+                            y = null;
+                        }
+                        ret.Add(item, diffItem);
+                        diffItem = null;
+                        fData = new formatedData();
+                        pairNameDictionary.Add(item, pairNames);
+                    }
+
+
+                }
+                snpClass = null;
+                //System.GC.Collect();
+                action = true;
+                return ret;
+            }
+            catch (SnpException ex)
+            {
+                action = false;
+                msg = ex.Message;
+                //MessageBoxEx.Show(ex.Message);
+                return null;
+            }
+
+        }
+
         public static Dictionary<string, plotData[]> 
             getDiff(Dictionary<string,string[]>testItems, string snpFilepath, SNPPort snpPort,Dictionary<string, plotData> spec,ref bool action,ref string msg)
         {
@@ -443,7 +682,7 @@ namespace S32PSave
                 action = true;
                 return ret;
             }
-            catch (snpException ex)
+            catch (SnpException ex)
             {
                 action = false;
                 msg = ex.Message;

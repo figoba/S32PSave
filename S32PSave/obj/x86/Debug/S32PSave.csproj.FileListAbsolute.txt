@@ -31,3 +31,15 @@ D:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave20180625修正�
 D:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Debug\S32PSave.exe
 D:\用户目录\我的文档\Visual Studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Debug\S32PSave.pdb
 D:\用户目录\我的文档\visual studio 2012\Projects\S32PSave20180625修正版\S32PSave\obj\x86\Debug\S32PSave.csprojResolveAssemblyReference.cache
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\S32PSave.exe.config
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.exe
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.pdb
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\S32PSave.exe
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\S32PSave.pdb
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\virtualIIC.dll
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\MathNet.Numerics.dll
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\32p_analyze.xml
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csprojResolveAssemblyReference.cache
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.frmMain.resources
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.Properties.Resources.resources
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csproj.GenerateResource.Cache

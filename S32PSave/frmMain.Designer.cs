@@ -29,11 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend13 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend14 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea15 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend15 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.textSN = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.rTextStatus = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
@@ -47,15 +53,22 @@
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.tabMain = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.chkTDDCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.txtMoSum = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX18 = new DevComponents.DotNetBar.LabelX();
             this.tabControl2 = new DevComponents.DotNetBar.TabControl();
-            this.tabControlPanel10 = new DevComponents.DotNetBar.TabControlPanel();
-            this.chartSDD11Full = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.tabItem10 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel4 = new DevComponents.DotNetBar.TabControlPanel();
+            this.chartTDD22Full = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tabItem4 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
+            this.chartTDD11Full = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel11 = new DevComponents.DotNetBar.TabControlPanel();
             this.chartSDD21Full = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabItem12 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel10 = new DevComponents.DotNetBar.TabControlPanel();
+            this.chartSDD11Full = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tabItem10 = new DevComponents.DotNetBar.TabItem(this.components);
             this.labelCableStatus = new DevComponents.DotNetBar.LabelX();
             this.progressBarX1 = new DevComponents.DotNetBar.Controls.ProgressBarX();
             this.btn_Calibrate = new DevComponents.DotNetBar.ButtonX();
@@ -120,15 +133,22 @@
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.tabItem5 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel5 = new DevComponents.DotNetBar.TabControlPanel();
+            this.chartSingle = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl2)).BeginInit();
             this.tabControl2.SuspendLayout();
-            this.tabControlPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartSDD11Full)).BeginInit();
+            this.tabControlPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTDD22Full)).BeginInit();
+            this.tabControlPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTDD11Full)).BeginInit();
             this.tabControlPanel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartSDD21Full)).BeginInit();
+            this.tabControlPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSDD11Full)).BeginInit();
             this.tabControlPanel2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -136,6 +156,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabControlPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSingle)).BeginInit();
             this.SuspendLayout();
             // 
             // textSN
@@ -328,6 +350,7 @@
             // 
             this.tabControlPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tabControlPanel1.CanvasColor = System.Drawing.Color.Transparent;
+            this.tabControlPanel1.Controls.Add(this.chkTDDCheck);
             this.tabControlPanel1.Controls.Add(this.txtMoSum);
             this.tabControlPanel1.Controls.Add(this.labelX18);
             this.tabControlPanel1.Controls.Add(this.tabControl2);
@@ -364,6 +387,22 @@
             this.tabControlPanel1.Style.GradientAngle = -90;
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // chkTDDCheck
+            // 
+            this.chkTDDCheck.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkTDDCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkTDDCheck.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTDDCheck.ForeColor = System.Drawing.Color.Black;
+            this.chkTDDCheck.Location = new System.Drawing.Point(655, 50);
+            this.chkTDDCheck.Name = "chkTDDCheck";
+            this.chkTDDCheck.Size = new System.Drawing.Size(107, 24);
+            this.chkTDDCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkTDDCheck.TabIndex = 32;
+            this.chkTDDCheck.Text = "TDDCheck";
             // 
             // txtMoSum
             // 
@@ -419,7 +458,10 @@
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
+            this.tabControl2.Controls.Add(this.tabControlPanel5);
             this.tabControl2.Controls.Add(this.tabControlPanel10);
+            this.tabControl2.Controls.Add(this.tabControlPanel4);
+            this.tabControl2.Controls.Add(this.tabControlPanel3);
             this.tabControl2.Controls.Add(this.tabControlPanel11);
             this.tabControl2.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl2.ForeColor = System.Drawing.Color.Black;
@@ -430,45 +472,84 @@
             this.tabControl2.Size = new System.Drawing.Size(1007, 367);
             this.tabControl2.TabIndex = 29;
             this.tabControl2.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
+            this.tabControl2.Tabs.Add(this.tabItem5);
             this.tabControl2.Tabs.Add(this.tabItem10);
             this.tabControl2.Tabs.Add(this.tabItem12);
+            this.tabControl2.Tabs.Add(this.tabItem3);
+            this.tabControl2.Tabs.Add(this.tabItem4);
             this.tabControl2.Text = "tabControl2";
             // 
-            // tabControlPanel10
+            // tabControlPanel4
             // 
-            this.tabControlPanel10.Controls.Add(this.chartSDD11Full);
-            this.tabControlPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel10.Location = new System.Drawing.Point(0, 27);
-            this.tabControlPanel10.Name = "tabControlPanel10";
-            this.tabControlPanel10.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel10.Size = new System.Drawing.Size(1007, 340);
-            this.tabControlPanel10.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabControlPanel10.Style.BackColor2.Color = System.Drawing.SystemColors.GradientActiveCaption;
-            this.tabControlPanel10.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel10.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabControlPanel10.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            this.tabControlPanel4.Controls.Add(this.chartTDD22Full);
+            this.tabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel4.Location = new System.Drawing.Point(0, 27);
+            this.tabControlPanel4.Name = "tabControlPanel4";
+            this.tabControlPanel4.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel4.Size = new System.Drawing.Size(1007, 340);
+            this.tabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabControlPanel4.Style.BackColor2.Color = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanel4.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel10.Style.GradientAngle = 90;
-            this.tabControlPanel10.TabIndex = 1;
-            this.tabControlPanel10.TabItem = this.tabItem10;
+            this.tabControlPanel4.Style.GradientAngle = 90;
+            this.tabControlPanel4.TabIndex = 4;
+            this.tabControlPanel4.TabItem = this.tabItem4;
             // 
-            // chartSDD11Full
+            // chartTDD22Full
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartSDD11Full.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartSDD11Full.Legends.Add(legend3);
-            this.chartSDD11Full.Location = new System.Drawing.Point(4, 0);
-            this.chartSDD11Full.Name = "chartSDD11Full";
-            this.chartSDD11Full.Size = new System.Drawing.Size(999, 336);
-            this.chartSDD11Full.TabIndex = 19;
-            this.chartSDD11Full.Text = "chart1";
+            chartArea11.Name = "ChartArea1";
+            this.chartTDD22Full.ChartAreas.Add(chartArea11);
+            legend11.Name = "Legend1";
+            this.chartTDD22Full.Legends.Add(legend11);
+            this.chartTDD22Full.Location = new System.Drawing.Point(4, 0);
+            this.chartTDD22Full.Name = "chartTDD22Full";
+            this.chartTDD22Full.Size = new System.Drawing.Size(999, 336);
+            this.chartTDD22Full.TabIndex = 18;
+            this.chartTDD22Full.Text = "chart1";
             // 
-            // tabItem10
+            // tabItem4
             // 
-            this.tabItem10.AttachedControl = this.tabControlPanel10;
-            this.tabItem10.Name = "tabItem10";
-            this.tabItem10.Text = "SDD11";
+            this.tabItem4.AttachedControl = this.tabControlPanel4;
+            this.tabItem4.Name = "tabItem4";
+            this.tabItem4.Text = "TDD22";
+            // 
+            // tabControlPanel3
+            // 
+            this.tabControlPanel3.Controls.Add(this.chartTDD11Full);
+            this.tabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel3.Location = new System.Drawing.Point(0, 27);
+            this.tabControlPanel3.Name = "tabControlPanel3";
+            this.tabControlPanel3.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel3.Size = new System.Drawing.Size(1007, 340);
+            this.tabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabControlPanel3.Style.BackColor2.Color = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel3.Style.GradientAngle = 90;
+            this.tabControlPanel3.TabIndex = 3;
+            this.tabControlPanel3.TabItem = this.tabItem3;
+            // 
+            // chartTDD11Full
+            // 
+            chartArea12.Name = "ChartArea1";
+            this.chartTDD11Full.ChartAreas.Add(chartArea12);
+            legend12.Name = "Legend1";
+            this.chartTDD11Full.Legends.Add(legend12);
+            this.chartTDD11Full.Location = new System.Drawing.Point(4, 0);
+            this.chartTDD11Full.Name = "chartTDD11Full";
+            this.chartTDD11Full.Size = new System.Drawing.Size(999, 336);
+            this.chartTDD11Full.TabIndex = 18;
+            this.chartTDD11Full.Text = "chart1";
+            // 
+            // tabItem3
+            // 
+            this.tabItem3.AttachedControl = this.tabControlPanel3;
+            this.tabItem3.Name = "tabItem3";
+            this.tabItem3.Text = "TDD11";
             // 
             // tabControlPanel11
             // 
@@ -490,10 +571,10 @@
             // 
             // chartSDD21Full
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartSDD21Full.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartSDD21Full.Legends.Add(legend4);
+            chartArea13.Name = "ChartArea1";
+            this.chartSDD21Full.ChartAreas.Add(chartArea13);
+            legend13.Name = "Legend1";
+            this.chartSDD21Full.Legends.Add(legend13);
             this.chartSDD21Full.Location = new System.Drawing.Point(4, 0);
             this.chartSDD21Full.Name = "chartSDD21Full";
             this.chartSDD21Full.Size = new System.Drawing.Size(999, 336);
@@ -505,6 +586,42 @@
             this.tabItem12.AttachedControl = this.tabControlPanel11;
             this.tabItem12.Name = "tabItem12";
             this.tabItem12.Text = "SDD21";
+            // 
+            // tabControlPanel10
+            // 
+            this.tabControlPanel10.Controls.Add(this.chartSDD11Full);
+            this.tabControlPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel10.Location = new System.Drawing.Point(0, 27);
+            this.tabControlPanel10.Name = "tabControlPanel10";
+            this.tabControlPanel10.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel10.Size = new System.Drawing.Size(1007, 340);
+            this.tabControlPanel10.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabControlPanel10.Style.BackColor2.Color = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tabControlPanel10.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel10.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanel10.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel10.Style.GradientAngle = 90;
+            this.tabControlPanel10.TabIndex = 1;
+            this.tabControlPanel10.TabItem = this.tabItem10;
+            // 
+            // chartSDD11Full
+            // 
+            chartArea14.Name = "ChartArea1";
+            this.chartSDD11Full.ChartAreas.Add(chartArea14);
+            legend14.Name = "Legend1";
+            this.chartSDD11Full.Legends.Add(legend14);
+            this.chartSDD11Full.Location = new System.Drawing.Point(4, 0);
+            this.chartSDD11Full.Name = "chartSDD11Full";
+            this.chartSDD11Full.Size = new System.Drawing.Size(999, 336);
+            this.chartSDD11Full.TabIndex = 19;
+            this.chartSDD11Full.Text = "chart1";
+            // 
+            // tabItem10
+            // 
+            this.tabItem10.AttachedControl = this.tabControlPanel10;
+            this.tabItem10.Name = "tabItem10";
+            this.tabItem10.Text = "SDD11";
             // 
             // labelCableStatus
             // 
@@ -571,7 +688,7 @@
             this.chkDataCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkDataCheck.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDataCheck.ForeColor = System.Drawing.Color.Black;
-            this.chkDataCheck.Location = new System.Drawing.Point(532, 48);
+            this.chkDataCheck.Location = new System.Drawing.Point(496, 50);
             this.chkDataCheck.Name = "chkDataCheck";
             this.chkDataCheck.Size = new System.Drawing.Size(107, 24);
             this.chkDataCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -587,7 +704,7 @@
             this.chkAutoSN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkAutoSN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAutoSN.ForeColor = System.Drawing.Color.Black;
-            this.chkAutoSN.Location = new System.Drawing.Point(353, 43);
+            this.chkAutoSN.Location = new System.Drawing.Point(370, 46);
             this.chkAutoSN.Name = "chkAutoSN";
             this.chkAutoSN.Size = new System.Drawing.Size(85, 31);
             this.chkAutoSN.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1330,7 +1447,7 @@
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(98, 24);
             this.labelX12.TabIndex = 19;
-            this.labelX12.Text = "Ver:1.31";
+            this.labelX12.Text = "Ver:1.42";
             // 
             // labelX13
             // 
@@ -1343,7 +1460,43 @@
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(150, 22);
             this.labelX13.TabIndex = 20;
-            this.labelX13.Text = "Date:20180728";
+            this.labelX13.Text = "Date:20180817";
+            // 
+            // tabItem5
+            // 
+            this.tabItem5.AttachedControl = this.tabControlPanel5;
+            this.tabItem5.Name = "tabItem5";
+            this.tabItem5.Text = "SINGLE";
+            // 
+            // tabControlPanel5
+            // 
+            this.tabControlPanel5.Controls.Add(this.chartSingle);
+            this.tabControlPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel5.Location = new System.Drawing.Point(0, 27);
+            this.tabControlPanel5.Name = "tabControlPanel5";
+            this.tabControlPanel5.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel5.Size = new System.Drawing.Size(1007, 340);
+            this.tabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabControlPanel5.Style.BackColor2.Color = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tabControlPanel5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanel5.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel5.Style.GradientAngle = 90;
+            this.tabControlPanel5.TabIndex = 5;
+            this.tabControlPanel5.TabItem = this.tabItem5;
+            // 
+            // chartSingle
+            // 
+            chartArea15.Name = "ChartArea1";
+            this.chartSingle.ChartAreas.Add(chartArea15);
+            legend15.Name = "Legend1";
+            this.chartSingle.Legends.Add(legend15);
+            this.chartSingle.Location = new System.Drawing.Point(4, 0);
+            this.chartSingle.Name = "chartSingle";
+            this.chartSingle.Size = new System.Drawing.Size(999, 336);
+            this.chartSingle.TabIndex = 20;
+            this.chartSingle.Text = "chart1";
             // 
             // frmMain
             // 
@@ -1365,10 +1518,14 @@
             this.tabControlPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl2)).EndInit();
             this.tabControl2.ResumeLayout(false);
-            this.tabControlPanel10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartSDD11Full)).EndInit();
+            this.tabControlPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartTDD22Full)).EndInit();
+            this.tabControlPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartTDD11Full)).EndInit();
             this.tabControlPanel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartSDD21Full)).EndInit();
+            this.tabControlPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartSDD11Full)).EndInit();
             this.tabControlPanel2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -1377,6 +1534,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabControlPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartSingle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1469,6 +1628,16 @@
         private DevComponents.Editors.ComboItem comboItem11;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMoSum;
         private DevComponents.DotNetBar.LabelX labelX18;
+        private DevComponents.DotNetBar.TabControlPanel tabControlPanel3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTDD11Full;
+        private DevComponents.DotNetBar.TabItem tabItem3;
+        private DevComponents.DotNetBar.TabControlPanel tabControlPanel4;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTDD22Full;
+        private DevComponents.DotNetBar.TabItem tabItem4;
+        private DevComponents.DotNetBar.Controls.CheckBoxX chkTDDCheck;
+        private DevComponents.DotNetBar.TabControlPanel tabControlPanel5;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartSingle;
+        private DevComponents.DotNetBar.TabItem tabItem5;
     }
 }
 
