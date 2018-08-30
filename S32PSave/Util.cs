@@ -470,6 +470,60 @@ namespace S32PSave
             }
             return ret;
         }
+
+        public static float[,] GetSavedTxtFromPlotDataArray(plotData[] plotDatas)
+        {
+            int row = plotDatas[0].yData.Length;
+            int col = plotDatas.Length + 1;
+            float[,]ret=new float[row,col];
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 1; j < col; j++)
+                {
+                    ret[i, j] = plotDatas[j - 1].yData[i];
+                }
+            }
+
+            for (int i = 0; i < row; i++)
+            {
+                ret[i, 0] = plotDatas[0].xData[i];
+            }
+             return ret;
+        }
+
+        public static bool Save2DArrayToTxt<T>(T[,] data, string savePath)
+        {
+            bool ret = true;
+            try
+            {
+                int col = data.GetLength(1);
+                var enumerator = data.Cast<T>()
+                    .Select((s, i) => (i + 1) % col == 0 ? string.Concat(s, Environment.NewLine) : string.Concat(s, "\t"));
+
+                var item = String.Join("", enumerator.ToArray<string>());
+                File.AppendAllText(savePath, item);
+
+            }
+            catch (Exception e)
+            {
+                ret = false;
+             }
+
+            return ret;
+        }
+
+        public static Dictionary<string, bool> dataSave( Dictionary<string, plotData[]> data)
+        {
+            Dictionary<string, bool> ret = new Dictionary<string, bool>();
+            foreach (var VARIABLE in data)
+            {
+                string testItem = VARIABLE.Key;
+                string savePath = @"B:\test123\" + testItem + ".txt";
+                ret.Add(testItem, Save2DArrayToTxt(GetSavedTxtFromPlotDataArray(data[testItem]), savePath)); ;
+            }
+
+            return ret;
+        }
         #region 等同labview边界测试函数
         public static bool edgeTest(plotData[] data,plotData spec,bool isUpper) {
             for (int i = 0; i < data.Length; i++) { 

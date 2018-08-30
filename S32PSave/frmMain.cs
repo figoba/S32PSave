@@ -102,7 +102,7 @@ namespace S32PSave
                 case TestStatus.Fail:
                     sw.Stop();
                     setResult("Fail",Color.Red);
-                    btnStart.Enabled = true;
+                    setStart(true);
                     break;
                 case TestStatus.Pass:
                     setResult("PASS",Color.Green);
@@ -117,12 +117,13 @@ namespace S32PSave
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+#if !DEBUG
             if (!diskFreeSpaceCheck()) {
                 MessageBoxEx.Show("磁盘剩余空间不足1G，请清理后再测试！");
                 return;
             }
 
-            
+#endif           
             addStatus("start test");
             sw.Start();
             setCableStatus("");
@@ -186,9 +187,15 @@ namespace S32PSave
          
             #if DEBUG
         
-                        button1.Visible = true;
+                       // button1.Visible = true;
             
             #endif
+            TabPage Page = new TabPage();
+            Page.Name = "Page" ;
+            Page.Text = "tabPage" ;
+            Page.TabIndex = 5;
+            //this.tabControl1.Controls.Add(Page)
+            tabControlChart.Controls.Add(Page);
             charts_ini();
             setCableStatus("");
             btn_Calibrate.Enabled = false;
@@ -1343,7 +1350,8 @@ namespace S32PSave
 
             Dictionary<string,string[]>pairNameDictionary=new Dictionary<string, string[]>();
 
-            string[] testItems = checkTDD ? new[] { "SINGLE", "SDD21", "SDD11", "TDD11", "TDD22" } : new[] { "SINGLE", "SDD21", "SDD11" };
+           // string[] testItems = checkTDD ? new[] { "SINGLE", "SDD21", "SDD11", "TDD11", "TDD22" } : new[] { "SINGLE", "SDD21", "SDD11" };
+            string[] testItems = {"SINGLE", "SDD21", "SDD11", "TDD11", "TDD22","SCD22","SCD21-SDD21","SCC11","MDNXET","MDFEXT"};
 
             bool action = false;
             string msg = "";
@@ -1357,6 +1365,7 @@ namespace S32PSave
                 return null;
             }
             Dictionary<string, bool> result = Util.judge(spec, data);
+            Util.dataSave(data);
             addStatus("finished judge data");
            
             foreach (string testItem in testItems)
