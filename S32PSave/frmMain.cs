@@ -18,6 +18,7 @@ using virtualIIC;
 using System.IO.Ports;
 using _32p_analyze;
 using System.Windows.Forms.DataVisualization.Charting;
+using DevComponents.DotNetBar.Controls;
 using Ivi.Visa.Interop;
 
 
@@ -163,11 +164,7 @@ namespace S32PSave
 
             StatusSet(TestStatus.Working);
            
-            //labelResult.Text = "Working";
-            //labelResult.BackColor = Color.Blue;
-
          
-
             setProgress(35, false);
 
            
@@ -190,13 +187,26 @@ namespace S32PSave
                        // button1.Visible = true;
             
             #endif
-            TabPage Page = new TabPage();
-            Page.Name = "Page" ;
-            Page.Text = "tabPage" ;
-            Page.TabIndex = 5;
-            //this.tabControl1.Controls.Add(Page)
-            tabControlChart.Controls.Add(Page);
+
+            TabItem tim = this.tabControlChart.CreateTab("SCD22");
+            Chart chart = new Chart();
+            chart.Name = "SCD22";
+            chart.Width = 999;
+            chart.Height = 336;
+            chart.Location=new Point(4,0);
+            ChartArea chartArea = new ChartArea("ChartArea1");
+            chart.ChartAreas.Add(chartArea);
+            
+            //Label lblTest = new Label();
+            //lblTest.Text = "wawawa";
+            tim.AttachedControl.Controls.Add(chart);
+            int kk = chart.ChartAreas.Count();
+            int b = kk;
+            chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
+            chart.Series.Clear();
             charts_ini();
+            chartDic.Add("SCD22",chart);
+            testItemCheckBoxIni();
             setCableStatus("");
             btn_Calibrate.Enabled = false;
             skinStyle_ini();
@@ -1351,7 +1361,7 @@ namespace S32PSave
             Dictionary<string,string[]>pairNameDictionary=new Dictionary<string, string[]>();
 
            // string[] testItems = checkTDD ? new[] { "SINGLE", "SDD21", "SDD11", "TDD11", "TDD22" } : new[] { "SINGLE", "SDD21", "SDD11" };
-            string[] testItems = {"SINGLE", "SDD21", "SDD11", "TDD11", "TDD22","SCD22","SCD21-SDD21","SCC11","MDNXET","MDFEXT"};
+            string[] testItems = {"SINGLE", "SDD21", "SDD11", "TDD11", "TDD22","SCD22"};
 
             bool action = false;
             string msg = "";
@@ -1377,6 +1387,8 @@ namespace S32PSave
                    // addStatus("chart " + testItem + i+" start");
                     if (pairNameDictionary.ContainsKey(testItem))
                     {
+                        string a = tempChart.Name;
+                        string b = a;
                         LineType lineType = testItem.StartsWith("T") ? LineType.Time : LineType.Fre;
                         DrawLine(tempChart, temp[i], pairNameDictionary[testItem][i], lineType);
                        
@@ -1971,7 +1983,9 @@ namespace S32PSave
        {
            if (chart.InvokeRequired)
            {
-               SetDrawLineCallBack d = new SetDrawLineCallBack(DrawLine);
+               string a = chart.Name;
+               string b = a;
+               SetDrawLineCallBack d = DrawLine;
                chart.Invoke(d, new object[] { chart, temp, seriName,lineType });
            }
            else
@@ -1979,7 +1993,7 @@ namespace S32PSave
                //绑定数据
                int index = chart.Series.Count;
                chart.Series.Add(seriName);
-                Series currentSeries = chart.Series[index];
+               Series currentSeries = chart.Series[index];
                //chart.Titles[index].Alignment = System.Drawing.ContentAlignment.TopRight;
                currentSeries.XValueType = ChartValueType.Single;  //设置X轴上的值类型
                currentSeries.Label = "#VAL";                //设置显示X Y的值    
@@ -2054,6 +2068,46 @@ namespace S32PSave
         private void txtVisaAddress_TextChanged(object sender, EventArgs e)
         {
             visaAddress = txtVisaAddress.Text;
+        }
+
+
+        private void testItemCheckBoxIni()
+        {
+            int startX = 5;
+            int startY = 5;
+            int width = 130;
+            int height = 20;
+            int rowMargin = 2;
+            int colMargin = 5;
+           
+            string[] testItems = {"SINGLE","SDD11", "SDD21","TDD11","TDD22","SCD22","SCD21-SDD21","SCC11","MDNEXT","MDFEXT"};
+
+            int startNo = 0;
+            int rows = 5;
+           
+            foreach (var VARIABLE in testItems)
+            {
+                int coordinateX = startNo / 5;
+                int coordinateY = startNo % 5;
+                CheckBoxX checkBox = new CheckBoxX();
+
+                checkBox.Visible = true;
+                checkBox.Size = new Size(width, height);
+                checkBox.Text = VARIABLE;
+                checkBox.Font = new Font("Consolas", 11F, 
+                    System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                checkBox.Location = new Point(startX + coordinateX * (width + rowMargin), startY + coordinateY*(height+colMargin));
+                checkBox.CheckedChanged+=checkBox_CheckedChanged;
+               // panelEx1.Controls.Add(checkBox);
+                panelExTestItems.Controls.Add(checkBox);
+                startNo = startNo + 1;
+            }
+        }
+
+        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBoxX checkBox = (CheckBoxX) sender;
+            MessageBoxEx.Show(checkBox.Text);
         }
 
     

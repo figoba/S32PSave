@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.textSN = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
@@ -136,6 +136,8 @@
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panelExTestItems = new DevComponents.DotNetBar.PanelEx();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -158,6 +160,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // textSN
@@ -331,8 +334,8 @@
             this.tabMain.BackColor = System.Drawing.Color.White;
             this.tabMain.CanReorderTabs = true;
             this.tabMain.ColorScheme.TabBackground = System.Drawing.Color.White;
-            this.tabMain.Controls.Add(this.tabControlPanel1);
             this.tabMain.Controls.Add(this.tabControlPanel2);
+            this.tabMain.Controls.Add(this.tabControlPanel1);
             this.tabMain.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.ForeColor = System.Drawing.Color.Black;
             this.tabMain.Location = new System.Drawing.Point(10, 67);
@@ -458,11 +461,11 @@
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
-            this.tabControlChart.Controls.Add(this.tabControlPanel5);
-            this.tabControlChart.Controls.Add(this.tabControlPanel10);
+            this.tabControlChart.Controls.Add(this.tabControlPanel11);
             this.tabControlChart.Controls.Add(this.tabControlPanel4);
             this.tabControlChart.Controls.Add(this.tabControlPanel3);
-            this.tabControlChart.Controls.Add(this.tabControlPanel11);
+            this.tabControlChart.Controls.Add(this.tabControlPanel10);
+            this.tabControlChart.Controls.Add(this.tabControlPanel5);
             this.tabControlChart.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControlChart.ForeColor = System.Drawing.Color.Black;
             this.tabControlChart.Location = new System.Drawing.Point(15, 75);
@@ -499,10 +502,10 @@
             // 
             // chartSingle
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartSingle.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartSingle.Legends.Add(legend1);
+            chartArea6.Name = "ChartArea1";
+            this.chartSingle.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chartSingle.Legends.Add(legend6);
             this.chartSingle.Location = new System.Drawing.Point(4, 0);
             this.chartSingle.Name = "chartSingle";
             this.chartSingle.Size = new System.Drawing.Size(999, 336);
@@ -535,10 +538,10 @@
             // 
             // chartSDD11Full
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartSDD11Full.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartSDD11Full.Legends.Add(legend2);
+            chartArea7.Name = "ChartArea1";
+            this.chartSDD11Full.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chartSDD11Full.Legends.Add(legend7);
             this.chartSDD11Full.Location = new System.Drawing.Point(4, 0);
             this.chartSDD11Full.Name = "chartSDD11Full";
             this.chartSDD11Full.Size = new System.Drawing.Size(999, 336);
@@ -571,10 +574,10 @@
             // 
             // chartTDD22Full
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartTDD22Full.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartTDD22Full.Legends.Add(legend3);
+            chartArea8.Name = "ChartArea1";
+            this.chartTDD22Full.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chartTDD22Full.Legends.Add(legend8);
             this.chartTDD22Full.Location = new System.Drawing.Point(4, 0);
             this.chartTDD22Full.Name = "chartTDD22Full";
             this.chartTDD22Full.Size = new System.Drawing.Size(999, 336);
@@ -607,10 +610,10 @@
             // 
             // chartTDD11Full
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartTDD11Full.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartTDD11Full.Legends.Add(legend4);
+            chartArea9.Name = "ChartArea1";
+            this.chartTDD11Full.ChartAreas.Add(chartArea9);
+            legend9.Name = "Legend1";
+            this.chartTDD11Full.Legends.Add(legend9);
             this.chartTDD11Full.Location = new System.Drawing.Point(4, 0);
             this.chartTDD11Full.Name = "chartTDD11Full";
             this.chartTDD11Full.Size = new System.Drawing.Size(999, 336);
@@ -643,10 +646,10 @@
             // 
             // chartSDD21Full
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chartSDD21Full.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chartSDD21Full.Legends.Add(legend5);
+            chartArea10.Name = "ChartArea1";
+            this.chartSDD21Full.ChartAreas.Add(chartArea10);
+            legend10.Name = "Legend1";
+            this.chartSDD21Full.Legends.Add(legend10);
             this.chartSDD21Full.Location = new System.Drawing.Point(4, 0);
             this.chartSDD21Full.Name = "chartSDD21Full";
             this.chartSDD21Full.Size = new System.Drawing.Size(999, 336);
@@ -792,6 +795,7 @@
             // tabControlPanel2
             // 
             this.tabControlPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.tabControlPanel2.Controls.Add(this.groupBox3);
             this.tabControlPanel2.Controls.Add(this.groupBox4);
             this.tabControlPanel2.Controls.Add(this.groupBox2);
             this.tabControlPanel2.Controls.Add(this.textSend);
@@ -1218,6 +1222,7 @@
             this.chkWriteSN.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkWriteSN.TabIndex = 26;
             this.chkWriteSN.Text = "WriteSN";
+           
             // 
             // chkEEPROM
             // 
@@ -1321,9 +1326,9 @@
             this.rTextTCPLog.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.rTextTCPLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rTextTCPLog.ForeColor = System.Drawing.Color.Black;
-            this.rTextTCPLog.Location = new System.Drawing.Point(441, 34);
+            this.rTextTCPLog.Location = new System.Drawing.Point(441, 380);
             this.rTextTCPLog.Name = "rTextTCPLog";
-            this.rTextTCPLog.Size = new System.Drawing.Size(446, 532);
+            this.rTextTCPLog.Size = new System.Drawing.Size(446, 186);
             this.rTextTCPLog.TabIndex = 15;
             // 
             // textPort
@@ -1498,6 +1503,32 @@
             this.labelX13.TabIndex = 20;
             this.labelX13.Text = "Date:20180817";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.panelExTestItems);
+            this.groupBox3.ForeColor = System.Drawing.Color.Black;
+            this.groupBox3.Location = new System.Drawing.Point(441, 25);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(446, 156);
+            this.groupBox3.TabIndex = 29;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "TestItems";
+            // 
+            // panelExTestItems
+            // 
+            this.panelExTestItems.CanvasColor = System.Drawing.Color.Transparent;
+            this.panelExTestItems.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelExTestItems.Location = new System.Drawing.Point(6, 25);
+            this.panelExTestItems.Name = "panelExTestItems";
+            this.panelExTestItems.Size = new System.Drawing.Size(434, 125);
+            this.panelExTestItems.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelExTestItems.Style.BackColor1.Color = System.Drawing.Color.Transparent;
+            this.panelExTestItems.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelExTestItems.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelExTestItems.Style.GradientAngle = 90;
+            this.panelExTestItems.TabIndex = 0;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1536,6 +1567,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1638,6 +1670,8 @@
         private DevComponents.DotNetBar.TabControlPanel tabControlPanel5;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartSingle;
         private DevComponents.DotNetBar.TabItem tabItem5;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private DevComponents.DotNetBar.PanelEx panelExTestItems;
     }
 }
 
