@@ -188,22 +188,7 @@ namespace S32PSave
             
             #endif
 
-            TabItem tim = this.tabControlChart.CreateTab("SCD22");
-            Chart chart = new Chart();
-            chart.Name = "SCD22";
-            chart.Width = 999;
-            chart.Height = 336;
-            chart.Location=new Point(4,0);
-            ChartArea chartArea = new ChartArea("ChartArea1");
-            chart.ChartAreas.Add(chartArea);
-            
-            //Label lblTest = new Label();
-            //lblTest.Text = "wawawa";
-            tim.AttachedControl.Controls.Add(chart);
-            int kk = chart.ChartAreas.Count();
-            int b = kk;
-            chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
-            chart.Series.Clear();
+           
             charts_ini();
             chartDic.Add("SCD22",chart);
             testItemCheckBoxIni();
@@ -1821,155 +1806,6 @@ namespace S32PSave
            }
        }
 
-       private  void drawDataIni(Chart chart)
-       {
-           //标题
-           //chart.Titles.Add("a柱状图数据分析");
-           //chart.Titles.Add("b柱状图数据分析");
-           //chart.Titles.Add("SDD21");
-           //chart.Titles[0].ForeColor = Color.White;
-           //chart.Titles[0].Font = new Font("微软雅黑", 12f, FontStyle.Regular);
-           //chart.Titles[0].Alignment = ContentAlignment.TopCenter;
-
-           chart.Visible = false;
-
-
-           //chart.Titles[1].ForeColor = Color.White;
-           //chart.Titles[1].Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-           //chart.Titles[1].Alignment = ContentAlignment.TopRight;
-
-           //控件背景
-           chart.BackColor = Color.Transparent;
-           //图表区背景
-           chart.ChartAreas[0].BackColor = Color.Transparent;
-           chart.ChartAreas[0].BorderColor = Color.Transparent;
-           //X轴标签间距
-           // chart.ChartAreas[0].AxisX.Interval=5000000000;
-           //chart.ChartAreas[0].AxisX.LabelStyle.IsStaggered = true;
-           chart.ChartAreas[0].AxisX.LabelStyle.Angle = 0;
-           chart.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 14f, FontStyle.Regular);
-           chart.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
-
-
-           //X坐标轴颜色
-           chart.ChartAreas[0].AxisX.LineColor = ColorTranslator.FromHtml("#38587a"); ;
-           chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
-           chart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
-           //X坐标轴标题
-           //chart.ChartAreas[0].AxisX.Title = "数量(宗)";
-           //chart.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
-           //chart.ChartAreas[0].AxisX.TitleForeColor = Color.White;
-           //chart.ChartAreas[0].AxisX.TextOrientation = TextOrientation.Horizontal;
-           //chart.ChartAreas[0].AxisX.ToolTip = "数量(宗)";
-           //X轴网络线条
-           chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
-           chart.ChartAreas[0].AxisX.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");
-
-           //Y坐标轴颜色
-           chart.ChartAreas[0].AxisY.LineColor = ColorTranslator.FromHtml("#38587a");
-           chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
-           chart.ChartAreas[0].AxisY.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
-           //Y坐标轴标题
-           chart.ChartAreas[0].AxisY.Title = "loss";
-           chart.ChartAreas[0].AxisY.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
-           chart.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
-           chart.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
-           chart.ChartAreas[0].AxisY.ToolTip = "loss";
-           //Y轴网格线条
-           chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
-           chart.ChartAreas[0].AxisY.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");
-
-           chart.ChartAreas[0].AxisY2.LineColor = Color.Transparent;
-           chart.ChartAreas[0].BackGradientStyle = GradientStyle.TopBottom;
-
-
-           //Legend legend = new Legend("legend");
-           //legend.Title = "legendTitle";
-
-
-           //chart.Legends.Add(legend);
-           //chart.Legends[0].Position.Auto = false;
-
-
-
-       }
-
-
-       private void drawDataIniTDD(Chart chart)
-       {
-           //标题
-           //chart.Titles.Add("a柱状图数据分析");
-           //chart.Titles.Add("b柱状图数据分析");
-           //chart.Titles.Add("SDD21");
-           //chart.Titles[0].ForeColor = Color.White;
-           //chart.Titles[0].Font = new Font("微软雅黑", 12f, FontStyle.Regular);
-           //chart.Titles[0].Alignment = ContentAlignment.TopCenter;
-
-           chart.Visible = false;
-
-
-           //chart.Titles[1].ForeColor = Color.White;
-           //chart.Titles[1].Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-           //chart.Titles[1].Alignment = ContentAlignment.TopRight;
-
-           //控件背景
-           chart.BackColor = Color.Transparent;
-           //图表区背景
-           chart.ChartAreas[0].BackColor = Color.Transparent;
-           chart.ChartAreas[0].BorderColor = Color.Transparent;
-           //X轴标签间距
-           // chart.ChartAreas[0].AxisX.Interval=5000000000;
-           //chart.ChartAreas[0].AxisX.LabelStyle.IsStaggered = true;
-           chart.ChartAreas[0].AxisX.LabelStyle.Angle = 0;
-           chart.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 14f, FontStyle.Regular);
-           chart.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
-
-
-           //X坐标轴颜色
-           chart.ChartAreas[0].AxisX.LineColor = ColorTranslator.FromHtml("#38587a"); ;
-           chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
-           chart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
-           //X坐标轴标题
-           //chart.ChartAreas[0].AxisX.Title = "数量(宗)";
-           //chart.ChartAreas[0].AxisX.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
-           //chart.ChartAreas[0].AxisX.TitleForeColor = Color.White;
-           //chart.ChartAreas[0].AxisX.TextOrientation = TextOrientation.Horizontal;
-           //chart.ChartAreas[0].AxisX.ToolTip = "数量(宗)";
-           //X轴网络线条
-           chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
-           chart.ChartAreas[0].AxisX.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");
-
-           //Y坐标轴颜色
-           chart.ChartAreas[0].AxisY.LineColor = ColorTranslator.FromHtml("#38587a");
-           chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
-           chart.ChartAreas[0].AxisY.LabelStyle.Font = new Font("微软雅黑", 10f, FontStyle.Regular);
-           //Y坐标轴标题
-           chart.ChartAreas[0].AxisY.Title = "resistance";
-           chart.ChartAreas[0].AxisY.TitleFont = new Font("微软雅黑", 10f, FontStyle.Regular);
-           chart.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
-           chart.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
-           chart.ChartAreas[0].AxisY.ToolTip = "resistance";
-           //Y轴网格线条
-           chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
-           chart.ChartAreas[0].AxisY.MajorGrid.LineColor = ColorTranslator.FromHtml("#2c4c6d");
-           chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
-           //chart.ChartAreas[0].AxisY.Minimum = 80;
-
-           chart.ChartAreas[0].AxisY2.LineColor = Color.Transparent;
-           chart.ChartAreas[0].BackGradientStyle = GradientStyle.TopBottom;
-
-
-           //Legend legend = new Legend("legend");
-           //legend.Title = "legendTitle";
-
-
-           //chart.Legends.Add(legend);
-           //chart.Legends[0].Position.Auto = false;
-
-
-
-       }
-
      
 
         private enum LineType
@@ -2107,7 +1943,49 @@ namespace S32PSave
         private void checkBox_CheckedChanged(object sender, EventArgs e)
         {
             CheckBoxX checkBox = (CheckBoxX) sender;
+            
             MessageBoxEx.Show(checkBox.Text);
+        }
+
+        private enum TestItemAction
+        {
+            Add,
+            Remove
+        }
+
+        private void TestItemChange(string testItem, TestItemAction actionItem)
+        {
+            switch (actionItem)
+            {
+                case TestItemAction.Remove:
+                    if (chartDic.ContainsKey(testItem))
+                    {
+                        chartDic.Remove(testItem);
+                        TabItem timRemove = this.tabControlChart.Tabs["testItem"];
+                        this.tabControlChart.Tabs.Remove(timRemove);
+                    }
+                    break;
+                case TestItemAction.Add:
+                    TabItem tim = this.tabControlChart.CreateTab(testItem);
+                    Chart chart = new Chart();
+                    chart.Name = testItem;
+                    chart.Width = 999;
+                    chart.Height = 336;
+                    chart.Location=new Point(4,0);
+                    ChartArea chartArea = new ChartArea("ChartArea1");
+                    chart.ChartAreas.Add(chartArea);
+                    tim.AttachedControl.Controls.Add(chart);
+                    chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
+                    chart.Series.Clear();
+                    chartDic.Add(testItem,chart);
+                    break;
+
+            }
+
+            ;
+            
+            
+
         }
 
     
