@@ -88,3 +88,30 @@ codedetail: Stack trace for current level:   在 _32p_analyze.SNP..ctor(String S
 
 
 
+2018/8/31 16:25:05
+error msg:unspported parameter:MDNEXT
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.EasyGetfreData(String testItem, String[]& pairNames)
+
+
+
+
+
+2018/8/31 16:27:02
+error msg:unspported parameter:SCD21-SDD21
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.EasyGetfreData(String testItem, String[]& pairNames)
+
+
+
+
+
+2018/8/31 20:50:29
+error msg:unspported parameter:SCD21-SDD21
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.EasyGetfreData(String testItem, String[]& pairNames)
+
+
+
+
+

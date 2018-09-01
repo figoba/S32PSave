@@ -189,8 +189,8 @@ namespace S32PSave
             #endif
 
            
-            charts_ini();
-            chartDic.Add("SCD22",chart);
+            //charts_ini();
+           // chartDic.Add("SCD22",chart);
             testItemCheckBoxIni();
             setCableStatus("");
             btn_Calibrate.Enabled = false;
@@ -1267,70 +1267,7 @@ namespace S32PSave
             }
         }
 
-        private void charts_ini() {
-            chartDic = new Dictionary<string, Chart>()
-            {
-                {"SINGLE",chartSingle},
-                {"SDD21",chartSDD21Full},
-                {"SDD11",chartSDD11Full},
-                {"TDD11",chartTDD11Full},
-                {"TDD22",chartTDD22Full}
-            };
-
-            foreach (KeyValuePair<string,Chart>chart in chartDic)
-            {
-                chart.Value.ChartAreas[0].AxisY.IsStartedFromZero = false;
-            }
-            
-            //drawDataIni(chartSDD21Full);
-            //drawDataIni(chartSDD11Full);
-            //drawDataIniTDD(chartTDD11Full);
-        }
-
-        private Dictionary<string, bool> diffCheck(string s32pFilepath, SNPPort snpPort, Dictionary<string, plotData> spec)
-        {
-
-            chartSDD21Full.Series.Clear();
-            chartSDD11Full.Series.Clear();
-
-            string[] SDD21 = { "SDD21", "SDD43", "SDD65", "SDD87", "SDD10_9", "SDD12_11", "SDD14_13", "SDD16_15" };
-            string[] SDD11 = { "SDD11", "SDD33", "SDD55", "SDD77", "SDD99", "SDD11_11", "SDD13_13", "SDD15_15" };
-            Dictionary<string, string[]> item = new Dictionary<string, string[]>();
-            item.Add("SDD21", SDD21);
-            item.Add("SDD11", SDD11);
-
-            bool action = false;
-            string msg = "";
-            Dictionary<string, plotData[]> data = Util.getDiff(item, s32pFilepath, snpPort,spec,ref action,ref msg);
-            if (!action) {
-                addStatus(msg);
-                MessageBoxEx.Show(msg);
-                return null;
-            }
-            //if (data == null) {
-               
-            //}
-            Dictionary<string, bool> result = Util.judge(spec, data);
-            for (int i = 0; i < data["SDD21"].Length; i++)
-            {
-                DrawLine(chartSDD21Full, data["SDD21"][i], SDD21[i],LineType.Fre);
-            }
-            drawSpec("SDD21", spec, chartSDD21Full);
-            for (int i = 0; i < data["SDD11"].Length; i++)
-            {
-                DrawLine(chartSDD11Full, data["SDD11"][i], SDD11[i],LineType.Fre);
-            }
-            drawSpec("SDD11", spec, chartSDD11Full);
-
-            foreach (var testResult in result)
-            {
-                addStatus(testResult.Key + ":" + Util.boolToString(testResult.Value));
-                // rTextStatus.AppendText(Util.formatMsg(testResult.Key + ":" + Util.boolToString(testResult.Value)) + "\n");
-            }
-            data = null;
-            return result;
-
-        }
+     
 
        
 
@@ -1346,7 +1283,7 @@ namespace S32PSave
             Dictionary<string,string[]>pairNameDictionary=new Dictionary<string, string[]>();
 
            // string[] testItems = checkTDD ? new[] { "SINGLE", "SDD21", "SDD11", "TDD11", "TDD22" } : new[] { "SINGLE", "SDD21", "SDD11" };
-            string[] testItems = {"SINGLE", "SDD21", "SDD11", "TDD11", "TDD22","SCD22"};
+            string[] testItems = chartDic.Keys.ToArray();
 
             bool action = false;
             string msg = "";
@@ -1372,8 +1309,7 @@ namespace S32PSave
                    // addStatus("chart " + testItem + i+" start");
                     if (pairNameDictionary.ContainsKey(testItem))
                     {
-                        string a = tempChart.Name;
-                        string b = a;
+                       
                         LineType lineType = testItem.StartsWith("T") ? LineType.Time : LineType.Fre;
                         DrawLine(tempChart, temp[i], pairNameDictionary[testItem][i], lineType);
                        
@@ -1828,7 +1764,17 @@ namespace S32PSave
            {
                //绑定数据
                int index = chart.Series.Count;
+               Legend l = new Legend();//初始化一个图例的实例
+
+               l.Alignment = System.Drawing.StringAlignment.Far;//设置图表的对齐方式(中间对齐，靠近原点对齐，远离原点对齐)
+               l.Name = seriName;
+               l.Enabled = true;
+               //l.MaximumAutoSize = 5;
+               l.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+               
+               chart.AutoSize = false;
                chart.Series.Add(seriName);
+               chart.Legends.Add(l);
                Series currentSeries = chart.Series[index];
                //chart.Titles[index].Alignment = System.Drawing.ContentAlignment.TopRight;
                currentSeries.XValueType = ChartValueType.Single;  //设置X轴上的值类型
@@ -1837,6 +1783,8 @@ namespace S32PSave
                currentSeries.ToolTip = "#VALX:#VAL";     //鼠标移动到对应点显示数值
                currentSeries.ChartType = SeriesChartType.FastLine;    //图类型(折线)
                currentSeries.LegendText = seriName;
+               //chart.Legends[seriName].Enabled = true;
+               //chart.Legends[seriName].MaximumAutoSize = 15;
                //chart.Series[0].IsValueShownAsLabel = true;
                currentSeries.LabelForeColor = Color.Black;
                currentSeries.CustomProperties = "DrawingStyle = Cylinder";
@@ -1943,8 +1891,9 @@ namespace S32PSave
         private void checkBox_CheckedChanged(object sender, EventArgs e)
         {
             CheckBoxX checkBox = (CheckBoxX) sender;
-            
-            MessageBoxEx.Show(checkBox.Text);
+            TestItemAction testItem = checkBox.Checked ? TestItemAction.Add : TestItemAction.Remove;
+            TestItemChange(checkBox.Text, testItem);
+
         }
 
         private enum TestItemAction
@@ -1961,17 +1910,34 @@ namespace S32PSave
                     if (chartDic.ContainsKey(testItem))
                     {
                         chartDic.Remove(testItem);
-                        TabItem timRemove = this.tabControlChart.Tabs["testItem"];
+                        TabItem timRemove = this.tabControlChart.Tabs[testItem];
+                        //TabItem timRemove = ((Func<TabItem>)(() =>
+                        //{
+                        //    TabItem ret = null;
+                        //    foreach (TabItem tabItem in this.tabControlChart.Tabs)
+                        //    {
+                        //        if (tabItem.Name == testItem)
+                        //        {
+                        //            ret = tabItem;
+                        //            break;
+                        //        }
+                        //    }
+                        //    return ret;
+                        //    }))();
+
                         this.tabControlChart.Tabs.Remove(timRemove);
+                        
                     }
                     break;
                 case TestItemAction.Add:
                     TabItem tim = this.tabControlChart.CreateTab(testItem);
+                    tim.Name = testItem;
                     Chart chart = new Chart();
                     chart.Name = testItem;
                     chart.Width = 999;
                     chart.Height = 336;
                     chart.Location=new Point(4,0);
+                    
                     ChartArea chartArea = new ChartArea("ChartArea1");
                     chart.ChartAreas.Add(chartArea);
                     tim.AttachedControl.Controls.Add(chart);
