@@ -1764,17 +1764,10 @@ namespace S32PSave
            {
                //绑定数据
                int index = chart.Series.Count;
-               Legend l = new Legend();//初始化一个图例的实例
-
-               l.Alignment = System.Drawing.StringAlignment.Far;//设置图表的对齐方式(中间对齐，靠近原点对齐，远离原点对齐)
-               l.Name = seriName;
-               l.Enabled = true;
-               //l.MaximumAutoSize = 5;
-               l.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+              
                
-               chart.AutoSize = false;
                chart.Series.Add(seriName);
-               chart.Legends.Add(l);
+              
                Series currentSeries = chart.Series[index];
                //chart.Titles[index].Alignment = System.Drawing.ContentAlignment.TopRight;
                currentSeries.XValueType = ChartValueType.Single;  //设置X轴上的值类型
@@ -1783,6 +1776,7 @@ namespace S32PSave
                currentSeries.ToolTip = "#VALX:#VAL";     //鼠标移动到对应点显示数值
                currentSeries.ChartType = SeriesChartType.FastLine;    //图类型(折线)
                currentSeries.LegendText = seriName;
+               currentSeries.IsVisibleInLegend = true;
                //chart.Legends[seriName].Enabled = true;
                //chart.Legends[seriName].MaximumAutoSize = 15;
                //chart.Series[0].IsValueShownAsLabel = true;
@@ -1937,7 +1931,11 @@ namespace S32PSave
                     chart.Width = 999;
                     chart.Height = 336;
                     chart.Location=new Point(4,0);
-                    
+                    Legend legend = new Legend("legend");
+                    legend.Title = "Legend";
+                    legend.Font = new Font("Consolas", 11F,
+                        System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    chart.Legends.Add(legend);
                     ChartArea chartArea = new ChartArea("ChartArea1");
                     chart.ChartAreas.Add(chartArea);
                     tim.AttachedControl.Controls.Add(chart);
