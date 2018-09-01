@@ -42,6 +42,20 @@
             this.cmbTestNo = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.tabMain = new DevComponents.DotNetBar.TabControl();
+            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.chkTDDCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.txtMoSum = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX18 = new DevComponents.DotNetBar.LabelX();
+            this.tabControlChart = new DevComponents.DotNetBar.TabControl();
+            this.labelCableStatus = new DevComponents.DotNetBar.LabelX();
+            this.progressBarX1 = new DevComponents.DotNetBar.Controls.ProgressBarX();
+            this.btn_Calibrate = new DevComponents.DotNetBar.ButtonX();
+            this.button1 = new System.Windows.Forms.Button();
+            this.chkDataCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkAutoSN = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.txtMO = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panelExTestItems = new DevComponents.DotNetBar.PanelEx();
@@ -92,20 +106,6 @@
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.chkTDDCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.txtMoSum = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX18 = new DevComponents.DotNetBar.LabelX();
-            this.tabControlChart = new DevComponents.DotNetBar.TabControl();
-            this.labelCableStatus = new DevComponents.DotNetBar.LabelX();
-            this.progressBarX1 = new DevComponents.DotNetBar.Controls.ProgressBarX();
-            this.btn_Calibrate = new DevComponents.DotNetBar.ButtonX();
-            this.button1 = new System.Windows.Forms.Button();
-            this.chkDataCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkAutoSN = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.labelX8 = new DevComponents.DotNetBar.LabelX();
-            this.txtMO = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.richTextBoxEx1 = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -115,6 +115,8 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
+            this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tabControlChart)).BeginInit();
             this.tabControlPanel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -122,8 +124,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.tabControlPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tabControlChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,7 +182,7 @@
             this.labelResult.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelResult.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelResult.ForeColor = System.Drawing.Color.Black;
-            this.labelResult.Location = new System.Drawing.Point(1034, 134);
+            this.labelResult.Location = new System.Drawing.Point(1034, 79);
             this.labelResult.Name = "labelResult";
             this.labelResult.Size = new System.Drawing.Size(324, 163);
             this.labelResult.TabIndex = 5;
@@ -312,6 +312,259 @@
             this.tabMain.Tabs.Add(this.tabItem1);
             this.tabMain.Tabs.Add(this.tabItem2);
             this.tabMain.Text = "tabControl1";
+            // 
+            // tabControlPanel1
+            // 
+            this.tabControlPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabControlPanel1.CanvasColor = System.Drawing.Color.Transparent;
+            this.tabControlPanel1.Controls.Add(this.chkTDDCheck);
+            this.tabControlPanel1.Controls.Add(this.txtMoSum);
+            this.tabControlPanel1.Controls.Add(this.labelX18);
+            this.tabControlPanel1.Controls.Add(this.tabControlChart);
+            this.tabControlPanel1.Controls.Add(this.labelCableStatus);
+            this.tabControlPanel1.Controls.Add(this.progressBarX1);
+            this.tabControlPanel1.Controls.Add(this.btn_Calibrate);
+            this.tabControlPanel1.Controls.Add(this.rTextStatus);
+            this.tabControlPanel1.Controls.Add(this.button1);
+            this.tabControlPanel1.Controls.Add(this.chkDataCheck);
+            this.tabControlPanel1.Controls.Add(this.chkAutoSN);
+            this.tabControlPanel1.Controls.Add(this.labelX8);
+            this.tabControlPanel1.Controls.Add(this.txtMO);
+            this.tabControlPanel1.Controls.Add(this.labelX3);
+            this.tabControlPanel1.Controls.Add(this.labelX4);
+            this.tabControlPanel1.Controls.Add(this.textSN);
+            this.tabControlPanel1.Controls.Add(this.cmbTestNo);
+            this.tabControlPanel1.Controls.Add(this.labelX1);
+            this.tabControlPanel1.Controls.Add(this.textPN);
+            this.tabControlPanel1.Controls.Add(this.labelResult);
+            this.tabControlPanel1.Controls.Add(this.btnExit);
+            this.tabControlPanel1.Controls.Add(this.btnStart);
+            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 33);
+            this.tabControlPanel1.Name = "tabControlPanel1";
+            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel1.Size = new System.Drawing.Size(1425, 667);
+            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.White;
+            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel1.Style.GradientAngle = -90;
+            this.tabControlPanel1.TabIndex = 1;
+            this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // chkTDDCheck
+            // 
+            this.chkTDDCheck.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkTDDCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkTDDCheck.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTDDCheck.ForeColor = System.Drawing.Color.Black;
+            this.chkTDDCheck.Location = new System.Drawing.Point(655, 50);
+            this.chkTDDCheck.Name = "chkTDDCheck";
+            this.chkTDDCheck.Size = new System.Drawing.Size(107, 24);
+            this.chkTDDCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkTDDCheck.TabIndex = 32;
+            this.chkTDDCheck.Text = "TDDCheck";
+            // 
+            // txtMoSum
+            // 
+            this.txtMoSum.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtMoSum.Border.Class = "TextBoxBorder";
+            this.txtMoSum.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMoSum.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMoSum.ForeColor = System.Drawing.Color.Black;
+            this.txtMoSum.Location = new System.Drawing.Point(881, 11);
+            this.txtMoSum.Name = "txtMoSum";
+            this.txtMoSum.Size = new System.Drawing.Size(141, 26);
+            this.txtMoSum.TabIndex = 31;
+            // 
+            // labelX18
+            // 
+            this.labelX18.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.labelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX18.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX18.ForeColor = System.Drawing.Color.Black;
+            this.labelX18.Location = new System.Drawing.Point(797, 9);
+            this.labelX18.Name = "labelX18";
+            this.labelX18.Size = new System.Drawing.Size(77, 33);
+            this.labelX18.TabIndex = 30;
+            this.labelX18.Text = "MO sum";
+            // 
+            // tabControlChart
+            // 
+            this.tabControlChart.BackColor = System.Drawing.Color.Transparent;
+            this.tabControlChart.CanReorderTabs = true;
+            this.tabControlChart.ColorScheme.TabBackground = System.Drawing.Color.Transparent;
+            this.tabControlChart.ColorScheme.TabBorder = System.Drawing.Color.Transparent;
+            this.tabControlChart.ColorScheme.TabItemBackground2 = System.Drawing.Color.Transparent;
+            this.tabControlChart.ColorScheme.TabItemBackgroundColorBlend.AddRange(new DevComponents.DotNetBar.BackgroundColorBlend[] {
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
+            this.tabControlChart.ColorScheme.TabItemBorder = System.Drawing.Color.Transparent;
+            this.tabControlChart.ColorScheme.TabItemHotBackgroundColorBlend.AddRange(new DevComponents.DotNetBar.BackgroundColorBlend[] {
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
+            this.tabControlChart.ColorScheme.TabItemSelectedBackground = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tabControlChart.ColorScheme.TabItemSelectedBackgroundColorBlend.AddRange(new DevComponents.DotNetBar.BackgroundColorBlend[] {
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
+            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
+            this.tabControlChart.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControlChart.ForeColor = System.Drawing.Color.Black;
+            this.tabControlChart.Location = new System.Drawing.Point(15, 75);
+            this.tabControlChart.Name = "tabControlChart";
+            this.tabControlChart.SelectedTabFont = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControlChart.SelectedTabIndex = 0;
+            this.tabControlChart.Size = new System.Drawing.Size(1007, 367);
+            this.tabControlChart.TabIndex = 29;
+            this.tabControlChart.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
+            this.tabControlChart.Text = "tabControl2";
+            // 
+            // labelCableStatus
+            // 
+            this.labelCableStatus.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.labelCableStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelCableStatus.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelCableStatus.ForeColor = System.Drawing.Color.Black;
+            this.labelCableStatus.Location = new System.Drawing.Point(1034, 298);
+            this.labelCableStatus.Name = "labelCableStatus";
+            this.labelCableStatus.Size = new System.Drawing.Size(324, 81);
+            this.labelCableStatus.TabIndex = 27;
+            this.labelCableStatus.Text = "请拔出线缆";
+            // 
+            // progressBarX1
+            // 
+            // 
+            // 
+            // 
+            this.progressBarX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.progressBarX1.ForeColor = System.Drawing.Color.Red;
+            this.progressBarX1.Location = new System.Drawing.Point(15, 445);
+            this.progressBarX1.Maximum = 200;
+            this.progressBarX1.Name = "progressBarX1";
+            this.progressBarX1.Size = new System.Drawing.Size(1009, 17);
+            this.progressBarX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
+            this.progressBarX1.TabIndex = 26;
+            this.progressBarX1.Text = "progressBarX1";
+            // 
+            // btn_Calibrate
+            // 
+            this.btn_Calibrate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_Calibrate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btn_Calibrate.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Calibrate.Location = new System.Drawing.Point(1274, 472);
+            this.btn_Calibrate.Name = "btn_Calibrate";
+            this.btn_Calibrate.Size = new System.Drawing.Size(147, 88);
+            this.btn_Calibrate.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
+            this.btn_Calibrate.TabIndex = 24;
+            this.btn_Calibrate.Text = "Calibrate";
+            this.btn_Calibrate.Click += new System.EventHandler(this.btn_Calibrate_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(831, 56);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(63, 21);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // chkDataCheck
+            // 
+            this.chkDataCheck.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkDataCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkDataCheck.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDataCheck.ForeColor = System.Drawing.Color.Black;
+            this.chkDataCheck.Location = new System.Drawing.Point(496, 50);
+            this.chkDataCheck.Name = "chkDataCheck";
+            this.chkDataCheck.Size = new System.Drawing.Size(107, 24);
+            this.chkDataCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkDataCheck.TabIndex = 22;
+            this.chkDataCheck.Text = "DataCheck";
+            // 
+            // chkAutoSN
+            // 
+            this.chkAutoSN.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkAutoSN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkAutoSN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAutoSN.ForeColor = System.Drawing.Color.Black;
+            this.chkAutoSN.Location = new System.Drawing.Point(370, 46);
+            this.chkAutoSN.Name = "chkAutoSN";
+            this.chkAutoSN.Size = new System.Drawing.Size(85, 31);
+            this.chkAutoSN.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkAutoSN.TabIndex = 21;
+            this.chkAutoSN.Text = "AutoSN";
+            this.chkAutoSN.CheckedChanged += new System.EventHandler(this.chkAutoSN_CheckedChanged);
+            // 
+            // labelX8
+            // 
+            this.labelX8.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX8.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX8.ForeColor = System.Drawing.Color.Black;
+            this.labelX8.Location = new System.Drawing.Point(26, 6);
+            this.labelX8.Name = "labelX8";
+            this.labelX8.Size = new System.Drawing.Size(34, 33);
+            this.labelX8.TabIndex = 19;
+            this.labelX8.Text = "MO";
+            // 
+            // txtMO
+            // 
+            this.txtMO.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtMO.Border.Class = "TextBoxBorder";
+            this.txtMO.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMO.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMO.ForeColor = System.Drawing.Color.Black;
+            this.txtMO.Location = new System.Drawing.Point(67, 11);
+            this.txtMO.Name = "txtMO";
+            this.txtMO.Size = new System.Drawing.Size(268, 26);
+            this.txtMO.TabIndex = 20;
+            this.txtMO.TextChanged += new System.EventHandler(this.txtMO_TextChanged);
+            // 
+            // tabItem1
+            // 
+            this.tabItem1.AttachedControl = this.tabControlPanel1;
+            this.tabItem1.BackColor = System.Drawing.Color.White;
+            this.tabItem1.BackColor2 = System.Drawing.Color.White;
+            this.tabItem1.Icon = ((System.Drawing.Icon)(resources.GetObject("tabItem1.Icon")));
+            this.tabItem1.Name = "tabItem1";
+            this.tabItem1.Text = "Home";
+            this.tabItem1.TextColor = System.Drawing.Color.Red;
             // 
             // tabControlPanel2
             // 
@@ -986,259 +1239,6 @@
             this.tabItem2.Name = "tabItem2";
             this.tabItem2.Text = "System";
             // 
-            // tabControlPanel1
-            // 
-            this.tabControlPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabControlPanel1.CanvasColor = System.Drawing.Color.Transparent;
-            this.tabControlPanel1.Controls.Add(this.chkTDDCheck);
-            this.tabControlPanel1.Controls.Add(this.txtMoSum);
-            this.tabControlPanel1.Controls.Add(this.labelX18);
-            this.tabControlPanel1.Controls.Add(this.tabControlChart);
-            this.tabControlPanel1.Controls.Add(this.labelCableStatus);
-            this.tabControlPanel1.Controls.Add(this.progressBarX1);
-            this.tabControlPanel1.Controls.Add(this.btn_Calibrate);
-            this.tabControlPanel1.Controls.Add(this.rTextStatus);
-            this.tabControlPanel1.Controls.Add(this.button1);
-            this.tabControlPanel1.Controls.Add(this.chkDataCheck);
-            this.tabControlPanel1.Controls.Add(this.chkAutoSN);
-            this.tabControlPanel1.Controls.Add(this.labelX8);
-            this.tabControlPanel1.Controls.Add(this.txtMO);
-            this.tabControlPanel1.Controls.Add(this.labelX3);
-            this.tabControlPanel1.Controls.Add(this.labelX4);
-            this.tabControlPanel1.Controls.Add(this.textSN);
-            this.tabControlPanel1.Controls.Add(this.cmbTestNo);
-            this.tabControlPanel1.Controls.Add(this.labelX1);
-            this.tabControlPanel1.Controls.Add(this.textPN);
-            this.tabControlPanel1.Controls.Add(this.labelResult);
-            this.tabControlPanel1.Controls.Add(this.btnExit);
-            this.tabControlPanel1.Controls.Add(this.btnStart);
-            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControlPanel1.Location = new System.Drawing.Point(0, 33);
-            this.tabControlPanel1.Name = "tabControlPanel1";
-            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(1425, 667);
-            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.White;
-            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.White;
-            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel1.Style.GradientAngle = -90;
-            this.tabControlPanel1.TabIndex = 1;
-            this.tabControlPanel1.TabItem = this.tabItem1;
-            // 
-            // chkTDDCheck
-            // 
-            this.chkTDDCheck.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkTDDCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkTDDCheck.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkTDDCheck.ForeColor = System.Drawing.Color.Black;
-            this.chkTDDCheck.Location = new System.Drawing.Point(655, 50);
-            this.chkTDDCheck.Name = "chkTDDCheck";
-            this.chkTDDCheck.Size = new System.Drawing.Size(107, 24);
-            this.chkTDDCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkTDDCheck.TabIndex = 32;
-            this.chkTDDCheck.Text = "TDDCheck";
-            // 
-            // txtMoSum
-            // 
-            this.txtMoSum.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtMoSum.Border.Class = "TextBoxBorder";
-            this.txtMoSum.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtMoSum.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMoSum.ForeColor = System.Drawing.Color.Black;
-            this.txtMoSum.Location = new System.Drawing.Point(881, 11);
-            this.txtMoSum.Name = "txtMoSum";
-            this.txtMoSum.Size = new System.Drawing.Size(141, 26);
-            this.txtMoSum.TabIndex = 31;
-            // 
-            // labelX18
-            // 
-            this.labelX18.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.labelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX18.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX18.ForeColor = System.Drawing.Color.Black;
-            this.labelX18.Location = new System.Drawing.Point(797, 9);
-            this.labelX18.Name = "labelX18";
-            this.labelX18.Size = new System.Drawing.Size(77, 33);
-            this.labelX18.TabIndex = 30;
-            this.labelX18.Text = "MO sum";
-            // 
-            // tabControlChart
-            // 
-            this.tabControlChart.BackColor = System.Drawing.Color.Transparent;
-            this.tabControlChart.CanReorderTabs = true;
-            this.tabControlChart.ColorScheme.TabBackground = System.Drawing.Color.Transparent;
-            this.tabControlChart.ColorScheme.TabBorder = System.Drawing.Color.Transparent;
-            this.tabControlChart.ColorScheme.TabItemBackground2 = System.Drawing.Color.Transparent;
-            this.tabControlChart.ColorScheme.TabItemBackgroundColorBlend.AddRange(new DevComponents.DotNetBar.BackgroundColorBlend[] {
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
-            this.tabControlChart.ColorScheme.TabItemBorder = System.Drawing.Color.Transparent;
-            this.tabControlChart.ColorScheme.TabItemHotBackgroundColorBlend.AddRange(new DevComponents.DotNetBar.BackgroundColorBlend[] {
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
-            this.tabControlChart.ColorScheme.TabItemSelectedBackground = System.Drawing.SystemColors.GradientActiveCaption;
-            this.tabControlChart.ColorScheme.TabItemSelectedBackgroundColorBlend.AddRange(new DevComponents.DotNetBar.BackgroundColorBlend[] {
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
-            new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
-            this.tabControlChart.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlChart.ForeColor = System.Drawing.Color.Black;
-            this.tabControlChart.Location = new System.Drawing.Point(15, 75);
-            this.tabControlChart.Name = "tabControlChart";
-            this.tabControlChart.SelectedTabFont = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlChart.SelectedTabIndex = 0;
-            this.tabControlChart.Size = new System.Drawing.Size(1007, 367);
-            this.tabControlChart.TabIndex = 29;
-            this.tabControlChart.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
-            this.tabControlChart.Text = "tabControl2";
-            // 
-            // labelCableStatus
-            // 
-            this.labelCableStatus.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.labelCableStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelCableStatus.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelCableStatus.ForeColor = System.Drawing.Color.Black;
-            this.labelCableStatus.Location = new System.Drawing.Point(1034, 298);
-            this.labelCableStatus.Name = "labelCableStatus";
-            this.labelCableStatus.Size = new System.Drawing.Size(324, 81);
-            this.labelCableStatus.TabIndex = 27;
-            this.labelCableStatus.Text = "请拔出线缆";
-            // 
-            // progressBarX1
-            // 
-            // 
-            // 
-            // 
-            this.progressBarX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.progressBarX1.ForeColor = System.Drawing.Color.Red;
-            this.progressBarX1.Location = new System.Drawing.Point(15, 445);
-            this.progressBarX1.Maximum = 200;
-            this.progressBarX1.Name = "progressBarX1";
-            this.progressBarX1.Size = new System.Drawing.Size(1009, 17);
-            this.progressBarX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
-            this.progressBarX1.TabIndex = 26;
-            this.progressBarX1.Text = "progressBarX1";
-            // 
-            // btn_Calibrate
-            // 
-            this.btn_Calibrate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btn_Calibrate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btn_Calibrate.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Calibrate.Location = new System.Drawing.Point(1274, 472);
-            this.btn_Calibrate.Name = "btn_Calibrate";
-            this.btn_Calibrate.Size = new System.Drawing.Size(147, 88);
-            this.btn_Calibrate.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
-            this.btn_Calibrate.TabIndex = 24;
-            this.btn_Calibrate.Text = "Calibrate";
-            this.btn_Calibrate.Click += new System.EventHandler(this.btn_Calibrate_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(831, 56);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(63, 21);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // chkDataCheck
-            // 
-            this.chkDataCheck.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkDataCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkDataCheck.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDataCheck.ForeColor = System.Drawing.Color.Black;
-            this.chkDataCheck.Location = new System.Drawing.Point(496, 50);
-            this.chkDataCheck.Name = "chkDataCheck";
-            this.chkDataCheck.Size = new System.Drawing.Size(107, 24);
-            this.chkDataCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkDataCheck.TabIndex = 22;
-            this.chkDataCheck.Text = "DataCheck";
-            // 
-            // chkAutoSN
-            // 
-            this.chkAutoSN.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkAutoSN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAutoSN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAutoSN.ForeColor = System.Drawing.Color.Black;
-            this.chkAutoSN.Location = new System.Drawing.Point(370, 46);
-            this.chkAutoSN.Name = "chkAutoSN";
-            this.chkAutoSN.Size = new System.Drawing.Size(85, 31);
-            this.chkAutoSN.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkAutoSN.TabIndex = 21;
-            this.chkAutoSN.Text = "AutoSN";
-            this.chkAutoSN.CheckedChanged += new System.EventHandler(this.chkAutoSN_CheckedChanged);
-            // 
-            // labelX8
-            // 
-            this.labelX8.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX8.ForeColor = System.Drawing.Color.Black;
-            this.labelX8.Location = new System.Drawing.Point(26, 6);
-            this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(34, 33);
-            this.labelX8.TabIndex = 19;
-            this.labelX8.Text = "MO";
-            // 
-            // txtMO
-            // 
-            this.txtMO.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtMO.Border.Class = "TextBoxBorder";
-            this.txtMO.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtMO.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMO.ForeColor = System.Drawing.Color.Black;
-            this.txtMO.Location = new System.Drawing.Point(67, 11);
-            this.txtMO.Name = "txtMO";
-            this.txtMO.Size = new System.Drawing.Size(268, 26);
-            this.txtMO.TabIndex = 20;
-            this.txtMO.TextChanged += new System.EventHandler(this.txtMO_TextChanged);
-            // 
-            // tabItem1
-            // 
-            this.tabItem1.AttachedControl = this.tabControlPanel1;
-            this.tabItem1.BackColor = System.Drawing.Color.White;
-            this.tabItem1.BackColor2 = System.Drawing.Color.White;
-            this.tabItem1.Icon = ((System.Drawing.Icon)(resources.GetObject("tabItem1.Icon")));
-            this.tabItem1.Name = "tabItem1";
-            this.tabItem1.Text = "Home";
-            this.tabItem1.TextColor = System.Drawing.Color.Red;
-            // 
             // richTextBoxEx1
             // 
             this.richTextBoxEx1.BackColor = System.Drawing.Color.White;
@@ -1287,7 +1287,7 @@
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(98, 24);
             this.labelX12.TabIndex = 19;
-            this.labelX12.Text = "Ver:1.42";
+            this.labelX12.Text = "Ver:1.50";
             // 
             // labelX13
             // 
@@ -1300,7 +1300,7 @@
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(150, 22);
             this.labelX13.TabIndex = 20;
-            this.labelX13.Text = "Date:20180817";
+            this.labelX13.Text = "Date:20180901";
             // 
             // frmMain
             // 
@@ -1319,6 +1319,8 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).EndInit();
             this.tabMain.ResumeLayout(false);
+            this.tabControlPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tabControlChart)).EndInit();
             this.tabControlPanel2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -1327,8 +1329,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.tabControlPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tabControlChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
