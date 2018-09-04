@@ -12,8 +12,11 @@ using System.Data.OleDb;
 using System.Data;
 using _32p_analyze;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using DevComponents.DotNetBar;
 using System.Threading;
+using System.Windows.Forms.VisualStyles;
+using System.Xml;
 
 
 namespace S32PSave
@@ -62,6 +65,23 @@ namespace S32PSave
 
     }
 
+    public struct ReportInformation
+    {
+        public string application;
+        public string partDescription;
+        public string partNo;
+        public string fixtureSerialNo;
+        public string reportNo;
+        public string sampleNo;
+        public string preparedBy;
+        public string approvedBy;
+        public string temprature;
+        public string rHumidity;
+        public string date;
+        public string tdrModel;
+        public string vnaModel;
+    }
+
     public class Util
     {
 #if DEBUG
@@ -88,11 +108,11 @@ namespace S32PSave
         //    return fsc;
         //}
 
-        //public static bool saveFileConfig(string xmlFilePath,string saveFolderPath)
+        //public static bool saveFileConfig(string xmlFilePath,string pnSaveFolderPath)
         //{
         //    XElement xe = XElement.Load(@xmlFilePath);
         //    XElement xle = (from ele in xe.Elements("FileSave") select ele).FirstOrDefault();
-        //    xle.Element("savePath").Value = saveFolderPath;
+        //    xle.Element("savePath").Value = pnSaveFolderPath;
         //    xe.Save(xmlFilePath);
         //    return true;
         //}
@@ -408,20 +428,22 @@ namespace S32PSave
             return ret;
         }
 
-        public static Dictionary<string, plotData> getPNSpec(string PN,ref TDD[] tdds)
+        public static Dictionary<string, plotData> getPNSpec(string PN,ref TDD[] tdds,ref string description)
         {
             if (!PingIpOrDomainName("172.20.23.107"))
             {
                 MessageBoxEx.Show("无法连接到IP地址172.20.23.107,请检查网络");
                 return null;
             }
-            string strSql = "select frequency,TDR from vna32port where LuxsharePN='" + PN + "'";
+            string strSql = "select frequency,TDR,general from vna32port where LuxsharePN='" + PN + "'";
             DataTable dt= DbHelperOleDb.Query(strSql,DB_HTPSDBConnectionString).Tables[0];
             if (dt.Rows.Count != 1) {
                 return null;
             }
             string frequency = dt.Rows[0]["frequency"].ToString();
             string tdr = dt.Rows[0]["TDR"].ToString();
+            string general = dt.Rows[0]["general"].ToString();
+            description = general.Split('\t')[5];
             tdds = getTdd(tdr);
             plotData[] tdd1 = GetTddSpec(tdds[0]);
             plotData[] tdd2 = GetTddSpec(tdds[1]);
@@ -917,6 +939,71 @@ namespace S32PSave
             }
 
             return ret;
+        }
+
+        public static bool SaveTestResult(Dictionary<string, bool> results, ReportInformation reportInformation, string saveFolder)
+        {
+            bool ret = true;
+            try
+            {
+                StringBuilder xmlHead = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<general>\r\n<testResult>\r\n");
+                string singleItem = "<testItem name=\"@item\" result=\"@result\"/> ";
+                string singleTail = "</testResult>\r\n";
+
+                string inforHead = "<information>";
+                string singleInforItem = "<inforItem name=\"@item\" value=\"@value\"/>";
+                string xmlTail = "</information>\r\n</general>";
+
+                StringBuilder temp = new StringBuilder();
+                foreach (var result in results)
+                {
+                    xmlHead.Append(singleItem.Replace("@item", result.Key).Replace("@result", result.Value ? "OK" : "NG"));
+
+                }
+
+                xmlHead.Append(singleTail);
+                xmlHead.Append(inforHead);
+                foreach (FieldInfo fieldInfo in reportInformation.GetType().GetFields())
+                {
+                    xmlHead.Append(singleInforItem.Replace("@item", fieldInfo.Name)
+                    .Replace("@value", fieldInfo.GetValue(reportInformation).ToString()));
+                 }
+
+                xmlHead.Append(xmlTail);
+                File.WriteAllText(saveFolder + "\\Result & Sample info.xml", FormatXml(xmlHead.ToString()));
+            }
+            catch (Exception e)
+            {
+                ret = false;
+                Console.WriteLine(e);
+                //throw;
+            }
+
+            return ret;
+        }
+
+        private static string FormatXml(string sUnformattedXml)
+        {
+            XmlDocument xd = new XmlDocument();
+            xd.LoadXml(sUnformattedXml);
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+            XmlTextWriter xtw = null;
+            try
+            {
+                xtw = new XmlTextWriter(sw);
+                xtw.Formatting = Formatting.Indented;
+                xtw.Indentation = 1;
+                xtw.IndentChar = '\t';
+                xd.WriteTo(xtw);
+            }
+            finally
+            {
+                if (xtw != null)
+                    xtw.Close();
+            }
+
+            return sb.ToString();
         }
     }
 }
