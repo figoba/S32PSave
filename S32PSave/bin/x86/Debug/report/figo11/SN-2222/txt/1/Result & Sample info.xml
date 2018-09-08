@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<general>
+	<testResult>
+		<testItem name="SINGLE" result="OK" />
+		<testItem name="SDD21" result="OK" />
+		<testItem name="SDD11" result="OK" />
+		<testItem name="TDD11" result="OK" />
+		<testItem name="TDD22" result="OK" />
+		<testItem name="SCD22" result="OK" />
+		<testItem name="SCD21-SDD21" result="OK" />
+		<testItem name="SCC11" result="OK" />
+		<testItem name="NEXT" result="OK" />
+		<testItem name="FEXT" result="OK" />
+		<testItem name="MDNEXT" result="OK" />
+		<testItem name="MDFEXT" result="OK" />
+	</testResult>
+	<information>
+		<inforItem name="application" value="Yaowen Wang" />
+		<inforItem name="partDescription" value="400G QSFP-DD to QSFP-DD 30AWG 0.5M Passive Cable Assembly " />
+		<inforItem name="partNo" value="figo11" />
+		<inforItem name="fixtureSerialNo" value="23" />
+		<inforItem name="reportNo" value="HF-2222" />
+		<inforItem name="sampleNo" value="2222" />
+		<inforItem name="preparedBy" value="Quanying Niu" />
+		<inforItem name="approvedBy" value="Wave Zhang" />
+		<inforItem name="temprature" value="23" />
+		<inforItem name="rHumidity" value="60" />
+		<inforItem name="date" value="2018-09-06" />
+		<inforItem name="tdrModel" value="1.TDR:Keysight PLTS IFFT" />
+		<inforItem name="vnaModel" value="2.PNA:Keysight 26.5GHz 32Port M9375A" />
+	</information>
+</general>

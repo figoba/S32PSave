@@ -13,10 +13,12 @@ using System.Data;
 using _32p_analyze;
 using System.Net.NetworkInformation;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using DevComponents.DotNetBar;
 using System.Threading;
 using System.Windows.Forms.VisualStyles;
 using System.Xml;
+using ICSharpCode.SharpZipLib.Zip;
 
 
 namespace S32PSave
@@ -534,13 +536,17 @@ namespace S32PSave
             return ret;
         }
 
-        public static Dictionary<string, bool> dataSave( Dictionary<string, plotData[]> data)
+        public static Dictionary<string, bool> dataSave(string saveFolder, Dictionary<string, plotData[]> data)
         {
             Dictionary<string, bool> ret = new Dictionary<string, bool>();
+            if (!Directory.Exists(saveFolder))
+            {
+                Directory.CreateDirectory(saveFolder);//创建该文件夹
+            }
             foreach (var VARIABLE in data)
             {
                 string testItem = VARIABLE.Key;
-                string savePath = @"B:\test123\" + testItem + ".txt";
+                string savePath = @saveFolder+"\\" + testItem + ".txt";
                 ret.Add(testItem, Save2DArrayToTxt(GetSavedTxtFromPlotDataArray(data[testItem]), savePath)); ;
             }
 
@@ -1005,5 +1011,92 @@ namespace S32PSave
 
             return sb.ToString();
         }
+
+        public enum DataType
+        {
+            Next,
+            TxtSource,
+            Fext,
+            Txt,
+            Summary,
+            EEPROM
+
+        }
+        public static bool zipTxt(string txtDataSourceFolder, string zipFileName, DataType dataType)
+        {
+            bool ret = true;
+          
+            try
+            {
+                List<string>txtList=new List<string>();
+                string[] txtFiles = Directory.GetFiles(txtDataSourceFolder).Select(fullPath => Path.GetFileName(fullPath)).ToArray();
+                switch (dataType)
+                {
+                    case    DataType.Next:
+                        txtList.Add(txtDataSourceFolder+"\\"+"next.txt");
+                       
+                        break;
+                    case DataType.Fext:
+                        txtList.Add(txtDataSourceFolder+"\\"+"fext.txt");
+                        
+                        break;
+                    case DataType.TxtSource:
+                        txtList = txtFiles.Select(filename => txtDataSourceFolder + "\\" + filename).ToList();
+                        
+                        break;
+                    case DataType.Txt:
+                        string pattern = @"^S|^T|^I";
+                        foreach (string fileName in txtFiles)
+                        {
+                            Match m = Regex.Match(fileName.ToUpper(), pattern);
+                            if (m.Success)
+                            {
+                                txtList.Add(txtDataSourceFolder+"\\"+fileName);
+                            }
+                        }
+                       
+                        break;
+                    case DataType.EEPROM:
+                        foreach (string fileName in txtFiles)
+                        {
+                            if (fileName.StartsWith("EEPROM"))
+                            {
+                                txtList.Add(txtDataSourceFolder+"\\"+fileName);
+                            }
+                        }
+                        
+                        break;
+                    case  DataType.Summary:
+                        txtList.Add("summary.txt");
+                        
+                        break;
+                   
+                         }
+
+                ret=SharpZip.CompressFile(txtList, zipFileName);
+
+            }
+            catch (Exception e)
+            {
+                ret = false;
+            }
+
+            return ret;
+        }
+
+      
+        public static void ziptest()
+        {
+            string[] lists = new[]
+            {
+                @"D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\report\figo11\SN-2222\txt\1\Result & Sample info.xml"
+            };
+            SharpZip.CompressFile(lists, "B:\\myzip.zip");
+
+          
+         
+        }
+
+
     }
 }

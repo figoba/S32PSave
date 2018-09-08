@@ -116,9 +116,15 @@ namespace S32PSave
             set { moTolerance = value; }
         }
 
-    
+        public string TxtSaveFolder
+        {
+            get { return txtSaveFolder; }
+            set { txtSaveFolder = value; }
+        }
 
-      
+        private string txtSaveFolder;
+
+
     }
 
     #region 数据库测试记录

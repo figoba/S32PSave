@@ -1,0 +1,12 @@
+D:\gitProjects\S32PSave\test\bin\Debug\test.dll
+D:\gitProjects\S32PSave\test\bin\Debug\test.pdb
+D:\gitProjects\S32PSave\test\bin\Debug\S32PSave.exe
+D:\gitProjects\S32PSave\test\bin\Debug\virtualIIC.dll
+D:\gitProjects\S32PSave\test\bin\Debug\32p_analyze.dll
+D:\gitProjects\S32PSave\test\bin\Debug\MathNet.Numerics.dll
+D:\gitProjects\S32PSave\test\bin\Debug\S32PSave.pdb
+D:\gitProjects\S32PSave\test\bin\Debug\32p_analyze.xml
+D:\gitProjects\S32PSave\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+D:\gitProjects\S32PSave\test\obj\Debug\test.dll
+D:\gitProjects\S32PSave\test\obj\Debug\test.pdb
+D:\gitProjects\S32PSave\test\bin\Debug\ICSharpCode.SharpZipLib.dll

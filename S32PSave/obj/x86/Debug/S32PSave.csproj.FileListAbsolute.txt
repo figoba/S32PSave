@@ -43,3 +43,4 @@ D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csprojResolveAssemblyRef
 D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.frmMain.resources
 D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.Properties.Resources.resources
 D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csproj.GenerateResource.Cache
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\ICSharpCode.SharpZipLib.dll

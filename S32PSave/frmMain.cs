@@ -20,6 +20,7 @@ using _32p_analyze;
 using System.Windows.Forms.DataVisualization.Charting;
 using DevComponents.DotNetBar.Controls;
 using Ivi.Visa.Interop;
+using Application = System.Windows.Forms.Application;
 
 
 namespace S32PSave
@@ -62,18 +63,21 @@ namespace S32PSave
 
         public static bool clearSN;
         public static string s32pSaveFolder;//全部32p保存文件夹
-        public string pnSaveFolderPath = "";//
+        public string pnSaveFolderPath = "";//对应料号创建的文件夹
+        public static string txtSaveFolder = "";//分析的数据保存路径
         
         public string volume = "";      //保存S32P文件所在的磁盘
         public string saveS32pPath = "";//生成的S32P文件保存路径
         public static int maxTestNum;
+        public static  bool blUpload;   //是否上传数据到数据库
+        public static bool blSaveTxt;   //是否保存分析数据
 
         public bool PN_change = false;
 
         AgilentPNA835x.Application PNA835;
-        //public PLTS plts = new PLTS();
+        
         public string visaAddress = "";
-        //private bool pltsConnected = false;
+        
         IScpiStringParser2 scpiParser;
         public string channelSelStr = "";
         public string channelSel = "";
@@ -156,7 +160,7 @@ namespace S32PSave
             InitializeComponent();
         }
 
-        enum TestStatus
+        private enum TestStatus
         {
             Fail,
             Pass,
@@ -205,8 +209,6 @@ namespace S32PSave
             if (!writeSN())
                 return;
            
-           
-
             StatusSet(TestStatus.Working);
             setProgress(45, false);
             timer1.Enabled = true;
@@ -306,8 +308,23 @@ namespace S32PSave
                 MessageBoxEx.Show("This application will auto create this path");
                 Directory.CreateDirectory(s32pSaveFolder);//创建该文件夹
             }
+
+            if (!Directory.Exists(txtSaveFolder))
+            {
+                if (string.IsNullOrWhiteSpace(txtSaveFolder))
+                {
+                    MessageBoxEx.Show("txt save path is emputy,will use default folder: report");
+                    txtSaveFolder =Application.StartupPath+"\\"+ "report";
+                }
+
+                
+                //MessageBoxEx.Show("txt save path:" + txtSaveFolder + " not exist");
+                Directory.CreateDirectory(txtSaveFolder);//创建该文件夹
+            }
             volume = s32pSaveFolder.Substring(0, s32pSaveFolder.IndexOf(':'));
         }
+
+       
 
         /// <summary>
         /// PNA档案检查
@@ -375,6 +392,10 @@ namespace S32PSave
            
             setProgress(170, false);
             Dictionary<string, bool> results = new Dictionary<string, bool>();
+            bool checkResult = false;
+            bool nextTF = false;
+            bool fextTF = false;
+            string testSN = null;
             if (!calibrated)
             {
                 addStatus("start calibrate");
@@ -384,17 +405,18 @@ namespace S32PSave
             else
             {
                 string testResult = "";
-                if (chkDataCheck.Checked)
+                if (chartDic.Count>0)
                 {
                     addStatus("data check set true,start data check");
-                    bool checkResult = s32pAnalyze(S32pFile, snpPort, spec, textPN.Text.Trim(), ref results);
-                    string testSN = null;
+                    checkResult = s32pAnalyze(S32pFile, snpPort, spec, textPN.Text.Trim(), ref results);
                     textSN.Invoke(new MethodInvoker(() =>
                     {
                         testSN = textSN.Text;
                     }));
                    // DBRecord_get(testSN,testNo,checkResult,)
                     testResult = setDisPlayResult(checkResult);
+                    nextTF = results.ContainsKey("NEXT");
+                    fextTF = results.ContainsKey("FEXT");
                 }
                 else
                 {
@@ -416,6 +438,24 @@ namespace S32PSave
             swTimeUse.Reset();
 
 
+            if (calibrated)
+            {
+                DBRecord_get(testSN, testNo, checkResult, (int)ts2.TotalSeconds, "EEPROM:None", nextTF, fextTF);
+                string txtDataFolder = txtSaveFolder + "\\" + testPN + "\\SN-" + Util.slashRepalce(testSN) + "\\txt\\" + testNo;
+                if (blSaveTxt)
+                {
+
+                    Util.SaveTestResult(results, GetReportInformation(), txtDataFolder);
+                }
+
+                if (blUpload)
+                {
+                    zipData(txtDataFolder);
+                    getSummary(txtDataFolder+"\\Upload1",Util.slashRepalce(testSN));
+                    getUpload2(testSN,txtDataFolder + "\\Upload2");
+                }
+            }
+           
             sendTCPAnalyzeCMD();
 
 
@@ -426,12 +466,91 @@ namespace S32PSave
             }
 
             setSNFocus();
-         
 
+            saveChart(chartDic["SDD11"]);
 
         }
 
+        private void saveChart(Chart chart)
+        {
+            chart.Invoke(new MethodInvoker(() => { chart.SaveImage(@"B:\22.emf", ChartImageFormat.Emf); }));
+        }
+
         #endregion
+
+        private bool getUpload2(string sn,string upload2Folder)
+        {
+            bool ret = false;
+            string[] temp = new string[6];
+            temp[0] = testPN;
+            temp[1] = sn;
+            temp[2] = "L037047";
+            temp[3] = DateTime.Now.ToString("hh:mm:ss yyyy/MM/dd");
+            temp[4] = dbRecord[4];//test result PASS,FAIL
+            temp[5] = "P#" + sn + "#s.zip";
+            try
+            {
+                string txtPath = upload2Folder + "\\P#" + sn + "#s.txt";
+                string zipPath = upload2Folder + "\\P#" + sn + "#s.zip";
+                if (!Directory.Exists(upload2Folder))
+                {
+                    Directory.CreateDirectory(upload2Folder);
+                }
+                File.WriteAllText(txtPath,string.Join(";",temp));
+                ret=SharpZip.CompressFile(txtPath, zipPath);
+            }
+            catch (Exception e)
+            {
+                ret = false;
+            }
+
+            return ret;
+        }
+        private bool getSummary(string summaryFolder,string sn)
+        {
+            bool ret = true;
+            try
+            {
+                File.WriteAllText(summaryFolder + "\\P#" + sn+"v.txt", string.Join(";", dbRecord));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                ret = false;
+            }
+
+            return ret;
+        }
+        private bool zipData(string txtDataSource)
+        {
+            bool ret = true;
+            string[] zipFiles = new string[6];
+            Util.DataType[] zipTypes=new Util.DataType[6];
+            zipFiles[0] = dbRecord[19];//ThruData
+            zipFiles[1] = dbRecord[22];//NextTXTData
+            zipFiles[2] = dbRecord[24];//FextTXTData
+            zipFiles[3] = dbRecord[25];//TxtData
+            zipFiles[4] = dbRecord[27];//EEPROMData
+            zipFiles[5] = dbRecord[28];//SummaryData
+
+            zipTypes[0] = Util.DataType.TxtSource;
+            zipTypes[1] = Util.DataType.Next;
+            zipTypes[2] = Util.DataType.Fext;
+            zipTypes[3] = Util.DataType.Txt;
+            zipTypes[4] = Util.DataType.EEPROM;
+            zipTypes[5] = Util.DataType.Summary;
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (zipFiles[i] != "NULL")
+                {
+                    ret = ret && Util.zipTxt(txtDataSource, txtDataSource + "\\Upload1\\" + zipFiles[i], zipTypes[i]);
+                }
+                
+            }
+
+            return ret;
+        }
 
 /// <summary>
         /// remote control command send to labview analyze software
@@ -516,7 +635,7 @@ namespace S32PSave
             else
             {
                 string testResult = "";
-                if (chkDataCheck.Checked)
+                if (chartDic.Count>0)
                 {
                     addStatus("data check set true,start data check");
                     bool checkResult = s32pAnalyze(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref results);
@@ -1028,9 +1147,8 @@ namespace S32PSave
         }
 
         private void autoSN_ini() { 
-            string MO=txtMO.Text.Trim();
-            string PN=textPN.Text.Trim();
-            MOPNCheckResult ret=  Util.MOPNCheck(MO, PN);
+           
+            MOPNCheckResult ret=  Util.MOPNCheck(testMO, testPN);
             if (ret.result)
             {
                 textSN.Enabled = false;
@@ -1274,7 +1392,7 @@ namespace S32PSave
 
        
 
-        private Dictionary<string, bool> snpCheck(string s32pFilepath, SNPPort snpPort, Dictionary<string, plotData> spec,bool checkTDD)
+        private Dictionary<string, bool> snpCheck(string s32pFilepath, SNPPort snpPort, Dictionary<string, plotData> spec)
         {
             addStatus("start clear charts");
   
@@ -1300,7 +1418,16 @@ namespace S32PSave
                 return null;
             }
             Dictionary<string, bool> result = Util.judge(spec, data);
-            Util.dataSave(data);
+            if (blSaveTxt)
+            {
+                string testSN = null;
+                textSN.Invoke(new MethodInvoker(() =>
+                {
+                    testSN = textSN.Text;
+                }));
+                Util.dataSave(txtSaveFolder + "\\" + testPN + "\\SN-" + testSN+"\\txt\\"+testNo,data);
+            }
+            
             addStatus("finished judge data");
            
             foreach (string testItem in testItems)
@@ -1524,14 +1651,14 @@ namespace S32PSave
 
            addStatus("wait s32p File used time is:"+fileCheckTime.ToString()+"ms");
 
-           results = snpCheck(s32pFilepath, snpPort, spec, chkTDDCheck.Checked);
+           results = snpCheck(s32pFilepath, snpPort, spec);
            if (results == null) {
                addStatus("analyze fail,please try again");
                return false;
            }
            addStatus("analyze test data finsihed");
          
-           Util.SaveTestResult(results, GetReportInformation(),"B:");
+           
            //Dictionary<string, bool> results=diffCheck(s32pFilepath, snpPort, spec);
            foreach (var item in results) {
                ret = ret && item.Value;
@@ -1611,8 +1738,10 @@ namespace S32PSave
            }
            else
            {
+               txtSaveFolder = readConfig.TxtSaveFolder;
+               textTxtSaveFolderPath.Text = txtSaveFolder;
                s32pSaveFolder = readConfig.FileSavePath;
-               textSaveFolderPath.Text = s32pSaveFolder;
+               textS32PSaveFolderPath.Text = s32pSaveFolder;
 
                clearSN = readConfig.ClearSN;
                chkSNClear.Checked = clearSN;
@@ -1646,7 +1775,7 @@ namespace S32PSave
 
        private bool saveConfig() {
            config saveConfig = new config();
-           saveConfig.FileSavePath = textSaveFolderPath.Text;
+           saveConfig.FileSavePath = textS32PSaveFolderPath.Text;
            saveConfig.ClearSN = chkSNClear.Checked;
            if (maxTestNum == 0) {
                maxTestNum = 4;
@@ -1664,6 +1793,7 @@ namespace S32PSave
            saveConfig.VisaAddress = txtVisaAddress.Text;
            saveConfig.ResolutionIndex = cmbResolution.SelectedIndex;
            saveConfig.MoTolerance = MOTolerance;
+           saveConfig.TxtSaveFolder = textTxtSaveFolderPath.Text;
            return Util.saveConfig(saveConfig, configFilePath);
        }
 
@@ -1712,7 +1842,7 @@ namespace S32PSave
        {
            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
            {
-               textSaveFolderPath.Text = folderBrowserDialog1.SelectedPath;
+               textS32PSaveFolderPath.Text = folderBrowserDialog1.SelectedPath;
                addLog("select folder path success!");
               
            }
@@ -1759,8 +1889,7 @@ namespace S32PSave
        {
            if (chart.InvokeRequired)
            {
-               string a = chart.Name;
-               string b = a;
+              
                SetDrawLineCallBack d = DrawLine;
                chart.Invoke(d, new object[] { chart, temp, seriName,lineType });
            }
@@ -1775,18 +1904,41 @@ namespace S32PSave
                Series currentSeries = chart.Series[index];
                //chart.Titles[index].Alignment = System.Drawing.ContentAlignment.TopRight;
                currentSeries.XValueType = ChartValueType.Single;  //设置X轴上的值类型
-               currentSeries.Label = "#VAL";                //设置显示X Y的值    
-               currentSeries.LabelForeColor = Color.Black;
+               //currentSeries.Label = "#VAL";                //设置显示X Y的值    
+               //currentSeries.LabelForeColor = Color.Black;
                currentSeries.ToolTip = "#VALX:#VAL";     //鼠标移动到对应点显示数值
-               currentSeries.ChartType = SeriesChartType.FastLine;    //图类型(折线)
+              // currentSeries.ChartType = SeriesChartType.FastLine;    //图类型(折线)
+               currentSeries.ChartType = SeriesChartType.Line;    //图类型(折线)
+               currentSeries.IsValueShownAsLabel = false;
                currentSeries.LegendText = seriName;
                currentSeries.IsVisibleInLegend = true;
                //chart.Legends[seriName].Enabled = true;
                //chart.Legends[seriName].MaximumAutoSize = 15;
                //chart.Series[0].IsValueShownAsLabel = true;
-               currentSeries.LabelForeColor = Color.Black;
-               currentSeries.CustomProperties = "DrawingStyle = Cylinder";
+
+              // currentSeries.LabelForeColor = Color.Black;
+               
+              // currentSeries.CustomProperties = "DrawingStyle = Cylinder";
                currentSeries.Points.DataBindXY(temp.xData, temp.yData);
+               
+               if (index == 0)
+               {
+                   CalloutAnnotation annotation = new CalloutAnnotation();
+                   annotation.AnchorDataPoint = currentSeries.Points[600];
+                   annotation.Text = "Just Won't Work";
+                   annotation.ForeColor = Color.Black;
+                   annotation.Font = new Font("Arial", 12); ;
+                   
+                   annotation.LineWidth = 2;
+                   annotation.Width = 50;
+                   annotation.Height = 30;
+                  
+                   annotation.Visible = true;
+                   chart.Annotations.Add(annotation);
+                  
+
+               }
+               
 
                switch (lineType)
                {
@@ -1813,7 +1965,7 @@ namespace S32PSave
                     
                }
 
-               chart.Visible = true;
+               //chart.Visible = true;
            }
 
 
@@ -1874,6 +2026,9 @@ namespace S32PSave
         }
 
 
+        /// <summary>
+        /// 测试项目初始化
+        /// </summary>
         private void testItemCheckBoxIni()
         {
             int startX = 5;
@@ -1883,11 +2038,12 @@ namespace S32PSave
             int rowMargin = 2;
             int colMargin = 5;
            
-            string[] testItems = {"SINGLE","SDD11", "SDD21","TDD11","TDD22","SCD22","SCD21-SDD21","SCC11","MDNEXT","MDFEXT"};
+            string[] testItems = {"SINGLE","SDD11", "SDD21","TDD11","TDD22","SCD22","SCD21-SDD21","SCC11","NEXT","FEXT","MDNEXT","MDFEXT"};
 
             int startNo = 0;
             int rows = 5;
-           
+
+            Dictionary<string, CheckBoxX> checkBoxDic=new Dictionary<string, CheckBoxX>();
             foreach (var VARIABLE in testItems)
             {
                 int coordinateX = startNo / 5;
@@ -1897,6 +2053,7 @@ namespace S32PSave
                 checkBox.Visible = true;
                 checkBox.Size = new Size(width, height);
                 checkBox.Text = VARIABLE;
+                checkBox.Name = "chk_" + VARIABLE;
                 checkBox.Font = new Font("Consolas", 11F, 
                     System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 checkBox.Location = new Point(startX + coordinateX * (width + rowMargin), startY + coordinateY*(height+colMargin));
@@ -1904,7 +2061,12 @@ namespace S32PSave
                // panelEx1.Controls.Add(checkBox);
                 panelExTestItems.Controls.Add(checkBox);
                 startNo = startNo + 1;
+                checkBoxDic.Add(checkBox.Name, checkBox);
             }
+
+            checkBoxDic["chk_SINGLE"].Checked = true;
+            checkBoxDic["chk_SDD21"].Checked = true;
+            checkBoxDic["chk_SDD11"].Checked = true;
         }
 
         private void checkBox_CheckedChanged(object sender, EventArgs e)
@@ -1961,7 +2123,15 @@ namespace S32PSave
                     legend.Font = new Font("Consolas", 11F,
                         System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     chart.Legends.Add(legend);
+                  
+                   
                     ChartArea chartArea = new ChartArea("ChartArea1");
+                    chartArea.CursorX.IsUserEnabled = true;
+                    chartArea.CursorX.IsUserSelectionEnabled = true;
+                    chartArea.CursorX.LineDashStyle = ChartDashStyle.DashDotDot;
+                    chartArea.CursorY.IsUserEnabled = true;
+                    chartArea.CursorY.IsUserSelectionEnabled = true;
+                    chartArea.CursorY.LineDashStyle = ChartDashStyle.DashDotDot;
                     chart.ChartAreas.Add(chartArea);
                     tim.AttachedControl.Controls.Add(chart);
                     chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
@@ -2034,6 +2204,42 @@ namespace S32PSave
 
             return true;
         }
+
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textTxtSaveFolderPath.Text = folderBrowserDialog1.SelectedPath;
+                addLog("select folder path success!");
+
+            }
+            else
+            {
+                addLog("cancel folder path select!");
+            }
+        }
+
+        private void chkUpload_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (chkUpload.Checked)
+            {
+                chkSaveTxt.Checked = true;
+                blUpload = true;
+                blSaveTxt = true;
+                chkSaveTxt.Enabled = false;
+            }
+            else
+            {
+                blUpload = false;
+                chkSaveTxt.Enabled = true;
+            }
+        }
+
+        private void chkSaveTxt_CheckedChanged(object sender, EventArgs e)
+        {
+            blSaveTxt = chkSaveTxt.Checked;
+        }
     
     }
 
@@ -2064,7 +2270,6 @@ namespace S32PSave
                 pnaConnectChecked(plts.Connected);
             }
             
-            
             plts.CloseAllFiles();
             plts.MeasureS32pFile();
 
@@ -2082,8 +2287,6 @@ namespace S32PSave
             {
                 saveFinished(filePath);
             }
-
-           
 
         }
      

@@ -1,6 +1,7 @@
 ﻿using S32PSave;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 
 namespace test
 {
@@ -106,6 +107,11 @@ namespace test
             SNData actual;
             actual= Util.getITSN(MO, PN);
             Assert.IsNotNull(actual);
+        }
+        [TestMethod()]
+        public void zipTest()
+        {
+            Util.zipTxt("2222", @"D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\report\figo11\SN-2222\txt\1",@"D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\report\figo11\SN-2222\txt\1\Upload1",Util.DataType.Txt);
         }
     }
 }

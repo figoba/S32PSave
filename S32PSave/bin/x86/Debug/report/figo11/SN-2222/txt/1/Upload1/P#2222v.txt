@@ -1,0 +1,1 @@
+figo11;nolabel;2222;;PASS;Yaowen Wang;Quanying Niu;Wave Zhang;08:53:46 2018/09/06;12S;USER-20180112CI;EEPROM:None;0;0;1;1;1;1;0;P#2222_1#Thru.zip;NULL;NULL;P#2222_1#NextTXT.zip;NULL;P#2222_1#FextTXT.zip;P#2222_1#TXT.zip;NULL;NULL;P#2222_1#Summary.zip;;;;;;;;;;NULL;S32pSave;S32P

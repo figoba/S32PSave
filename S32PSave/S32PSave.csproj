@@ -79,6 +79,10 @@
       <HintPath>bin\x86\Debug\32p_analyze.dll</HintPath>
     </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.3, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL" />
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Interop.AgilentPNA835x">
       <HintPath>bin\x86\Debug\dll\Interop.AgilentPNA835x.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -122,6 +126,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializer.cs" />
+    <Compile Include="SharpZip.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Web References\MESLabel\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -143,6 +148,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
