@@ -373,10 +373,7 @@ namespace S32PSave
             plotData[] ret=new plotData[2];
             double step = (float.Parse(tdd.stopTime) - float.Parse(tdd.startTime))/(tdd.points-1);
             float[] timeArray=new float[tdd.points];
-            //for (int i = 0; i < timeArray.Length; i++)
-            //{
-            //    timeArray[i] = i * step;
-            //}
+           
             var cc = tdd.impedance.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(t => t.Split('#').ToArray()).ToArray();
             double upperPoint1 = double.Parse((cc[0][1]));
             double upperPoint2 = double.Parse((cc[1][1]));
@@ -430,7 +427,7 @@ namespace S32PSave
             return ret;
         }
 
-        public static Dictionary<string, plotData> getPNSpec(string PN,ref TDD[] tdds,ref string description)
+        public static Dictionary<string, plotData> getPNSpec(string PN,ref TDD[] tdds,ref string description,ref string[][] freSpec,ref string TDDSpec,bool DBoffline)
         {
             if (!PingIpOrDomainName("172.20.23.107"))
             {
@@ -438,41 +435,99 @@ namespace S32PSave
                 return null;
             }
             string strSql = "select frequency,TDR,general from vna32port where LuxsharePN='" + PN + "'";
-            DataTable dt= DbHelperOleDb.Query(strSql,DB_HTPSDBConnectionString).Tables[0];
+            //DataTable dt= DbHelperOleDb.Query(strSql,DB_HTPSDBConnectionString).Tables[0];
+            DataTable dt = DBoffline
+                ? SqlLite.ExecuteDataTable(strSql)
+                : DbHelperOleDb.Query(strSql, DB_HTPSDBConnectionString).Tables[0];
             if (dt.Rows.Count != 1) {
                 return null;
             }
-            string frequency = dt.Rows[0]["frequency"].ToString();
+            string freSpecStr  = dt.Rows[0]["frequency"].ToString();
             string tdr = dt.Rows[0]["TDR"].ToString();
             string general = dt.Rows[0]["general"].ToString();
             description = general.Split('\t')[5];
             tdds = getTdd(tdr);
             plotData[] tdd1 = GetTddSpec(tdds[0]);
             plotData[] tdd2 = GetTddSpec(tdds[1]);
-            string bb = frequency.Split('\t')[0];
-            var cc = bb.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(t=>t.Split('#').ToArray()).ToArray();
+            string bb = freSpecStr.Split('\t')[0];
+            freSpec = bb.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(t => t.Split('#').ToArray()).ToArray();
             Dictionary<string, plotData> ret = new Dictionary<string, plotData>();
 
-            for (int i = 1; i < cc[0].Length; i++) {
+            for (int i = 1; i < freSpec[0].Length; i++)
+            {
                 plotData temp = new plotData();
                 List<float> x = new List<float>();
                 List<float> y = new List<float>();
-                for (int j = 1; j < cc.Length; j++) {
-                    if (cc[j][i] != "NaN") {
-                        x.Add((float)(double.Parse(cc[j][0])));
-                        y.Add((float)(double.Parse(cc[j][i])));
+                for (int j = 1; j < freSpec.Length; j++)
+                {
+                    if (freSpec[j][i] != "NaN")
+                    {
+                        x.Add((float)(double.Parse(freSpec[j][0])));
+                        y.Add((float)(double.Parse(freSpec[j][i])));
                     }
                 }
                 temp.xData = x.ToArray();
                 temp.yData = y.ToArray();
-                ret.Add(cc[0][i].ToUpper(), temp);
+                ret.Add(freSpec[0][i].ToUpper(), temp);
             }
             ret.Add("TDD11_UPPER",tdd1[0]);
             ret.Add("TDD11_LOWER", tdd1[1]);
             ret.Add("TDD22_UPPER", tdd2[0]);
             ret.Add("TDD22_LOWER", tdd2[1]);
+
+            string[] temStrings0 = getTDDString(tdd1[0], tdds[0], "TDD11_UPPER");
+            string[] temStrings1 = getTDDString(tdd1[1], tdds[0], "TDD11_LOWER");
+            string[] temStrings2 = getTDDString(tdd2[0], tdds[1], "TDD22_UPPER");
+            string[] temStrings3 = getTDDString(tdd2[1], tdds[1], "TDD22_LOWER");
+            string[][] TDDArray = {temStrings0, temStrings1, temStrings2, temStrings3};
+            TDDSpec = getTDDString(TDDArray);
+           
             return ret;
         
+        }
+
+        private static string getTDDString(string[][]TDD)
+        {
+            int length = TDD[0].Length;
+            string[] temp=new string[length];
+            for (int i = 0; i < length; i++)
+            {
+                temp[i] = TDD[0][i] + "\t" + TDD[1][i] + "\t" + TDD[2][i] + "\t" + TDD[3][i];
+            }
+
+            return string.Join(Environment.NewLine, temp);
+        }
+
+        private static string[] getTDDString(plotData TDD,TDD tddParams,string itemName)
+        {
+            int lengthCount = tddParams.points - 1;
+           
+            double step = (double.Parse(tddParams.stopTime) - double.Parse(tddParams.startTime)) / lengthCount;
+            double temp = 0;
+            double startValue = double.Parse(TDD.xData[0].ToString());
+            double endValue = double.Parse(TDD.xData.Max().ToString());
+            string[] retValue = new string[lengthCount+2];
+
+            int startPoint = (int) (startValue / step);
+            int endPoint = (int) (endValue / step);
+
+            retValue[0] = itemName;
+            for (int i = 1; i < startPoint+1; i++)
+            {
+                retValue[i] = "NaN";
+            }
+
+            for (int i = startPoint+1; i <= endPoint+1; i++)
+            {
+                retValue[i] = TDD.yData[i - startPoint-1].ToString();
+            }
+
+            for (int i = endPoint + 2; i < lengthCount+2; i++)
+            {
+                retValue[i] = "NaN";
+            }
+
+            return retValue;
         }
 
         public static Dictionary<string, bool> judge(Dictionary<string, plotData> spec, Dictionary<string, plotData[]> data)
@@ -1084,18 +1139,8 @@ namespace S32PSave
             return ret;
         }
 
-      
-        public static void ziptest()
-        {
-            string[] lists = new[]
-            {
-                @"D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\report\figo11\SN-2222\txt\1\Result & Sample info.xml"
-            };
-            SharpZip.CompressFile(lists, "B:\\myzip.zip");
 
-          
-         
-        }
+      
 
 
     }

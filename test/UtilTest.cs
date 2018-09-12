@@ -1,6 +1,7 @@
 ﻿using S32PSave;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Data;
 using System.IO;
 
 namespace test
@@ -109,9 +110,16 @@ namespace test
             Assert.IsNotNull(actual);
         }
         [TestMethod()]
-        public void zipTest()
+        public void sqlLiteTest()
         {
-            Util.zipTxt("2222", @"D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\report\figo11\SN-2222\txt\1",@"D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\report\figo11\SN-2222\txt\1\Upload1",Util.DataType.Txt);
+            string PN = "LZ6AAAAAA";
+            string strSql = "select frequency,TDR,general from vna32port where LuxsharePN='" + PN + "'";
+            //DataTable dt= DbHelperOleDb.Query(strSql,DB_HTPSDBConnectionString).Tables[0];
+            DataTable dt = SqlLite.ExecuteDataTable(strSql);
+            if (dt.Rows.Count != 1) {
+                
+            }
+           
         }
     }
 }

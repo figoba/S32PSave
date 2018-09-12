@@ -122,7 +122,15 @@ namespace S32PSave
             set { txtSaveFolder = value; }
         }
 
+        public bool DbOffline
+        {
+            get { return dbOffline; }
+            set { dbOffline = value; }
+        }
+
         private string txtSaveFolder;
+
+        private bool dbOffline;
 
 
     }

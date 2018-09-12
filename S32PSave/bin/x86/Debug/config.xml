@@ -15,4 +15,6 @@
   <VisaAddress>TCPIP0::LOCALHOST::hislip1::INSTR</VisaAddress>
   <ResolutionIndex>1</ResolutionIndex>
   <MoTolerance>0</MoTolerance>
+  <TxtSaveFolder />
+  <DbOffline>true</DbOffline>
 </config>

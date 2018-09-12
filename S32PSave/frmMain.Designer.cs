@@ -43,6 +43,8 @@
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.tabMain = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.chkUpload = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkSaveTxt = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.txtMoSum = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX18 = new DevComponents.DotNetBar.LabelX();
             this.tabControlChart = new DevComponents.DotNetBar.TabControl();
@@ -113,8 +115,7 @@
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.chkSaveTxt = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkUpload = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkDBOffline = new DevComponents.DotNetBar.Controls.CheckBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -300,8 +301,8 @@
             this.tabMain.BackColor = System.Drawing.Color.White;
             this.tabMain.CanReorderTabs = true;
             this.tabMain.ColorScheme.TabBackground = System.Drawing.Color.White;
-            this.tabMain.Controls.Add(this.tabControlPanel1);
             this.tabMain.Controls.Add(this.tabControlPanel2);
+            this.tabMain.Controls.Add(this.tabControlPanel1);
             this.tabMain.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.ForeColor = System.Drawing.Color.Black;
             this.tabMain.Location = new System.Drawing.Point(10, 67);
@@ -355,6 +356,40 @@
             this.tabControlPanel1.Style.GradientAngle = -90;
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // chkUpload
+            // 
+            this.chkUpload.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkUpload.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkUpload.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkUpload.ForeColor = System.Drawing.Color.Black;
+            this.chkUpload.Location = new System.Drawing.Point(585, 50);
+            this.chkUpload.Name = "chkUpload";
+            this.chkUpload.Size = new System.Drawing.Size(107, 24);
+            this.chkUpload.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkUpload.TabIndex = 34;
+            this.chkUpload.Text = "Upload";
+            this.chkUpload.CheckedChanged += new System.EventHandler(this.chkUpload_CheckedChanged);
+            // 
+            // chkSaveTxt
+            // 
+            this.chkSaveTxt.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkSaveTxt.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkSaveTxt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSaveTxt.ForeColor = System.Drawing.Color.Black;
+            this.chkSaveTxt.Location = new System.Drawing.Point(461, 50);
+            this.chkSaveTxt.Name = "chkSaveTxt";
+            this.chkSaveTxt.Size = new System.Drawing.Size(107, 24);
+            this.chkSaveTxt.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkSaveTxt.TabIndex = 33;
+            this.chkSaveTxt.Text = "Save Data";
+            this.chkSaveTxt.CheckedChanged += new System.EventHandler(this.chkSaveTxt_CheckedChanged);
             // 
             // txtMoSum
             // 
@@ -576,6 +611,7 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox4.Controls.Add(this.chkDBOffline);
             this.groupBox4.Controls.Add(this.buttonX1);
             this.groupBox4.Controls.Add(this.textTxtSaveFolderPath);
             this.groupBox4.Controls.Add(this.labelX19);
@@ -1304,39 +1340,19 @@
             this.labelX13.TabIndex = 20;
             this.labelX13.Text = "Date:20180901";
             // 
-            // chkSaveTxt
-            // 
-            this.chkSaveTxt.BackColor = System.Drawing.Color.Transparent;
+            // chkDBOffline
             // 
             // 
             // 
-            this.chkSaveTxt.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkSaveTxt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSaveTxt.ForeColor = System.Drawing.Color.Black;
-            this.chkSaveTxt.Location = new System.Drawing.Point(461, 50);
-            this.chkSaveTxt.Name = "chkSaveTxt";
-            this.chkSaveTxt.Size = new System.Drawing.Size(107, 24);
-            this.chkSaveTxt.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkSaveTxt.TabIndex = 33;
-            this.chkSaveTxt.Text = "Save Data";
-            this.chkSaveTxt.CheckedChanged += new System.EventHandler(this.chkSaveTxt_CheckedChanged);
             // 
-            // chkUpload
-            // 
-            this.chkUpload.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkUpload.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkUpload.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUpload.ForeColor = System.Drawing.Color.Black;
-            this.chkUpload.Location = new System.Drawing.Point(585, 50);
-            this.chkUpload.Name = "chkUpload";
-            this.chkUpload.Size = new System.Drawing.Size(107, 24);
-            this.chkUpload.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkUpload.TabIndex = 34;
-            this.chkUpload.Text = "Upload";
-            this.chkUpload.CheckedChanged += new System.EventHandler(this.chkUpload_CheckedChanged);
+            this.chkDBOffline.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkDBOffline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDBOffline.Location = new System.Drawing.Point(199, 100);
+            this.chkDBOffline.Name = "chkDBOffline";
+            this.chkDBOffline.Size = new System.Drawing.Size(108, 37);
+            this.chkDBOffline.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkDBOffline.TabIndex = 32;
+            this.chkDBOffline.Text = "Local DB";
             // 
             // frmMain
             // 
@@ -1457,6 +1473,7 @@
         private DevComponents.DotNetBar.LabelX labelX19;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkUpload;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkSaveTxt;
+        private DevComponents.DotNetBar.Controls.CheckBoxX chkDBOffline;
     }
 }
 

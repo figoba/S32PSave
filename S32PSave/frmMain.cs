@@ -55,6 +55,8 @@ namespace S32PSave
 
         #region SI
         Dictionary<string, plotData> spec = new Dictionary<string, plotData>();
+        public static string[][] freSpec ;
+        public static string TDDSpec;
         TDD[]tdds=new TDD[2];
         private string PNDescription = "";
         public bool calibrated = false;
@@ -65,6 +67,7 @@ namespace S32PSave
         public static string s32pSaveFolder;//全部32p保存文件夹
         public string pnSaveFolderPath = "";//对应料号创建的文件夹
         public static string txtSaveFolder = "";//分析的数据保存路径
+
         
         public string volume = "";      //保存S32P文件所在的磁盘
         public string saveS32pPath = "";//生成的S32P文件保存路径
@@ -446,12 +449,15 @@ namespace S32PSave
                 {
 
                     Util.SaveTestResult(results, GetReportInformation(), txtDataFolder);
+                    saveTDDSpecData(txtDataFolder + "\\" + "Impedance Spec.txt");
+                    saveFreData(txtDataFolder + "\\" + "Freq Spec.txt");
                 }
 
                 if (blUpload)
                 {
-                    zipData(txtDataFolder);
-                    getSummary(txtDataFolder+"\\Upload1",Util.slashRepalce(testSN));
+                    getUpload1(testSN, txtDataFolder);
+                    //zipData(txtDataFolder);
+                    //getSummary(txtDataFolder+"\\Upload1",Util.slashRepalce(testSN));
                     getUpload2(testSN,txtDataFolder + "\\Upload2");
                 }
             }
@@ -467,16 +473,61 @@ namespace S32PSave
 
             setSNFocus();
 
-            saveChart(chartDic["SDD11"]);
-
+      
         }
 
+        
         private void saveChart(Chart chart)
         {
             chart.Invoke(new MethodInvoker(() => { chart.SaveImage(@"B:\22.emf", ChartImageFormat.Emf); }));
         }
 
         #endregion
+        
+
+        private  bool saveTDDSpecData(string savePath)
+        {
+            bool ret = true;
+            try
+            {
+               File.WriteAllText(savePath, TDDSpec);
+            }
+            catch (Exception e)
+            {
+                ret = false;
+            }
+
+            return ret;
+        }
+        private  bool saveFreData(string savePath)
+        {
+            bool ret = true;
+            try
+            {
+                var enumerator = freSpec.Select(s => string.Join("\t", s.Skip(1))).ToArray();
+                var allText = string.Join(Environment.NewLine, enumerator);
+
+                File.WriteAllText(savePath, allText);
+            }
+            catch (Exception e)
+            {
+                ret = false;
+            }
+
+            return ret;
+        }
+        private bool getUpload1(string sn, string txtDataFolder)
+        {
+            if (zipData(txtDataFolder))
+            {
+                return getSummary(txtDataFolder + "\\Upload1", Util.slashRepalce(sn));
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
 
         private bool getUpload2(string sn,string upload2Folder)
         {
@@ -891,11 +942,12 @@ namespace S32PSave
         {
             if (PN_change) {
                 PNChange(textPN.Text.Trim());
-                spec = Util.getPNSpec(textPN.Text.Trim(), ref tdds, ref PNDescription);
+                spec = Util.getPNSpec(textPN.Text.Trim(), ref tdds, ref PNDescription, ref freSpec, ref TDDSpec,chkDBOffline.Checked);
                 if (spec != null)
                 {
                     DBRecord_ini();
                     addStatus("get PN spec from DB success!");
+                    //saveFreData();
                 }
                 else {
                     setStart(false);
@@ -1768,6 +1820,7 @@ namespace S32PSave
                visaAddress = txtVisaAddress.Text;
                cmbResolution.SelectedIndex = readConfig.ResolutionIndex;
                MOTolerance=readConfig.MoTolerance>0?MOTolerance:0;
+               chkDBOffline.Checked = readConfig.DbOffline;
               
                return true;
            }
@@ -1794,6 +1847,7 @@ namespace S32PSave
            saveConfig.ResolutionIndex = cmbResolution.SelectedIndex;
            saveConfig.MoTolerance = MOTolerance;
            saveConfig.TxtSaveFolder = textTxtSaveFolderPath.Text;
+           saveConfig.DbOffline = chkDBOffline.Checked;
            return Util.saveConfig(saveConfig, configFilePath);
        }
 
@@ -1907,8 +1961,8 @@ namespace S32PSave
                //currentSeries.Label = "#VAL";                //设置显示X Y的值    
                //currentSeries.LabelForeColor = Color.Black;
                currentSeries.ToolTip = "#VALX:#VAL";     //鼠标移动到对应点显示数值
-              // currentSeries.ChartType = SeriesChartType.FastLine;    //图类型(折线)
-               currentSeries.ChartType = SeriesChartType.Line;    //图类型(折线)
+               currentSeries.ChartType = SeriesChartType.FastLine;    //图类型(折线)
+               //currentSeries.ChartType = SeriesChartType.Line;    //图类型(折线)
                currentSeries.IsValueShownAsLabel = false;
                currentSeries.LegendText = seriName;
                currentSeries.IsVisibleInLegend = true;
@@ -1921,23 +1975,23 @@ namespace S32PSave
               // currentSeries.CustomProperties = "DrawingStyle = Cylinder";
                currentSeries.Points.DataBindXY(temp.xData, temp.yData);
                
-               if (index == 0)
-               {
-                   CalloutAnnotation annotation = new CalloutAnnotation();
-                   annotation.AnchorDataPoint = currentSeries.Points[600];
-                   annotation.Text = "Just Won't Work";
-                   annotation.ForeColor = Color.Black;
-                   annotation.Font = new Font("Arial", 12); ;
+               //if (index == 0)
+               //{
+               //    CalloutAnnotation annotation = new CalloutAnnotation();
+               //    annotation.AnchorDataPoint = currentSeries.Points[600];
+               //    annotation.Text = "Just Won't Work";
+               //    annotation.ForeColor = Color.Black;
+               //    annotation.Font = new Font("Arial", 12); ;
                    
-                   annotation.LineWidth = 2;
-                   annotation.Width = 50;
-                   annotation.Height = 30;
+               //    annotation.LineWidth = 2;
+               //    annotation.Width = 50;
+               //    annotation.Height = 30;
                   
-                   annotation.Visible = true;
-                   chart.Annotations.Add(annotation);
+               //    annotation.Visible = true;
+               //    chart.Annotations.Add(annotation);
                   
 
-               }
+               //}
                
 
                switch (lineType)

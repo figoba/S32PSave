@@ -1,0 +1,11 @@
+D:\gitProjects\S32PSave\test\bin\x86\Debug\test.dll
+D:\gitProjects\S32PSave\test\bin\x86\Debug\test.pdb
+D:\gitProjects\S32PSave\test\bin\x86\Debug\S32PSave.exe
+D:\gitProjects\S32PSave\test\bin\x86\Debug\System.Data.SQLite.dll
+D:\gitProjects\S32PSave\test\bin\x86\Debug\virtualIIC.dll
+D:\gitProjects\S32PSave\test\bin\x86\Debug\32p_analyze.dll
+D:\gitProjects\S32PSave\test\bin\x86\Debug\ICSharpCode.SharpZipLib.dll
+D:\gitProjects\S32PSave\test\bin\x86\Debug\S32PSave.pdb
+D:\gitProjects\S32PSave\test\obj\x86\Debug\test.csprojResolveAssemblyReference.cache
+D:\gitProjects\S32PSave\test\obj\x86\Debug\test.dll
+D:\gitProjects\S32PSave\test\obj\x86\Debug\test.pdb

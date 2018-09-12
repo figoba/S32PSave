@@ -4,15 +4,6 @@
 		<testItem name="SINGLE" result="OK" />
 		<testItem name="SDD21" result="OK" />
 		<testItem name="SDD11" result="OK" />
-		<testItem name="TDD11" result="OK" />
-		<testItem name="TDD22" result="OK" />
-		<testItem name="SCD22" result="OK" />
-		<testItem name="SCD21-SDD21" result="OK" />
-		<testItem name="SCC11" result="OK" />
-		<testItem name="NEXT" result="OK" />
-		<testItem name="FEXT" result="OK" />
-		<testItem name="MDNEXT" result="OK" />
-		<testItem name="MDFEXT" result="OK" />
 	</testResult>
 	<information>
 		<inforItem name="application" value="Yaowen Wang" />
@@ -25,7 +16,7 @@
 		<inforItem name="approvedBy" value="Wave Zhang" />
 		<inforItem name="temprature" value="23" />
 		<inforItem name="rHumidity" value="60" />
-		<inforItem name="date" value="2018-09-06" />
+		<inforItem name="date" value="2018-09-11" />
 		<inforItem name="tdrModel" value="1.TDR:Keysight PLTS IFFT" />
 		<inforItem name="vnaModel" value="2.PNA:Keysight 26.5GHz 32Port M9375A" />
 	</information>
