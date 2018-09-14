@@ -161,6 +161,7 @@ namespace S32PSave
         public frmMain()
         {
             InitializeComponent();
+            facadeIni();
         }
 
         private enum TestStatus
@@ -245,6 +246,13 @@ namespace S32PSave
             PNASettingCheck();
             AutoScale(this);
           
+        }
+
+        private void facadeIni()
+        {
+            string customerLogo = @"Resources\customerLogo.png";
+            if (File.Exists(customerLogo))
+                picLogo.ImageLocation = customerLogo;
         }
 
         /// <summary>
@@ -427,7 +435,7 @@ namespace S32PSave
                     StatusSet(TestStatus.Pass);
                   }
 
-                saveTestRecord(testResult);
+                //saveTestRecord(testResult);
                 setStart(true);
             }
 
@@ -1974,26 +1982,7 @@ namespace S32PSave
                
               // currentSeries.CustomProperties = "DrawingStyle = Cylinder";
                currentSeries.Points.DataBindXY(temp.xData, temp.yData);
-               
-               //if (index == 0)
-               //{
-               //    CalloutAnnotation annotation = new CalloutAnnotation();
-               //    annotation.AnchorDataPoint = currentSeries.Points[600];
-               //    annotation.Text = "Just Won't Work";
-               //    annotation.ForeColor = Color.Black;
-               //    annotation.Font = new Font("Arial", 12); ;
-                   
-               //    annotation.LineWidth = 2;
-               //    annotation.Width = 50;
-               //    annotation.Height = 30;
-                  
-               //    annotation.Visible = true;
-               //    chart.Annotations.Add(annotation);
-                  
-
-               //}
-               
-
+              
                switch (lineType)
                {
                    case LineType.Fre:
@@ -2146,20 +2135,6 @@ namespace S32PSave
                     {
                         chartDic.Remove(testItem);
                         TabItem timRemove = this.tabControlChart.Tabs[testItem];
-                        //TabItem timRemove = ((Func<TabItem>)(() =>
-                        //{
-                        //    TabItem ret = null;
-                        //    foreach (TabItem tabItem in this.tabControlChart.Tabs)
-                        //    {
-                        //        if (tabItem.Name == testItem)
-                        //        {
-                        //            ret = tabItem;
-                        //            break;
-                        //        }
-                        //    }
-                        //    return ret;
-                        //    }))();
-
                         this.tabControlChart.Tabs.Remove(timRemove);
                         
                     }

@@ -429,7 +429,7 @@ namespace S32PSave
 
         public static Dictionary<string, plotData> getPNSpec(string PN,ref TDD[] tdds,ref string description,ref string[][] freSpec,ref string TDDSpec,bool DBoffline)
         {
-            if (!PingIpOrDomainName("172.20.23.107"))
+            if (!PingIpOrDomainName("172.20.23.107")&&!DBoffline)
             {
                 MessageBoxEx.Show("无法连接到IP地址172.20.23.107,请检查网络");
                 return null;

@@ -86,8 +86,6 @@
             this.chkSerialPortChoose = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX11 = new DevComponents.DotNetBar.LabelX();
             this.cmbPorts = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.rbtPort1 = new System.Windows.Forms.RadioButton();
             this.rbtPort0 = new System.Windows.Forms.RadioButton();
             this.chkWriteSN = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -110,12 +108,14 @@
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
             this.richTextBoxEx1 = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.chkDBOffline = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -124,10 +124,10 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // textSN
@@ -225,7 +225,7 @@
             // 
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.Font = new System.Drawing.Font("Cambria", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX2.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.labelX2.ForeColor = System.Drawing.Color.Aquamarine;
             this.labelX2.Location = new System.Drawing.Point(280, -16);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(972, 84);
@@ -301,8 +301,8 @@
             this.tabMain.BackColor = System.Drawing.Color.White;
             this.tabMain.CanReorderTabs = true;
             this.tabMain.ColorScheme.TabBackground = System.Drawing.Color.White;
-            this.tabMain.Controls.Add(this.tabControlPanel2);
             this.tabMain.Controls.Add(this.tabControlPanel1);
+            this.tabMain.Controls.Add(this.tabControlPanel2);
             this.tabMain.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.ForeColor = System.Drawing.Color.Black;
             this.tabMain.Location = new System.Drawing.Point(10, 67);
@@ -473,11 +473,12 @@
             // 
             // progressBarX1
             // 
+            this.progressBarX1.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.progressBarX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.progressBarX1.ForeColor = System.Drawing.Color.Red;
+            this.progressBarX1.ForeColor = System.Drawing.Color.Black;
             this.progressBarX1.Location = new System.Drawing.Point(15, 445);
             this.progressBarX1.Maximum = 200;
             this.progressBarX1.Name = "progressBarX1";
@@ -684,6 +685,7 @@
             // 
             this.chkCalFileEnable.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkCalFileEnable.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkCalFileEnable.ForeColor = System.Drawing.Color.Black;
             this.chkCalFileEnable.Location = new System.Drawing.Point(16, 336);
             this.chkCalFileEnable.Name = "chkCalFileEnable";
             this.chkCalFileEnable.Size = new System.Drawing.Size(100, 37);
@@ -755,6 +757,7 @@
             // 
             this.chkSNClear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkSNClear.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSNClear.ForeColor = System.Drawing.Color.Black;
             this.chkSNClear.Location = new System.Drawing.Point(16, 100);
             this.chkSNClear.Name = "chkSNClear";
             this.chkSNClear.Size = new System.Drawing.Size(100, 37);
@@ -996,28 +999,6 @@
             this.cmbPorts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbPorts.TabIndex = 31;
             this.cmbPorts.SelectedIndexChanged += new System.EventHandler(this.cmbPorts_SelectedIndexChanged);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.ForeColor = System.Drawing.Color.Black;
-            this.pictureBox3.Image = global::S32PSave.Properties.Resources._1;
-            this.pictureBox3.Location = new System.Drawing.Point(204, 169);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(123, 63);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 30;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.ForeColor = System.Drawing.Color.Black;
-            this.pictureBox2.Image = global::S32PSave.Properties.Resources._0;
-            this.pictureBox2.Location = new System.Drawing.Point(19, 169);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(123, 63);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 29;
-            this.pictureBox2.TabStop = false;
             // 
             // rbtPort1
             // 
@@ -1297,18 +1278,6 @@
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
             this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.ForeColor = System.Drawing.Color.Black;
-            this.pictureBox1.Image = global::S32PSave.Properties.Resources.LUXSHARE_ICT_LOGO_透明底_400x90;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(250, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
             // timer1
             // 
             this.timer1.Interval = 400;
@@ -1316,11 +1285,13 @@
             // 
             // labelX12
             // 
+            this.labelX12.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX12.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX12.ForeColor = System.Drawing.Color.Black;
             this.labelX12.Location = new System.Drawing.Point(1154, 37);
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(98, 24);
@@ -1329,11 +1300,13 @@
             // 
             // labelX13
             // 
+            this.labelX13.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX13.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX13.ForeColor = System.Drawing.Color.Black;
             this.labelX13.Location = new System.Drawing.Point(1154, 67);
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(150, 22);
@@ -1347,12 +1320,47 @@
             // 
             this.chkDBOffline.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkDBOffline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDBOffline.ForeColor = System.Drawing.Color.Black;
             this.chkDBOffline.Location = new System.Drawing.Point(199, 100);
             this.chkDBOffline.Name = "chkDBOffline";
             this.chkDBOffline.Size = new System.Drawing.Size(108, 37);
             this.chkDBOffline.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkDBOffline.TabIndex = 32;
             this.chkDBOffline.Text = "Local DB";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.ForeColor = System.Drawing.Color.Black;
+            this.pictureBox3.Image = global::S32PSave.Properties.Resources._1;
+            this.pictureBox3.Location = new System.Drawing.Point(204, 169);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(123, 63);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 30;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.ForeColor = System.Drawing.Color.Black;
+            this.pictureBox2.Image = global::S32PSave.Properties.Resources._0;
+            this.pictureBox2.Location = new System.Drawing.Point(19, 169);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(123, 63);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 29;
+            this.pictureBox2.TabStop = false;
+            // 
+            // picLogo
+            // 
+            this.picLogo.BackColor = System.Drawing.Color.White;
+            this.picLogo.ForeColor = System.Drawing.Color.Black;
+            this.picLogo.Image = global::S32PSave.Properties.Resources.LUXSHARE_ICT_LOGO_透明底_400x90;
+            this.picLogo.Location = new System.Drawing.Point(12, 0);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(250, 50);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 9;
+            this.picLogo.TabStop = false;
             // 
             // frmMain
             // 
@@ -1363,7 +1371,7 @@
             this.Controls.Add(this.labelX13);
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.labelX2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picLogo);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
@@ -1378,10 +1386,10 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1394,7 +1402,7 @@
         private DevComponents.DotNetBar.LabelX labelResult;
         private DevComponents.DotNetBar.ButtonX btnExit;
         private DevComponents.DotNetBar.ButtonX btnStart;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picLogo;
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.Controls.TextBoxX textPN;
         private DevComponents.DotNetBar.LabelX labelX3;

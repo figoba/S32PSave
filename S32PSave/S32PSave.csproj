@@ -137,6 +137,7 @@
     <Compile Include="config.cs" />
     <Compile Include="CSetLineSpace.cs" />
     <Compile Include="DbHelperOleDb.cs" />
+    <Compile Include="Draw\IChart.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
