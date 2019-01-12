@@ -16,5 +16,5 @@
   <ResolutionIndex>1</ResolutionIndex>
   <MoTolerance>0</MoTolerance>
   <TxtSaveFolder />
-  <DbOffline>true</DbOffline>
+  <DbOffline>false</DbOffline>
 </config>

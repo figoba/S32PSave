@@ -1,0 +1,184 @@
+﻿static void Main(string[] args)
+
+    {
+
+        // Connect to the hislip VISA address of localhost
+
+        ResourceManager resourceManager = new ResourceManager();
+
+        FormattedIO488 formattedIO = new FormattedIO488();
+
+        formattedIO.IO = (IMessage)resourceManager.Open("TCPIP0::localhost::hislip0::INSTR");
+
+ 
+
+        // Destroy all measurements and add a window
+
+        formattedIO.WriteString("SYST:FPR\n");
+
+        formattedIO.WriteString("DISP:WIND:STAT 1");
+
+ 
+
+        // initialize memory mapped structures in VNA
+
+        formattedIO.WriteString("SYST:DATA:MEM:INIT\n");
+
+ 
+
+        // Create 4 SParameters
+
+        string[] parameters = new string[] { "S11", "S21", "S12", "S22" };
+
+        int[] offsets_for_complex_data = new int[parameters.Length];
+
+        int[] offsets_for_formatted_data = new int[parameters.Length];
+
+        for (int i = 0; i < parameters.Length; i++)
+
+        {
+
+            // Create a new parameter
+
+            formattedIO.WriteString("CALC:PAR:DEF '" + parameters[i] + "'," + parameters[i]);
+
+            formattedIO.WriteString("DISP:WIND:TRAC" + (i + 1).ToString() + ":FEED '" + parameters[i] + "'");
+
+ 
+
+            // Configure a new section of the memory map to monitor the complex data of this parameter
+
+            formattedIO.WriteString("SYST:DATA:MEM:ADD '1:" + (i + 1).ToString() + ":SDATA:201'"); // add parameter to memory mapped
+
+            formattedIO.WriteString("SYST:DATA:MEM:OFFSet?");
+
+            offsets_for_complex_data[i] = int.Parse(formattedIO.ReadString());
+
+ 
+
+            // Configure a new section of the memory map to monitor the formatted data of this parameter
+
+            formattedIO.WriteString("SYST:DATA:MEM:ADD '1:" + (i + 1).ToString() + ":FDATA:201'"); // add parameter to memory mapped
+
+            formattedIO.WriteString("SYST:DATA:MEM:OFFSet?");
+
+            offsets_for_formatted_data[i] = int.Parse(formattedIO.ReadString());
+
+        }
+
+ 
+
+        // Tell the VNA to allocate the memory map. Name it "VNA_MemoryMap"
+
+        formattedIO.WriteString("SYST:DATA:MEM:COMM 'VNA_MemoryMap'");
+
+ 
+
+        // Query the size of the memory map
+
+        formattedIO.WriteString("SYST:DATA:MEM:SIZE?");
+
+        int size = int.Parse(formattedIO.ReadString());
+
+ 
+
+        // Create the memory map in C#. This requires .NET 4.5 framework
+
+        MemoryMappedFile mappedFile = MemoryMappedFile.CreateOrOpen("VNA_MemoryMap", size);
+
+        MemoryMappedViewAccessor mappedFileView = mappedFile.CreateViewAccessor();
+
+ 
+
+        // Trigger a single sweep, and wait for it to complete
+
+        formattedIO.WriteString("SENS:SWE:MODE SING");
+
+        formattedIO.WriteString("*OPC?");
+
+        formattedIO.ReadString();
+
+ 
+
+        // Allocate buffers to hold the output data
+
+        float[][] complexData = new float[parameters.Length][];
+
+        for (int i = 0; i < complexData.Length; i++)
+
+        {
+
+            complexData[i] = new float[402];
+
+        }
+
+ 
+
+        float[][] formattedData = new float[parameters.Length][];
+
+        for (int i = 0; i < formattedData.Length; i++)
+
+        {
+
+            formattedData[i] = new float[201];
+
+        }
+
+ 
+
+        // Copy the data from the memory map into the output buffers
+
+        // These copy the data from the in-process memory map.
+
+        // This runs very fast - and is just a "memcpy" under the hood
+
+        for (int i = 0; i < parameters.Length; i++)
+
+        {
+
+            ReadBytes(mappedFileView,offsets_for_complex_data[i],402,complexData[i]);
+
+            ReadBytes(mappedFileView, offsets_for_formatted_data[i], 201, formattedData[i]);
+
+        }
+
+ 
+
+        // Output some data to show that it worked
+
+        System.Console.WriteLine(complexData[0][0].ToString()); // Output first point of S11 in complex
+
+        System.Console.WriteLine(formattedData[3][200].ToString()); // Output last point of S22 as formatted
+
+    }
+
+ 
+
+ 
+
+    static public unsafe void ReadBytes(MemoryMappedViewAccessor mappedFileView,
+
+        int offset, int num, float[] arr)
+
+    {
+
+        // This is equivalent to:
+
+        //         //m_mappedFileView.ReadArray<float>(m_sharedMemoryOffsets[i-1], complexArray, 0, points*2);
+
+        // But, using this "unsafe" code is 30 times faster. 100usec versus 3ms
+
+        byte* ptr = (byte*)0;
+
+        mappedFileView.SafeMemoryMappedViewHandle.AcquirePointer(ref ptr);
+
+        System.Runtime.InteropServices.Marshal.Copy(IntPtr.Add(new IntPtr(ptr), offset), arr, 0, num);
+
+        mappedFileView.SafeMemoryMappedViewHandle.ReleasePointer();
+
+    }
+
+ 
+
+}
+

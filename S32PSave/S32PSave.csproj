@@ -132,6 +132,14 @@
     <Reference Include="virtualIIC">
       <HintPath>bin\x86\Debug\dll\virtualIIC.dll</HintPath>
     </Reference>
+    <Reference Include="ZedGraph, Version=6.0.0.0, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZedGraph.6.0.0-alpha0001\lib\net40\ZedGraph.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ZedGraph.WinForms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZedGraph.WinForms.6.0.0-alpha0001\lib\net40\ZedGraph.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="config.cs" />
@@ -209,6 +217,7 @@
     <Content Include="Audio_Frequency_Icon_128px_1129152_easyicon.net.ico" />
     <None Include="bin\x86\Debug\Resources\port\0.png" />
     <None Include="bin\x86\Debug\Resources\port\1.png" />
+    <Content Include="memoryShare.txt" />
     <Content Include="ooopic_1516796215.ico" />
   </ItemGroup>
   <ItemGroup>

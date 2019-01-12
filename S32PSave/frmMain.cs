@@ -20,6 +20,7 @@ using _32p_analyze;
 using System.Windows.Forms.DataVisualization.Charting;
 using DevComponents.DotNetBar.Controls;
 using Ivi.Visa.Interop;
+using S32PSave.Draw;
 using Application = System.Windows.Forms.Application;
 
 
@@ -94,7 +95,9 @@ namespace S32PSave
         public int MOTolerance=20;//工单数量误差百分比
         public Dictionary<string, testParams> testparamList;
 
-        public Dictionary<string, Chart> chartDic = new Dictionary<string, Chart>();
+        private IChart iChart = null;
+
+        public Dictionary<string, object> chartDic = new Dictionary<string, object>();
         /// <summary>
         /// dbRecord:数据库记录字段
         /// 
@@ -225,6 +228,7 @@ namespace S32PSave
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            iChart = new ZedChart(this.tabControlChart);
          
             testItemCheckBoxIni();
             setCableStatus("");
@@ -1456,9 +1460,9 @@ namespace S32PSave
         {
             addStatus("start clear charts");
   
-            foreach (KeyValuePair<string, Chart> chart in chartDic)
+            foreach (KeyValuePair<string, object> chart in chartDic)
             {
-                chartClear(chart.Value);
+                iChart.ChartClear(chart.Value);
             }
 
             Dictionary<string,string[]>pairNameDictionary=new Dictionary<string, string[]>();
@@ -1492,7 +1496,7 @@ namespace S32PSave
            
             foreach (string testItem in testItems)
             {
-               Chart tempChart = chartDic[testItem];
+               object tempChart = chartDic[testItem];
                 plotData[] temp = data[testItem];
                 for (int i = 0; i < temp.Length; i++)
                 {
@@ -1501,7 +1505,8 @@ namespace S32PSave
                     {
                        
                         LineType lineType = testItem.StartsWith("T") ? LineType.Time : LineType.Fre;
-                        DrawLine(tempChart, temp[i], pairNameDictionary[testItem][i], lineType);
+                       // DrawLine(tempChart, temp[i], pairNameDictionary[testItem][i], lineType);
+                        iChart.DrawLine(tempChart, temp[i], pairNameDictionary[testItem][i], lineType);
                        
                     }
                     else
@@ -1510,8 +1515,8 @@ namespace S32PSave
                     }
  
                 }
-
-                drawSpec(testItem, spec, tempChart);
+                iChart.DrawSpec(testItem, spec, tempChart);
+                //drawSpec(testItem, spec, tempChart);
             }
 
          
@@ -1526,19 +1531,7 @@ namespace S32PSave
 
         }
 
-
-        private void drawSpec(string itemName, Dictionary<string, plotData> spec, Chart chart)
-        {
-            if (spec.ContainsKey(itemName + "_UPPER")) {
-                DrawLine(chart, spec[itemName + "_UPPER"], itemName + "_UPPER",LineType.Spec);
-            }
-            if (spec.ContainsKey(itemName + "_LOWER"))
-            {
-                DrawLine(chart, spec[itemName + "_LOWER"], itemName + "_LOWER",LineType.Spec);
-            }
-        }
-
-     
+    
 
         private delegate void SetaddStatusCallback(string msg);
         private void addStatus(string msg) {
@@ -1939,81 +1932,6 @@ namespace S32PSave
        }
 
      
-
-        private enum LineType
-        {
-            Fre,
-            Time,
-            Spec
-        }
-
-       private void DrawLine(Chart chart, plotData temp, string seriName,LineType lineType)
-       {
-           if (chart.InvokeRequired)
-           {
-              
-               SetDrawLineCallBack d = DrawLine;
-               chart.Invoke(d, new object[] { chart, temp, seriName,lineType });
-           }
-           else
-           {
-               //绑定数据
-               int index = chart.Series.Count;
-              
-               
-               chart.Series.Add(seriName);
-              
-               Series currentSeries = chart.Series[index];
-               //chart.Titles[index].Alignment = System.Drawing.ContentAlignment.TopRight;
-               currentSeries.XValueType = ChartValueType.Single;  //设置X轴上的值类型
-               //currentSeries.Label = "#VAL";                //设置显示X Y的值    
-               //currentSeries.LabelForeColor = Color.Black;
-               currentSeries.ToolTip = "#VALX:#VAL";     //鼠标移动到对应点显示数值
-               currentSeries.ChartType = SeriesChartType.FastLine;    //图类型(折线)
-               //currentSeries.ChartType = SeriesChartType.Line;    //图类型(折线)
-               currentSeries.IsValueShownAsLabel = false;
-               currentSeries.LegendText = seriName;
-               currentSeries.IsVisibleInLegend = true;
-               //chart.Legends[seriName].Enabled = true;
-               //chart.Legends[seriName].MaximumAutoSize = 15;
-               //chart.Series[0].IsValueShownAsLabel = true;
-
-              // currentSeries.LabelForeColor = Color.Black;
-               
-              // currentSeries.CustomProperties = "DrawingStyle = Cylinder";
-               currentSeries.Points.DataBindXY(temp.xData, temp.yData);
-              
-               switch (lineType)
-               {
-                   case LineType.Fre:
-                       for (int i = 1; i < 10; i++)
-                       {
-                           CustomLabel label = new CustomLabel();
-                           label.Text = (i * 5).ToString() + "Ghz";
-                           label.ToPosition = i * 10000000000;
-                           chart.ChartAreas[0].AxisX.CustomLabels.Add(label);
-                           label.GridTicks = GridTickTypes.Gridline;
-                       }
-                       break;
-                   case LineType.Time:
-                       for (int i = 1; i < 10; i++)
-                       {
-                           CustomLabel label = new CustomLabel();
-                           label.Text = (i * 1).ToString() + "ns";
-                           label.ToPosition = (float)i * 2;
-                           chart.ChartAreas[0].AxisX.CustomLabels.Add(label);
-                           label.GridTicks = GridTickTypes.Gridline;
-                       }
-                     break;
-                    
-               }
-
-               //chart.Visible = true;
-           }
-
-
-       }
-
      
 
 
@@ -2134,37 +2052,11 @@ namespace S32PSave
                     if (chartDic.ContainsKey(testItem))
                     {
                         chartDic.Remove(testItem);
-                        TabItem timRemove = this.tabControlChart.Tabs[testItem];
-                        this.tabControlChart.Tabs.Remove(timRemove);
-                        
-                    }
+                        iChart.ChartDel(testItem);
+                     }
                     break;
                 case TestItemAction.Add:
-                    TabItem tim = this.tabControlChart.CreateTab(testItem);
-                    tim.Name = testItem;
-                    Chart chart = new Chart();
-                    chart.Name = testItem;
-                    chart.Width = 999;
-                    chart.Height = 336;
-                    chart.Location=new Point(4,0);
-                    Legend legend = new Legend("legend");
-                    legend.Title = "Legend";
-                    legend.Font = new Font("Consolas", 11F,
-                        System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    chart.Legends.Add(legend);
-                  
-                   
-                    ChartArea chartArea = new ChartArea("ChartArea1");
-                    chartArea.CursorX.IsUserEnabled = true;
-                    chartArea.CursorX.IsUserSelectionEnabled = true;
-                    chartArea.CursorX.LineDashStyle = ChartDashStyle.DashDotDot;
-                    chartArea.CursorY.IsUserEnabled = true;
-                    chartArea.CursorY.IsUserSelectionEnabled = true;
-                    chartArea.CursorY.LineDashStyle = ChartDashStyle.DashDotDot;
-                    chart.ChartAreas.Add(chartArea);
-                    tim.AttachedControl.Controls.Add(chart);
-                    chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
-                    chart.Series.Clear();
+                    object chart=iChart.ChartAdd(testItem);
                     chartDic.Add(testItem,chart);
                     break;
 

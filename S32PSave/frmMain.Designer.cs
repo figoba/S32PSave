@@ -59,6 +59,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panelExTestItems = new DevComponents.DotNetBar.PanelEx();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkDBOffline = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.textTxtSaveFolderPath = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX19 = new DevComponents.DotNetBar.LabelX();
@@ -86,6 +87,8 @@
             this.chkSerialPortChoose = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX11 = new DevComponents.DotNetBar.LabelX();
             this.cmbPorts = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.rbtPort1 = new System.Windows.Forms.RadioButton();
             this.rbtPort0 = new System.Windows.Forms.RadioButton();
             this.chkWriteSN = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -112,9 +115,6 @@
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.chkDBOffline = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -124,9 +124,9 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -301,8 +301,8 @@
             this.tabMain.BackColor = System.Drawing.Color.White;
             this.tabMain.CanReorderTabs = true;
             this.tabMain.ColorScheme.TabBackground = System.Drawing.Color.White;
-            this.tabMain.Controls.Add(this.tabControlPanel1);
             this.tabMain.Controls.Add(this.tabControlPanel2);
+            this.tabMain.Controls.Add(this.tabControlPanel1);
             this.tabMain.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.ForeColor = System.Drawing.Color.Black;
             this.tabMain.Location = new System.Drawing.Point(10, 67);
@@ -634,6 +634,21 @@
             this.groupBox4.TabIndex = 28;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Config";
+            // 
+            // chkDBOffline
+            // 
+            // 
+            // 
+            // 
+            this.chkDBOffline.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkDBOffline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDBOffline.ForeColor = System.Drawing.Color.Black;
+            this.chkDBOffline.Location = new System.Drawing.Point(199, 100);
+            this.chkDBOffline.Name = "chkDBOffline";
+            this.chkDBOffline.Size = new System.Drawing.Size(108, 37);
+            this.chkDBOffline.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkDBOffline.TabIndex = 32;
+            this.chkDBOffline.Text = "Local DB";
             // 
             // buttonX1
             // 
@@ -1000,6 +1015,28 @@
             this.cmbPorts.TabIndex = 31;
             this.cmbPorts.SelectedIndexChanged += new System.EventHandler(this.cmbPorts_SelectedIndexChanged);
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.ForeColor = System.Drawing.Color.Black;
+            this.pictureBox3.Image = global::S32PSave.Properties.Resources._1;
+            this.pictureBox3.Location = new System.Drawing.Point(204, 169);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(123, 63);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 30;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.ForeColor = System.Drawing.Color.Black;
+            this.pictureBox2.Image = global::S32PSave.Properties.Resources._0;
+            this.pictureBox2.Location = new System.Drawing.Point(19, 169);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(123, 63);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 29;
+            this.pictureBox2.TabStop = false;
+            // 
             // rbtPort1
             // 
             this.rbtPort1.AutoSize = true;
@@ -1313,43 +1350,6 @@
             this.labelX13.TabIndex = 20;
             this.labelX13.Text = "Date:20180901";
             // 
-            // chkDBOffline
-            // 
-            // 
-            // 
-            // 
-            this.chkDBOffline.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkDBOffline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDBOffline.ForeColor = System.Drawing.Color.Black;
-            this.chkDBOffline.Location = new System.Drawing.Point(199, 100);
-            this.chkDBOffline.Name = "chkDBOffline";
-            this.chkDBOffline.Size = new System.Drawing.Size(108, 37);
-            this.chkDBOffline.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkDBOffline.TabIndex = 32;
-            this.chkDBOffline.Text = "Local DB";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.ForeColor = System.Drawing.Color.Black;
-            this.pictureBox3.Image = global::S32PSave.Properties.Resources._1;
-            this.pictureBox3.Location = new System.Drawing.Point(204, 169);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(123, 63);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 30;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.ForeColor = System.Drawing.Color.Black;
-            this.pictureBox2.Image = global::S32PSave.Properties.Resources._0;
-            this.pictureBox2.Location = new System.Drawing.Point(19, 169);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(123, 63);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 29;
-            this.pictureBox2.TabStop = false;
-            // 
             // picLogo
             // 
             this.picLogo.BackColor = System.Drawing.Color.White;
@@ -1386,9 +1386,9 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
