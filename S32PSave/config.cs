@@ -128,9 +128,24 @@ namespace S32PSave
             set { dbOffline = value; }
         }
 
+        public string Upload1Path
+        {
+            get { return upload1Path; }
+            set { upload1Path = value; }
+        }
+
+        public string Upload2Path
+        {
+            get { return upload2Path; }
+            set { upload2Path = value; }
+        }
+
         private string txtSaveFolder;
 
         private bool dbOffline;
+
+        private string upload1Path;
+        private string upload2Path;
 
 
     }

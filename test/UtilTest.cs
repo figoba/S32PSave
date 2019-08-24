@@ -1,8 +1,10 @@
 ﻿using S32PSave;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace test
 {
@@ -120,6 +122,70 @@ namespace test
                 
             }
            
+        }
+
+        [TestMethod()]
+        public void readTxt()
+        {
+            string filePath = @"C:\Users\Administrator\Desktop\777.txt";
+
+            //float[] f1 = {0.1f, 0.2f,0.3f,0.4f};
+            //byte[]b1=new byte[f1.Length*sizeof(float)];
+            //Buffer.BlockCopy(f1, 0, b1, 0, b1.Length);
+
+            //float[]f2=new float[2];
+            //Buffer.BlockCopy(b1, 0, f2, 0, f2.Length*sizeof(float));
+            byte[] retb = File.ReadAllBytes(filePath);
+            int dbLength = BitConverter.ToInt32(retb.Take(4).ToArray(),0);
+            int freLength = BitConverter.ToInt32(retb.Skip(4).Take(4).ToArray(), 0);
+            byte[] db = retb.Skip(8).Take(dbLength).ToArray();
+            byte[] fre = retb.Skip(8 + dbLength).Take(freLength).ToArray();
+
+            float[]dbFloats=new float[db.Length/sizeof(float)];
+            Buffer.BlockCopy(db, 0, dbFloats, 0, db.Length);
+
+            double[] freDoubles = new Double[fre.Length / sizeof(double)];
+            Buffer.BlockCopy(fre, 0, freDoubles, 0, fre.Length);
+
+            float[]ret=new float[retb.Length/sizeof(float)];
+            Buffer.BlockCopy(retb, 0, ret, 0, ret.Length);
+            
+            //List<float> ret = new List<float>();
+            //using (FileStream reader = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite))
+            //{
+            //    using (BinaryReader binRdr = new BinaryReader(reader))
+            //    {
+                    
+            //        byte[] chunk;
+            //        chunk = binRdr.ReadBytes(sizeof(float));
+            //        while (chunk.Length > 0)
+            //        {
+            //            ret.Add(BitConverter.ToSingle(chunk, 0));
+            //            chunk = binRdr.ReadBytes(sizeof(float));
+            //        }
+
+                   
+            //    }
+
+            //}
+            var new1 = ret.Where((c, i) => i % 2 == 0).ToArray();
+            var new2 = ret.Where((c, i) => i % 2 != 0).ToArray();
+            float[,]real=new float[2650,1024];
+            float[,] image = new float[2650, 1024];
+            Buffer.BlockCopy(new1, 0, real, 0, new1.Length * sizeof(float));
+            Buffer.BlockCopy(new2, 0, image, 0, new2.Length * sizeof(float));
+        }
+        [TestMethod()]
+        public void CycleTest()
+        {
+            string[] tempRow = new string[1];
+            Dictionary<int,string[]>ret=new Dictionary<int, string[]>();
+            for (int i = 0; i < 10; i++)
+            {
+                tempRow[0] = i.ToString();
+                ret.Add(i,tempRow);
+            }
+
         }
     }
 }

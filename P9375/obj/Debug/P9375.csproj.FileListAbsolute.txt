@@ -1,0 +1,5 @@
+D:\gitProjects\S32PSave\P9375\bin\Debug\P9375.dll
+D:\gitProjects\S32PSave\P9375\bin\Debug\P9375.pdb
+D:\gitProjects\S32PSave\P9375\obj\Debug\P9375.csprojResolveAssemblyReference.cache
+D:\gitProjects\S32PSave\P9375\obj\Debug\P9375.dll
+D:\gitProjects\S32PSave\P9375\obj\Debug\P9375.pdb

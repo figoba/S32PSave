@@ -115,3 +115,23 @@ codedetail: Stack trace for current level:   在 _32p_analyze.SNP.EasyGetfreData
 
 
 
+2019/1/28 15:31:09
+error msg:unspported parameter:ILD
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.EasyGetfreData(String testItem, String[]& pairNames, CableType cableType)
+
+
+
+
+
+2019/5/20 11:50:24
+error msg:unspported parameter:MDFEXT
+
+
+
+codedetail: Stack trace for current level:   在 _32p_analyze.SNP.EasyGetfreData(String testItem, String[]& pairNames, CableType cableType)
+
+
+
+
+

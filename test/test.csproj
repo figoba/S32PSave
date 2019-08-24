@@ -54,11 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.3, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL" />
-    <Reference Include="Interop.AgilentPNA835x">
-      <HintPath>..\S32PSave\bin\x86\Debug\dll\Interop.AgilentPNA835x.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Ivi.Visa.Interop, Version=5.8.0.0, Culture=neutral, PublicKeyToken=a128c98f1d7717c1, processorArchitecture=x86">
+    <Reference Include="Ivi.Visa.Interop, Version=5.8.0.0, Culture=neutral, PublicKeyToken=a128c98f1d7717c1, processorArchitecture=AMD64">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -96,10 +92,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\P9375\P9375.csproj">
+      <Project>{894BA57C-D6B9-45FD-8E87-7DFBCBA69146}</Project>
+      <Name>P9375</Name>
+    </ProjectReference>
     <ProjectReference Include="..\S32PSave\S32PSave.csproj">
       <Project>{704EE7B4-A29B-4F50-A18E-31E8443D0065}</Project>
       <Name>S32PSave</Name>

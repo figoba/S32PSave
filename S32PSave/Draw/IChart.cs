@@ -25,9 +25,11 @@ namespace S32PSave.Draw
     {
         object ChartAdd(string testItem);
         bool ChartDel(string testItem);
+        bool ChartDel();
         void DrawLine(object tChart, plotData temp, string seriName, LineType lineType);
         void DrawSpec(string itemName, Dictionary<string, plotData> spec, object tChart);
         void ChartClear(object tChart);
+        
 
     }
 
@@ -77,6 +79,14 @@ namespace S32PSave.Draw
             doneTabControl.Tabs.Remove(timRemove);
             return true;
         }
+
+        public bool ChartDel()
+        {
+           
+            doneTabControl.Tabs.Clear();
+            return true;
+        }
+
         delegate void SetDrawLineCallBack(Chart chart, plotData temp, string serialName, LineType lineType);
         public void DrawLine(object oChart, plotData temp, string seriName, LineType lineType)
         {
@@ -239,6 +249,13 @@ namespace S32PSave.Draw
             doneTabControl.Tabs.Remove(timRemove);
             return true;
         }
+
+        public bool ChartDel()
+        {
+            doneTabControl.Tabs.Clear();
+            return true;
+        }
+
         delegate void SetDrawLineCallBack(ZedGraphControl chart, plotData temp, string serialName, LineType lineType);
         public void DrawLine(object tChart, plotData temp, string seriName, LineType lineType)
         {

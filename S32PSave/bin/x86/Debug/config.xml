@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <FileSavePath>S:\</FileSavePath>
+  <FileSavePath>S:</FileSavePath>
   <MaxTestNum>4</MaxTestNum>
   <ClearSN>true</ClearSN>
-  <AdapterIndex>1</AdapterIndex>
+  <AdapterIndex>0</AdapterIndex>
   <ComIndex>0</ComIndex>
   <ConnectMap>1</ConnectMap>
   <WriteSN>false</WriteSN>
@@ -17,4 +17,6 @@
   <MoTolerance>0</MoTolerance>
   <TxtSaveFolder />
   <DbOffline>false</DbOffline>
+  <Upload1Path>\\172.20.20.113\emc\HPTS\VNA</Upload1Path>
+  <Upload2Path>\\172.20.20.113\emc\HPTS\SI</Upload2Path>
 </config>

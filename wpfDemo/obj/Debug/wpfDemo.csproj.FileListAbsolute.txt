@@ -1,0 +1,15 @@
+D:\gitProjects\S32PSave\wpfDemo\bin\Debug\wpfDemo.exe
+D:\gitProjects\S32PSave\wpfDemo\bin\Debug\wpfDemo.pdb
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\wpfDemo.csprojResolveAssemblyReference.cache
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\MainWindow.baml
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\MainWindow.g.cs
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\App.g.cs
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\wpfDemo_MarkupCompile.cache
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\wpfDemo.g.resources
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\wpfDemo.Properties.Resources.resources
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\wpfDemo.csproj.GenerateResource.Cache
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\wpfDemo.exe
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\wpfDemo.pdb
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\CommonStyle.baml
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\Page1.baml
+D:\gitProjects\S32PSave\wpfDemo\obj\Debug\Page1.g.cs

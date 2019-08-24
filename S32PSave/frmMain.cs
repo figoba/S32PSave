@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using AgilentPNA835x;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
 using System.Diagnostics;
@@ -19,8 +15,9 @@ using System.IO.Ports;
 using _32p_analyze;
 using System.Windows.Forms.DataVisualization.Charting;
 using DevComponents.DotNetBar.Controls;
-using Ivi.Visa.Interop;
+using S32PSave.Core;
 using S32PSave.Draw;
+
 using Application = System.Windows.Forms.Application;
 
 
@@ -58,6 +55,8 @@ namespace S32PSave
         Dictionary<string, plotData> spec = new Dictionary<string, plotData>();
         public static string[][] freSpec ;
         public static string TDDSpec;
+        public static List<TestItem> TestItems;
+        public static bool eprWrite;
         TDD[]tdds=new TDD[2];
         private string PNDescription = "";
         public bool calibrated = false;
@@ -68,6 +67,7 @@ namespace S32PSave
         public static string s32pSaveFolder;//全部32p保存文件夹
         public string pnSaveFolderPath = "";//对应料号创建的文件夹
         public static string txtSaveFolder = "";//分析的数据保存路径
+        
 
         
         public string volume = "";      //保存S32P文件所在的磁盘
@@ -75,17 +75,14 @@ namespace S32PSave
         public static int maxTestNum;
         public static  bool blUpload;   //是否上传数据到数据库
         public static bool blSaveTxt;   //是否保存分析数据
+        public config softConfig;       //      
 
         public bool PN_change = false;
 
-        AgilentPNA835x.Application PNA835;
-        
         public string visaAddress = "";
-        
-        IScpiStringParser2 scpiParser;
         public string channelSelStr = "";
-        public string channelSel = "";
-       
+        
+
         public int testNo = -1;
         public string testPN = "";
         public string testMO = "";
@@ -163,8 +160,9 @@ namespace S32PSave
         
         public frmMain()
         {
+           
             InitializeComponent();
-            facadeIni();
+            FacadeIni();
         }
 
         private enum TestStatus
@@ -197,7 +195,8 @@ namespace S32PSave
         private void btnStart_Click(object sender, EventArgs e)
         {
 #if !DEBUG
-            if (!diskFreeSpaceCheck()) {
+            if (!DiskFreeSpaceCheck())
+            {
                 MessageBoxEx.Show("磁盘剩余空间不足1G，请清理后再测试！");
                 return;
             }
@@ -213,7 +212,7 @@ namespace S32PSave
             if (!snCheck())
                 return;
 
-            if (!writeSN())
+            if (!WriteSn())
                 return;
            
             StatusSet(TestStatus.Working);
@@ -221,38 +220,43 @@ namespace S32PSave
             timer1.Enabled = true;
             addStatus("start get S32P");
 
-            Thread threadGetS32p = new Thread(new ThreadStart(getS32P_EventStyle));
-            threadGetS32p.Start();
+            Thread threadGetS32P = new Thread(new ThreadStart(getS32P_EventStyle));
+            threadGetS32P.Start();
 
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            iChart = new ZedChart(this.tabControlChart);
-         
-            testItemCheckBoxIni();
-            setCableStatus("");
-            btn_Calibrate.Enabled = false;
             skinStyle_ini();
-            getSerialPorts();
-            cmbAdapter.SelectedIndex = 0;
-            if (!readConfig()) {
+            if (!ReadConfig())
+            {
                 MessageBoxEx.Show("read config file error!");
             }
             cmbTestNo_ini();
             
-            setStart(false);
+            setCableStatus("");
+            getSerialPorts();
+            cmbAdapter.SelectedIndex = 0;
             rbtPort1.Checked = true;
             labelX2.ForeColor = Color.DarkOliveGreen;//标题颜色
             labelResult.Text = "";
-
+            iChart = new VsChart(this.tabControlChart);
+            btn_Calibrate.Enabled = false;
+            chkUpload.Checked = true;
+            
+            
+            
+           
+            
+            
+            setStart(false);
             S32PSaveFolderCheck();
-            PNASettingCheck();
+            PNASettingCheck(visaAddress);
             AutoScale(this);
           
         }
 
-        private void facadeIni()
+        private void FacadeIni()
         {
             string customerLogo = @"Resources\customerLogo.png";
             if (File.Exists(customerLogo))
@@ -263,11 +267,11 @@ namespace S32PSave
         /// 写入SN到EEPROM
         /// </summary>
         /// <returns></returns>
-        private bool writeSN()
+        private bool WriteSn()
         {
             if (chkWriteSN.Checked)
             {
-                if (!writeSN(textSN.Text.Trim()))
+                if (!WriteSn(textSN.Text.Trim()))
                 {
                     MessageBoxEx.Show("写入SN失败，请确认烧录盒子或线缆连接是否OK后再重试");
                     labelResult.Text = "Fail";
@@ -290,7 +294,7 @@ namespace S32PSave
         {
             if (chkAutoSN.Checked)
             {
-                if (!getSN(txtMO.Text.Trim(), textPN.Text.Trim()))
+                if (!GetSn(txtMO.Text.Trim(), textPN.Text.Trim()))
                 {
                     return false;
                 }
@@ -344,51 +348,33 @@ namespace S32PSave
         /// <summary>
         /// PNA档案检查
         /// </summary>
-        private void PNASettingCheck()
-        {
-#if !DEBUG
-            PNA835 = new AgilentPNA835x.Application();
-            scpiParser = (IScpiStringParser2)PNA835.ScpiStringParser;
-            testparamList = getTestParas();
-
-            if (!testparamList.ContainsKey("Sdd21"))
-            {
-                MessageBoxEx.Show("the csa file did not contain Sdd21!");
-            }
-
-            testParams Sdd21 = testparamList["Sdd21"];
-
-            string firstChannel = "";
-            foreach (string key in testparamList.Keys)
-            {
-                if (testparamList[key].trace == 0)
-                {
-                    firstChannel = key;
-                    break;
-                }
-            }
-
-            channelSelStr = "CALC:PAR:SEL '" + testparamList[firstChannel].channelName + "'";
-            channelSel = (Sdd21.trace + 1).ToString();
-#endif
-        }
+        
 
         #region event style getS32P and analyze
 
         private void getS32P_EventStyle()
         {
-            PNASaver a = new PNASaver();
-            a.saveBefore += On_SaveBefore;
-            a.pnaConnectChecked += On_PNAConnectChecked;
-            a.saveFinished += On_SaveFinished;
-            a.saveS32p(saveS32pPath, saveS32pPath, Resolution);
+            try
+            {
+                PNASaver a = new PNASaver();
+                a.OnsaveBefore += OnOnsaveBefore;
+                a.OnpnaConnectChecked += OnPnaConnectChecked;
+                a.OnsaveFinished += OnSaveFinished;
+                a.saveS32p(saveS32pPath, visaAddress, Resolution);
+                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+           
         }
-        private void On_SaveBefore(string S32pFile)
+        private void OnOnsaveBefore(string S32pFile)
         {
             sendWriting();
         }
 
-        private void On_PNAConnectChecked(bool connected)
+        private void OnPnaConnectChecked(bool connected)
         {
             if (!connected)
             {
@@ -397,9 +383,9 @@ namespace S32PSave
                 setStart(true);
             }
             
-            addStatus("start PLTS");
+            addStatus("start data save");
         }
-        private void On_SaveFinished(string S32pFile)
+        private void OnSaveFinished(string S32pFile)
         {
             addStatus("finished get S32P");
             setCableStatus("请拔出线缆");
@@ -414,7 +400,7 @@ namespace S32PSave
             if (!calibrated)
             {
                 addStatus("start calibrate");
-                calibrated = s32pAnalyze(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref results);
+                calibrated = S32PAnalyze(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref results);
                 setDisplayCaliresult();
             }
             else
@@ -423,7 +409,7 @@ namespace S32PSave
                 if (chartDic.Count>0)
                 {
                     addStatus("data check set true,start data check");
-                    checkResult = s32pAnalyze(S32pFile, snpPort, spec, textPN.Text.Trim(), ref results);
+                    checkResult = S32PAnalyze(S32pFile, snpPort, spec, textPN.Text.Trim(), ref results);
                     textSN.Invoke(new MethodInvoker(() =>
                     {
                         testSN = textSN.Text;
@@ -467,10 +453,10 @@ namespace S32PSave
 
                 if (blUpload)
                 {
-                    getUpload1(testSN, txtDataFolder);
+                    getUpload1(testSN, txtDataFolder, softConfig.Upload1Path);
                     //zipData(txtDataFolder);
                     //getSummary(txtDataFolder+"\\Upload1",Util.slashRepalce(testSN));
-                    getUpload2(testSN,txtDataFolder + "\\Upload2");
+                    getUpload2(testSN, txtDataFolder + "\\Upload2", softConfig.Upload2Path);
                 }
             }
            
@@ -489,10 +475,6 @@ namespace S32PSave
         }
 
         
-        private void saveChart(Chart chart)
-        {
-            chart.Invoke(new MethodInvoker(() => { chart.SaveImage(@"B:\22.emf", ChartImageFormat.Emf); }));
-        }
 
         #endregion
         
@@ -528,11 +510,62 @@ namespace S32PSave
 
             return ret;
         }
-        private bool getUpload1(string sn, string txtDataFolder)
+
+        private  void DirectoryCopy(
+            string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            // If the source directory does not exist, throw an exception.
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            // If the destination directory does not exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+
+            // Get the file contents of the directory to copy.
+            FileInfo[] files = dir.GetFiles();
+
+            foreach (FileInfo file in files)
+            {
+                // Create the path to the new copy of the file.
+                string temppath = Path.Combine(destDirName, file.Name);
+
+                // Copy the file.
+                file.CopyTo(temppath, true);
+            }
+
+            // If copySubDirs is true, copy the subdirectories.
+            if (copySubDirs)
+            {
+
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    // Create the subdirectory.
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+
+                    // Copy the subdirectories.
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
+        }
+    
+        private bool getUpload1(string sn, string txtDataFolder,string uploadFolder)
         {
             if (zipData(txtDataFolder))
             {
-                return getSummary(txtDataFolder + "\\Upload1", Util.slashRepalce(sn));
+                bool ret= getSummary(txtDataFolder + "\\Upload1", Util.slashRepalce(sn));
+                DirectoryCopy(txtDataFolder + "\\Upload1", uploadFolder, false);
+                return ret;
             }
             else
             {
@@ -541,7 +574,7 @@ namespace S32PSave
             
         }
 
-        private bool getUpload2(string sn,string upload2Folder)
+        private bool getUpload2(string sn, string upload2Folder, string uploadFolder)
         {
             bool ret = false;
             string[] temp = new string[6];
@@ -561,6 +594,7 @@ namespace S32PSave
                 }
                 File.WriteAllText(txtPath,string.Join(";",temp));
                 ret=SharpZip.CompressFile(txtPath, zipPath);
+                DirectoryCopy(upload2Folder, uploadFolder, false);
             }
             catch (Exception e)
             {
@@ -646,114 +680,7 @@ namespace S32PSave
             }
         }
 
-        #region unUsed getS32P
-
-        private void getS32p()
-        {
-          
-#if !DEBUG
-   
-            PLTS plts = new PLTS();
-            if (!plts.Connected)
-            {
-                plts.Connect(visaAddress);
-            }
-            if (!plts.Connected)
-            {
-                MessageBoxEx.Show("请先连接PNA设备");
-                StatusSet(TestStatus.Fail);
-                setStart(true);
-            }
-
-
-            addStatus("start PLTS");
-            plts.CloseAllFiles();
-            plts.MeasureS32pFile();
-
-            int fileNumber = plts.GetActiveFileIndex();
-            
-            if (File.Exists(saveS32pPath))
-            {
-                File.Delete(saveS32pPath);
-            }
-            plts.ExportFile(fileNumber, 32, saveS32pPath, cmbResolution.SelectedItem.ToString());
-            plts.Disconnect();
-           
-#endif
-
-
-            addStatus("finished get S32P");
-            setCableStatus("请拔出线缆");
-          
-            timer1.Enabled = false;
-            addStatus("timer set false");
-            setProgress(170, false);
-            Dictionary<string, bool> results = new Dictionary<string, bool>();
-            if (!calibrated)
-            {
-                addStatus("start calibrate");
-                calibrated = s32pAnalyze(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref results);
-                setDisplayCaliresult();
-            }
-            else
-            {
-                string testResult = "";
-                if (chartDic.Count>0)
-                {
-                    addStatus("data check set true,start data check");
-                    bool checkResult = s32pAnalyze(saveS32pPath, snpPort, spec, textPN.Text.Trim(), ref results);
-                    string testSN = null;
-                    textSN.Invoke(new MethodInvoker(() =>
-                    {
-                        testSN = textSN.Text;
-                    }));
-                   // DBRecord_get(testSN,testNo,checkResult,)
-                    testResult = setDisPlayResult(checkResult);
-                }
-                else
-                {
-                    addStatus("data check set false, data check cancel");
-                    StatusSet(TestStatus.Pass);
-                  }
-
-                saveTestRecord(testResult);
-               
-
-                setStart(true);
-            }
-
-
-            setProgress(200, false);
-
-            swTimeUse.Stop();
-            TimeSpan ts2 = swTimeUse.Elapsed;
-            addStatus("used time is:" + ts2.TotalMilliseconds + " ms");
-            swTimeUse.Reset();
-
-
-            if (accSock != null)
-            {
-                if (accSock.Connected)
-                {
-                    string Msg = Util.setTestJson(textSN.Text, cmbTestNo.Text, "0");
-                    addStatus("start send TCP/IP....");
-                    sendMsg(Msg);
-                    addStatus("TCP/IP send finish");
-                }
-            }
-
-
-            if (clearSN)
-            {
-                clearSNtext();
-                // this.textSN.Text = "";
-            }
-
-            setSNFocus();
-            // this.textSN.Focus();
-        }
-
-        #endregion
+      
         /// <summary>
         /// Display testResult
         /// </summary>
@@ -854,7 +781,7 @@ namespace S32PSave
         private void textPN_TextChanged(object sender, EventArgs e)
         {
             PN_change = true;
-            autoSNStatusSet();
+            AutoSnStatusSet();
            
         }
 
@@ -875,54 +802,9 @@ namespace S32PSave
 
        
 
-        private bool setTrigger() {
-            bool result = false;
-            const string setSingle = "SENS:SWE:MODE SINGle";
-            const string queryStatue="SENSe:SWEep:MODE?";
-            rTextStatus.AppendText(Util.formatMsg("start set single Mode") + "\n");
-            scpiParser.Execute(setSingle);
+       
 
-            for (int i = 0; i < 50; i++) {
-                Thread.Sleep(500);
-                string status = scpiParser.Execute(queryStatue);
-                
-                if (status.Trim().ToUpper() == "HOLD") {
-                    rTextStatus.AppendText(Util.formatMsg("set single Mode succesed,now Hold") + "\n");
-                    result = true;
-                    return result;
-                }
-
-            }
-            rTextStatus.AppendText(Util.formatMsg("wait Hold Mode fail") + "\n");
-            return result;
-
-        }
-
-        private Dictionary<string, testParams> getTestParas()
-        {
-            Dictionary<string, testParams> dTestParams = new Dictionary<string, testParams>();
-            const string queryString="CALC:PAR:CAT?";
-            string sRet=scpiParser.Execute(queryString);
-           
-           //string sRet = "\"CH1_SDD21_1,S32_1,CH1_S22_2,S22,CH1_SDD21_3,Sdd21,CH1_SDD22_4,Sdd22\"";
-           sRet = Util.testChannelTrim(sRet);
-            string[] temp = sRet.Split(',');
-            int length = temp.Length;
-            if ((length == 0) || (length % 2 == 1)) {
-                throw new Exception("get test params fail");
-            }
-
-            for (int i = 0; i < length/2; i++) {
-                testParams newParams=new testParams();
-                newParams.testName = temp[2 * i + 1];
-                newParams.trace = i;
-                newParams.channelName = temp[2 * i];
-                dTestParams.Add(newParams.testName, newParams);
-            }
-            return dTestParams;
-
-          
-        }
+        
 
         private bool PNChange(string PN) {
             if (PN.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) >= 0||PN=="")
@@ -941,24 +823,24 @@ namespace S32PSave
                 if (!Directory.Exists(pnSaveFolderPath)) {
                     Directory.CreateDirectory(pnSaveFolderPath);//创建该文件夹
                 }
+
+                
                 return true;
             }
         }
 
-        private void textPN_Leave(object sender, EventArgs e)
-        {
-           
-        }
-
+      
         private void textPN_Validated(object sender, EventArgs e)
         {
             if (PN_change) {
                 PNChange(textPN.Text.Trim());
-                spec = Util.getPNSpec(textPN.Text.Trim(), ref tdds, ref PNDescription, ref freSpec, ref TDDSpec,chkDBOffline.Checked);
+                spec = Util.GetPnSpec(textPN.Text.Trim(), ref tdds, ref PNDescription, ref freSpec, ref TDDSpec, chkDBOffline.Checked, ref TestItems,ref eprWrite);
                 if (spec != null)
                 {
+                    SetTestItem(TestItems);
                     DBRecord_ini();
                     addStatus("get PN spec from DB success!");
+                    chkEEPROM.Checked = eprWrite;
                     //saveFreData();
                 }
                 else {
@@ -1205,7 +1087,7 @@ namespace S32PSave
                 autoSN_ini();
             }
             else {
-                autoSNStatusSet();
+                AutoSnStatusSet();
             }
             
         }
@@ -1224,7 +1106,7 @@ namespace S32PSave
             }
             else {
                 MONumber = -1;
-                autoSNStatusSet();
+                AutoSnStatusSet();
                 MessageBoxEx.Show(ret.msg);
             }
             
@@ -1395,11 +1277,6 @@ namespace S32PSave
 
 
             string[] str = SerialPort.GetPortNames();
-            if (str == null)
-            {
-                MessageBoxEx.Show("本机没有串口！", "Error");
-                return;
-            }
             if (str.Length == 0)
             {
                 MessageBoxEx.Show("本机没有串口！", "Error");
@@ -1468,12 +1345,12 @@ namespace S32PSave
             Dictionary<string,string[]>pairNameDictionary=new Dictionary<string, string[]>();
 
            // string[] testItems = checkTDD ? new[] { "SINGLE", "SDD21", "SDD11", "TDD11", "TDD22" } : new[] { "SINGLE", "SDD21", "SDD11" };
-            string[] testItems = chartDic.Keys.ToArray();
+            //string[] testItems = chartDic.Keys.ToArray();
 
             bool action = false;
             string msg = "";
             Dictionary<string, plotData[]> data = Util.getAnalyzedData(
-                testItems, s32pFilepath, snpPort, spec, tdds, ref action, ref msg, ref pairNameDictionary);
+                TestItems, s32pFilepath, snpPort, spec, tdds, ref action, ref msg, ref pairNameDictionary);
           
             if (!action)
             {
@@ -1494,8 +1371,9 @@ namespace S32PSave
             
             addStatus("finished judge data");
            
-            foreach (string testItem in testItems)
+            foreach (var _testItem in TestItems)
             {
+                string testItem = _testItem.testName.ToUpper();
                object tempChart = chartDic[testItem];
                 plotData[] temp = data[testItem];
                 for (int i = 0; i < temp.Length; i++)
@@ -1562,18 +1440,18 @@ namespace S32PSave
 
         private void txtMO_TextChanged(object sender, EventArgs e)
         {
-            autoSNStatusSet();
+            AutoSnStatusSet();
         }
 
-        private void autoSNStatusSet() {
+        private void AutoSnStatusSet() {
             chkAutoSN.Checked = false;
             textSN.Enabled = true;
             textSN.BackColor = this.BackColor;
             textSN.ForeColor = this.ForeColor;
             txtMoSum.BackColor = this.BackColor;
         }
-       private bool getSN(string MO,string PN){
-           SNData snData=Util.getITSN(MO, PN);
+       private bool GetSn(string mo,string pn){
+           SNData snData=Util.getITSN(mo, pn);
           
            if (!Util.saveSNRecord(snData))
            {
@@ -1582,14 +1460,14 @@ namespace S32PSave
            }
            else
            {
-               setDetailSN(snData);
+               SetDetailSn(snData);
                addStatus("save sn data to DB success!");
            }
            string sn = snData.label;
         textSN.Text = sn;
         addStatus("get sn: " + sn + " from WCF success!");
         
-           int moSum=Util.getSavedNumber(MO, PN, int.Parse(cmbTestNo.Text));
+           int moSum=Util.getSavedNumber(mo, pn, int.Parse(cmbTestNo.Text));
            txtMoSum.Text = moSum.ToString();
            if (moSum > (MOTolerance + 100) * MONumber / 100)
            {
@@ -1600,7 +1478,7 @@ namespace S32PSave
         return true;
        }
 
-       private void setDetailSN(SNData snData)
+       private void SetDetailSn(SNData snData)
        {
            dbRecord[29] = snData.FSN;
            dbRecord[30] = "";
@@ -1611,57 +1489,50 @@ namespace S32PSave
            dbRecord[35] = snData.snDec;
        }
 
-       private bool writeSN(string sn) {
+       private bool WriteSn(string sn) {
 
-           if (openDevice())
+           if (OpenDevice())
            {
-               string writeSN =  string.Format("{0:00}", sn.Length)+sn;// 
-               byte[] writeData = Util.getBytes(writeSN);
+               string writeSn =  string.Format("{0:00}", sn.Length)+sn;// 
+               byte[] writeData = Util.getBytes(writeSn);
 
                operationResult or = I2CDevice.writeDevice(SlaveAddr, 0, 0, writeData.Length, writeData);
                if (or.result)
                {
                    addStatus("write SN: " + sn + " suceess!");
-                   if (closeDevice())
+                   if (CloseDevice())
                    {
                        return true;
                    }
-                   else
-                   {
-                       return false;
-                   }
+
+                   return false;
 
                }
-               else
-               {
-                   addStatus("write SN: " + sn + " fail! reson: " + or.msg);
-                   closeDevice();
-                   return false;
-               }
-           }
-           else {
-               addStatus("open device fail,please check or replace the adapter");
+
+               addStatus("write SN: " + sn + " fail! reson: " + or.msg);
+               CloseDevice();
                return false;
            }
 
-         
+           addStatus("open device fail,please check or replace the adapter");
+           return false;
+
+
        }
 
 
-       private bool openDevice() {
+       private bool OpenDevice() {
            if (I2CDevice.openDevice())
            {
                addStatus("successful to open device!");
                return true;
            }
-           else
-           {
-               addStatus("fail to open device!");
-               return false;
-           }
+
+           addStatus("fail to open device!");
+           return false;
        }
 
-       private bool closeDevice() {
+       private bool CloseDevice() {
            try
            {
                if (I2CDevice.closeDevice())
@@ -1681,7 +1552,7 @@ namespace S32PSave
           
        }
 
-       private bool s32pAnalyze(string s32pFilepath, SNPPort snpPort, Dictionary<string, plotData> spec, string PN, ref Dictionary<string, bool> results)
+       private bool S32PAnalyze(string s32PFilepath, SNPPort snpPort, Dictionary<string, plotData> spec, string pn, ref Dictionary<string, bool> results)
        {
           
            bool ret=true;
@@ -1694,7 +1565,7 @@ namespace S32PSave
            string fileMsg="";
            int fileCheckTime=0;
 
-           fileExist=Util.FileIsUsing(s32pFilepath, timeOutCreate, timeOutUse, ref fileMsg, ref fileCheckTime);
+           fileExist=Util.FileIsUsing(s32PFilepath, timeOutCreate, timeOutUse, ref fileMsg, ref fileCheckTime);
 
            if (!fileExist) {
                addStatus(fileMsg);
@@ -1704,7 +1575,7 @@ namespace S32PSave
 
            addStatus("wait s32p File used time is:"+fileCheckTime.ToString()+"ms");
 
-           results = snpCheck(s32pFilepath, snpPort, spec);
+           results = snpCheck(s32PFilepath, snpPort, spec);
            if (results == null) {
                addStatus("analyze fail,please try again");
                return false;
@@ -1712,7 +1583,7 @@ namespace S32PSave
            addStatus("analyze test data finsihed");
          
            
-           //Dictionary<string, bool> results=diffCheck(s32pFilepath, snpPort, spec);
+           
            foreach (var item in results) {
                ret = ret && item.Value;
                msg = msg+item.Key + ":" + Util.boolToString(item.Value) + "\r\n";
@@ -1725,7 +1596,7 @@ namespace S32PSave
                {
                    Directory.CreateDirectory(@savePath);
                }
-               FileStream fs = File.Create(savePath + "\\" + PN + ".txt");
+               FileStream fs = File.Create(savePath + "\\" + pn + ".txt");
                StreamWriter swSaveWriter = new StreamWriter(fs);
                swSaveWriter.Write(msg);
                swSaveWriter.Close();
@@ -1782,74 +1653,91 @@ namespace S32PSave
            }
        }
 
-       private bool readConfig()
+       private bool ReadConfig()
        {
-           config readConfig = Util.getConfig(configFilePath);
-           if (readConfig == null)
+            softConfig = Util.getConfig(configFilePath);
+           if (softConfig == null)
            {
                return false;
            }
-           else
+
+           if (string.IsNullOrEmpty(softConfig.Upload1Path))
            {
-               txtSaveFolder = readConfig.TxtSaveFolder;
-               textTxtSaveFolderPath.Text = txtSaveFolder;
-               s32pSaveFolder = readConfig.FileSavePath;
-               textS32PSaveFolderPath.Text = s32pSaveFolder;
-
-               clearSN = readConfig.ClearSN;
-               chkSNClear.Checked = clearSN;
-
-               maxTestNum = readConfig.MaxTestNum;
-
-               txtCalFile.Text = readConfig.CalPath;
-               chkCalFileEnable.Checked = readConfig.CalFileEnable;
-               if (chkCalFileEnable.Checked&&(!File.Exists(readConfig.CalPath)))
-               {
-                   MessageBoxEx.Show("cal file is not exsit,can't set enable checked");
-                   chkCalFileEnable.Checked = false;
-               }
-               textPort.Text = readConfig.Port;
-               cmbAdapter.SelectedIndex = readConfig.AdapterIndex;
-               cmbPorts.SelectedIndex = readConfig.ComIndex;
-               setPortMap(readConfig.ConnectMap);
-
-               chkWriteSN.Checked = readConfig.WriteSN;
-
-               chkEEPROM.Checked = readConfig.WriteEEPROM;
-               cmbSkin.SelectedIndex=readConfig.Skin;
-               txtVisaAddress.Text = readConfig.VisaAddress;
-               visaAddress = txtVisaAddress.Text;
-               cmbResolution.SelectedIndex = readConfig.ResolutionIndex;
-               MOTolerance=readConfig.MoTolerance>0?MOTolerance:0;
-               chkDBOffline.Checked = readConfig.DbOffline;
-              
-               return true;
+               softConfig.Upload1Path = @"\\172.20.20.113\emc\HPTS\VNA";
            }
+           if (string.IsNullOrEmpty(softConfig.Upload2Path))
+           {
+               softConfig.Upload2Path = @"\\172.20.20.113\emc\HPTS\SI";
+           }
+          
+           txtSaveFolder = softConfig.TxtSaveFolder;
+           textTxtSaveFolderPath.Text = txtSaveFolder;
+           s32pSaveFolder = softConfig.FileSavePath;
+           textS32PSaveFolderPath.Text = s32pSaveFolder;
+
+           clearSN = softConfig.ClearSN;
+           chkSNClear.Checked = clearSN;
+
+           maxTestNum = softConfig.MaxTestNum;
+
+           txtCalFile.Text = softConfig.CalPath;
+           chkCalFileEnable.Checked = softConfig.CalFileEnable;
+           if (chkCalFileEnable.Checked&&(!File.Exists(softConfig.CalPath)))
+           {
+               MessageBoxEx.Show("cal file is not exsit,can't set enable checked");
+               chkCalFileEnable.Checked = false;
+           }
+           textPort.Text = softConfig.Port;
+           cmbAdapter.SelectedIndex = softConfig.AdapterIndex;
+               
+           
+           try
+           {
+               cmbPorts.SelectedIndex = softConfig.ComIndex;
+           }
+           catch (Exception e)
+           {
+               MessageBox.Show(e.Message);
+           }
+           setPortMap(softConfig.ConnectMap);
+
+           chkWriteSN.Checked = softConfig.WriteSN;
+
+           chkEEPROM.Checked = softConfig.WriteEEPROM;
+           cmbSkin.SelectedIndex=softConfig.Skin;
+           txtVisaAddress.Text = softConfig.VisaAddress;
+           visaAddress = txtVisaAddress.Text;
+           cmbResolution.SelectedIndex = softConfig.ResolutionIndex;
+           MOTolerance=softConfig.MoTolerance>0?MOTolerance:0;
+           chkDBOffline.Checked = softConfig.DbOffline;
+              
+           return true;
        }
 
-       private bool saveConfig() {
-           config saveConfig = new config();
-           saveConfig.FileSavePath = textS32PSaveFolderPath.Text;
-           saveConfig.ClearSN = chkSNClear.Checked;
+       private bool SaveConfig() {
+           //config softConfig = new config();
+           softConfig.FileSavePath = textS32PSaveFolderPath.Text;
+           softConfig.ClearSN = chkSNClear.Checked;
            if (maxTestNum == 0) {
                maxTestNum = 4;
            }
-           saveConfig.MaxTestNum = maxTestNum;
-           saveConfig.CalPath = txtCalFile.Text;
-           saveConfig.CalFileEnable = chkCalFileEnable.Enabled;
-           saveConfig.Port = textPort.Text;
-           saveConfig.AdapterIndex = cmbAdapter.SelectedIndex;
-           saveConfig.ComIndex = cmbPorts.SelectedIndex;
-           saveConfig.ConnectMap = getPortMap();
-           saveConfig.WriteSN = chkWriteSN.Checked;
-           saveConfig.WriteEEPROM = chkEEPROM.Checked;
-           saveConfig.Skin = cmbSkin.SelectedIndex;
-           saveConfig.VisaAddress = txtVisaAddress.Text;
-           saveConfig.ResolutionIndex = cmbResolution.SelectedIndex;
-           saveConfig.MoTolerance = MOTolerance;
-           saveConfig.TxtSaveFolder = textTxtSaveFolderPath.Text;
-           saveConfig.DbOffline = chkDBOffline.Checked;
-           return Util.saveConfig(saveConfig, configFilePath);
+           softConfig.MaxTestNum = maxTestNum;
+           softConfig.CalPath = txtCalFile.Text;
+           softConfig.CalFileEnable = chkCalFileEnable.Enabled;
+           softConfig.Port = textPort.Text;
+           softConfig.AdapterIndex = cmbAdapter.SelectedIndex;
+           softConfig.ComIndex = cmbPorts.SelectedIndex;
+           softConfig.ConnectMap = getPortMap();
+           softConfig.WriteSN = chkWriteSN.Checked;
+           softConfig.WriteEEPROM = chkEEPROM.Checked;
+           softConfig.Skin = cmbSkin.SelectedIndex;
+           softConfig.VisaAddress = txtVisaAddress.Text;
+           softConfig.ResolutionIndex = cmbResolution.SelectedIndex;
+           softConfig.MoTolerance = MOTolerance;
+           softConfig.TxtSaveFolder = textTxtSaveFolderPath.Text;
+           softConfig.DbOffline = chkDBOffline.Checked;
+         //  saveConfig.Upload1Path = "Figo";
+           return Util.saveConfig(softConfig, configFilePath);
        }
 
        #region PNA portmap function
@@ -1922,7 +1810,7 @@ namespace S32PSave
 
        private void btnSave_Click(object sender, EventArgs e)
        {
-           if (saveConfig())
+           if (SaveConfig())
            {
                addLog("save config success!");
            }
@@ -1935,7 +1823,7 @@ namespace S32PSave
      
 
 
-       private bool diskFreeSpaceCheck() {
+       private bool DiskFreeSpaceCheck() {
            long freespace = Util.GetHardDiskSpace(volume);
            if (freespace < 1000)
            {
@@ -1987,10 +1875,23 @@ namespace S32PSave
         }
 
 
+        private void SetTestItem(List<TestItem> testItems)
+        {
+            chartDic.Clear();
+            iChart.ChartDel();
+
+            foreach (var variable in testItems)
+            {
+                TestItemChange(variable.testName, TestItemAction.Add);
+            }
+          
+          
+        }
+
         /// <summary>
         /// 测试项目初始化
         /// </summary>
-        private void testItemCheckBoxIni()
+        private void TestItemCheckBoxIni()
         {
             int startX = 5;
             int startY = 5;
@@ -2090,19 +1991,19 @@ namespace S32PSave
             return true;
         }
 
-        private bool DBRecord_get(string sn,int testCount,bool testResult,int testTime,string EEPRomResult,
-            bool nextTF,bool fextTF)
+        private bool DBRecord_get(string sn,int testCount,bool testResult,int testTime,string eepRomResult,
+            bool nextTf,bool fextTf)
         {
             dbRecord[2] = sn;
             dbRecord[4] = testResult?"PASS":"FAIL";
             dbRecord[8] = DateTime.Now.ToString("HH:mm:ss yyyy/MM/dd");
             dbRecord[9] = testTime + "S";
 
-            dbRecord[11] = EEPRomResult;
+            dbRecord[11] = eepRomResult;
             dbRecord[12] = "0";
             dbRecord[13] = "0";
-            dbRecord[14] = nextTF?"1":"0";
-            dbRecord[15] = fextTF ? "1" : "0";
+            dbRecord[14] = nextTf?"1":"0";
+            dbRecord[15] = fextTf ? "1" : "0";
             dbRecord[16] = "1";
             dbRecord[17] = "1";
             dbRecord[18] = "0";
@@ -2110,12 +2011,12 @@ namespace S32PSave
             dbRecord[19] = "P#" + sn + "_" + testCount + "#Thru.zip";
             dbRecord[20] = "NULL";
             dbRecord[21] = "NULL";
-            dbRecord[22] = nextTF ? "P#" + sn + "_" + testCount + "#NextTXT.zip":"NULL";
+            dbRecord[22] = nextTf ? "P#" + sn + "_" + testCount + "#NextTXT.zip":"NULL";
             dbRecord[23] = "NULL";
-            dbRecord[24] = fextTF ? "P#" + sn + "_" + testCount + "#FextTXT.zip" : "NULL";
+            dbRecord[24] = fextTf ? "P#" + sn + "_" + testCount + "#FextTXT.zip" : "NULL";
             dbRecord[25] = "P#" + sn + "_" + testCount + "#TXT.zip";
             dbRecord[26] = "NULL";
-            dbRecord[27] = EEPRomResult != "EEPROM:None" ? "P#" + sn + "_" + testCount + "#FextTXT.zip" : "NULL";
+            dbRecord[27] = eepRomResult != "EEPROM:None" ? "P#" + sn + "_" + testCount + "#FextTXT.zip" : "NULL";
             dbRecord[28] = "P#" + sn + "_" + testCount + "#Summary.zip";
 
             dbRecord[37] = "";
@@ -2161,56 +2062,72 @@ namespace S32PSave
         {
             blSaveTxt = chkSaveTxt.Checked;
         }
+
+
+
+        /// <summary>
+        /// PNA档案检查
+        /// </summary>
+        private void PNASettingCheck(string visaAddress)
+        {
+#if !DEBUG
+          
+            testparamList = GetTestParas(visaAddress);
+
+            if (!testparamList.ContainsKey("Sdd21"))
+            {
+                MessageBoxEx.Show("the csa file did not contain Sdd21!");
+            }
+
+            testParams Sdd21 = testparamList["Sdd21"];
+
+            string firstChannel = "";
+            foreach (string key in testparamList.Keys)
+            {
+                if (testparamList[key].trace == 0)
+                {
+                    firstChannel = key;
+                    break;
+                }
+            }
+
+            channelSelStr = "CALC:PAR:SEL '" + testparamList[firstChannel].channelName + "'";
+            //channelSel = (Sdd21.trace + 1).ToString();
+#endif
+        }
+
+        private Dictionary<string, testParams> GetTestParas(string visaAdr)
+        {
+            Dictionary<string, testParams> dTestParams = new Dictionary<string, testParams>();
+            const string queryString = "CALC:PAR:CAT?";
+            P9375A p9375A=new P9375A();
+            p9375A.Connect(visaAdr);
+            string sRet = p9375A.Query(queryString);
+
+            //string sRet = "\"CH1_SDD21_1,S32_1,CH1_S22_2,S22,CH1_SDD21_3,Sdd21,CH1_SDD22_4,Sdd22\"";
+            sRet = Util.testChannelTrim(sRet);
+            string[] temp = sRet.Split(',');
+            int length = temp.Length;
+            if ((length == 0) || (length % 2 == 1))
+            {
+                throw new Exception("get test params fail");
+            }
+
+            for (int i = 0; i < length / 2; i++)
+            {
+                testParams newParams = new testParams();
+                newParams.testName = temp[2 * i + 1];
+                newParams.trace = i;
+                newParams.channelName = temp[2 * i];
+                dTestParams.Add(newParams.testName, newParams);
+            }
+            return dTestParams;
+
+
+        }
     
     }
 
-    class PNASaver
-    {
-        public delegate void saveFileHandler(string S32pFilePath);
-        public delegate void pnaConnectCheckeHandler(bool connected);
-        public event saveFileHandler saveFinished;
-        public event saveFileHandler saveBefore;
-        public event pnaConnectCheckeHandler pnaConnectChecked;
-        public void saveS32p(string filePath,string visaAddress,string Resolution)
-        {
-            if (saveBefore != null)
-            {
-                saveBefore(filePath);
-            }
-
-#if !DEBUG
    
-            PLTS plts = new PLTS();
-            if (!plts.Connected)
-            {
-                plts.Connect(visaAddress);
-            }
-
-            if (pnaConnectChecked != null)
-            {
-                pnaConnectChecked(plts.Connected);
-            }
-            
-            plts.CloseAllFiles();
-            plts.MeasureS32pFile();
-
-            int fileNumber = plts.GetActiveFileIndex();
-
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
-            plts.ExportFile(fileNumber, 32, filePath, Resolution);
-            plts.Disconnect();
-           
-#endif
-            if (saveFinished != null)
-            {
-                saveFinished(filePath);
-            }
-
-        }
-     
-    }
    
 }

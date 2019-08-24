@@ -45,6 +45,13 @@ namespace S32PSave
         public string msg;
         public int MONumber;
     }
+
+    public struct TestItem
+    {
+        public string testName;
+        public bool smooth;
+        public IldSpec IldSpec;
+    }
     public struct SNData {
         public string FSN;
         public string label;
@@ -64,6 +71,8 @@ namespace S32PSave
         public string riseTime;
         public string offset;
         public string impedance;
+        public bool smooth;
+
 
     }
 
@@ -350,7 +359,9 @@ namespace S32PSave
             ret[0].points = (int)double.Parse(temp[2]);
             ret[0].riseTime = temp[3];
             ret[0].offset = temp[4];
+            ret[0].smooth = (int) double.Parse(temp[6]) == 1;
             ret[0].impedance = temp[7];
+            ret[1].smooth = ret[0].smooth;
             if ((int)double.Parse(temp[10]) == 1)
             {
                 ret[1].startTime = temp[8];
@@ -427,26 +438,40 @@ namespace S32PSave
             return ret;
         }
 
-        public static Dictionary<string, plotData> getPNSpec(string PN,ref TDD[] tdds,ref string description,ref string[][] freSpec,ref string TDDSpec,bool DBoffline)
+        public static Dictionary<string, plotData> GetPnSpec(string PN,ref TDD[] tdds,ref string description,ref string[][] freSpec,ref string TDDSpec,bool DBoffline,ref List<TestItem>testItems,ref bool eprWrite)
         {
             if (!PingIpOrDomainName("172.20.23.107")&&!DBoffline)
             {
                 MessageBoxEx.Show("无法连接到IP地址172.20.23.107,请检查网络");
                 return null;
             }
-            string strSql = "select frequency,TDR,general from vna32port where LuxsharePN='" + PN + "'";
+            string strSql = "select frequency,TDR,general,project,label from vna32port where LuxsharePN='" + PN + "'";
             //DataTable dt= DbHelperOleDb.Query(strSql,DB_HTPSDBConnectionString).Tables[0];
-            DataTable dt = DBoffline
-                ? SqlLite.ExecuteDataTable(strSql)
-                : DbHelperOleDb.Query(strSql, DB_HTPSDBConnectionString).Tables[0];
+            DataTable dt=null;
+            try
+            {
+                 dt = DBoffline
+                    ? SqlLite.ExecuteDataTable(strSql)
+                    : DbHelperOleDb.Query(strSql, DB_HTPSDBConnectionString).Tables[0];
+            }
+            catch (Exception e)
+            {
+                MessageBoxEx.Show(e.Message);
+            }
+            
             if (dt.Rows.Count != 1) {
                 return null;
             }
+
+            string labelStr = dt.Rows[0]["Label"].ToString();
+            string ers = labelStr.Split('\t')[4].ToUpper().Trim();
+            eprWrite = ers.Equals("TRUE");
             string freSpecStr  = dt.Rows[0]["frequency"].ToString();
             string tdr = dt.Rows[0]["TDR"].ToString();
             string general = dt.Rows[0]["general"].ToString();
             description = general.Split('\t')[5];
             tdds = getTdd(tdr);
+            testItems = getTestItems(dt.Rows[0]["project"].ToString());
             plotData[] tdd1 = GetTddSpec(tdds[0]);
             plotData[] tdd2 = GetTddSpec(tdds[1]);
             string bb = freSpecStr.Split('\t')[0];
@@ -460,10 +485,24 @@ namespace S32PSave
                 List<float> y = new List<float>();
                 for (int j = 1; j < freSpec.Length; j++)
                 {
-                    if (freSpec[j][i] != "NaN")
+                    if (freSpec[j][0] != "NaN")
                     {
                         x.Add((float)(double.Parse(freSpec[j][0])));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    
+                    if (freSpec[j][i] != "NaN")
+                    {
+                        
                         y.Add((float)(double.Parse(freSpec[j][i])));
+                       
+                    }
+                    else
+                    {
+                        y.Add(float.NaN);
                     }
                 }
                 temp.xData = x.ToArray();
@@ -486,6 +525,57 @@ namespace S32PSave
         
         }
 
+        private static List<TestItem> getTestItems(string project)
+        {
+            string[] temp = project.Split('\t');
+            int ild = int.Parse(temp[6]);
+            List<TestItem> sparas = parseItemStr(temp[0], ild);
+            List<TestItem> tparas = parseItemStr(temp[2], ild);
+
+           sparas.AddRange(tparas);
+            return sparas;
+
+        }
+
+
+        private static List<TestItem> parseItemStr(string itemStr,int ild)
+        {
+            List<TestItem>ret=new List<TestItem>();
+            
+            string[] tempFre = itemStr.Split('@');
+            string[] tempSymbo = tempFre[0].Split('$');
+            string[] tempItem = tempFre[1].Split('*');
+            int length = tempSymbo.Length;
+            for (int i = 0; i < length; i++)
+            {
+                TestItem tempTestItem=new TestItem();
+                if (double.Parse(tempSymbo[i]) == 38)
+                {
+                    tempTestItem.testName = tempItem[i].Trim();
+                    tempTestItem.smooth = false;
+                    if (tempItem[i].ToUpper() == "ILD")
+                    {
+                        tempTestItem.IldSpec = (IldSpec) ild;
+                    }
+                    ret.Add(tempTestItem);
+                }
+                else if (double.Parse(tempSymbo[i]) == 17)
+                {
+                    tempTestItem.testName = tempItem[i].Trim();
+                    tempTestItem.smooth = true;
+                    if (tempItem[i].ToUpper() == "ILD")
+                    {
+                        tempTestItem.IldSpec = (IldSpec)ild;
+                    }
+                    ret.Add(tempTestItem);
+                }
+            }
+
+
+            return ret;
+        }
+
+        
         private static string getTDDString(string[][]TDD)
         {
             int length = TDD[0].Length;
@@ -631,6 +721,10 @@ namespace S32PSave
         {
             for (int i = 0; i < spec.xData.Length; i++) {
                 if (x == spec.xData[i]) {
+                    if (float.IsNaN(spec.yData[i]))
+                    {
+                        return true;
+                    }
                     if (isUpper) {
                         if (y >= spec.yData[i])
                         {
@@ -651,7 +745,7 @@ namespace S32PSave
         #endregion
 
         public static Dictionary<string, plotData[]>
-            getAnalyzedData(string[] testItems, string snpFilepath, SNPPort snpPort, Dictionary<string, plotData> spec, 
+            getAnalyzedData(List<TestItem> testItems, string snpFilepath, SNPPort snpPort, Dictionary<string, plotData> spec, 
                 TDD[] tdds ,
                 ref bool action, ref string msg,ref Dictionary<string,string[]> pairNameDictionary)
         {
@@ -662,11 +756,12 @@ namespace S32PSave
             try
             {
                 SNP snpClass = new SNP(snpFilepath, snpPort);
-                foreach (string item in testItems)
+                foreach (var testItem in testItems)
                 {
+                    string item = testItem.testName.ToUpper();
                     if (item.StartsWith("T"))
                     {
-                        TDD tdd = item.ToUpper().Equals("TDD11") ? tdds[0] : tdds[1];
+                        TDD tdd = item.Equals("TDD11") ? tdds[0] : tdds[1];
                         timeDomainData tData = snpClass.EasyGetTimeData(item, out pairNames, double.Parse(tdd.riseTime), (double.Parse(tdd.stopTime) - double.Parse(tdd.startTime)) / (tdd.points - 1), tdd.points, double.Parse(tdd.offset));
                         int tColumns = tData.resistance.GetLength(1);
                         int tRows = tData.resistance.GetLength(0);
@@ -724,10 +819,9 @@ namespace S32PSave
                         ret.Add(item, singleItem);
                         pairNameDictionary.Add(item, pairNameSingles);
                       }
-                    else
+                    else if (item.Equals("ILD"))
                     {
-                        
-                        formatedData fData = snpClass.EasyGetfreData(item, out pairNames);
+                        formatedData fData = snpClass.EasyGetILD(testItem.IldSpec, out pairNames);
                         int columns = fData.dB.GetLength(1);
                         int rows = fData.dB.GetLength(0);
                         float[] offset = new float[rows];
@@ -756,6 +850,46 @@ namespace S32PSave
                         fData = new formatedData();
                         pairNameDictionary.Add(item, pairNames);
                     }
+                    else
+                    {
+                        
+                        formatedData fData = snpClass.EasyGetfreData(item, out pairNames);
+                        int columns = fData.dB.GetLength(1);
+                        int rows = fData.dB.GetLength(0);
+                        float[] offset = new float[rows];
+                        if (spec.ContainsKey(item + "_OFFSET"))
+                        {
+                            for (int row = 0; row < rows; row++)
+                            {
+                                offset[row] = spec[item + "_OFFSET"].yData[row];
+                            }
+                        }
+
+                        plotData[] diffItem = new plotData[columns];
+                        for (int curveNo = 0; curveNo < columns; curveNo++)
+                        {
+                            float[] y = new float[rows];
+                            for (int row = 0; row < rows; row++)
+                            {
+                                if (!float.IsNaN(offset[row]))
+                                {
+                                    y[row] = fData.dB[row, curveNo] + offset[row];
+                                }
+                                else
+                                {
+                                    y[row] = fData.dB[row, curveNo];
+                                }
+                                
+                            }
+                            diffItem[curveNo].yData = y;
+                            diffItem[curveNo].xData = fData.fre;
+                            y = null;
+                        }
+                        ret.Add(item, diffItem);
+                        diffItem = null;
+                        fData = new formatedData();
+                        pairNameDictionary.Add(item, pairNames);
+                    }
 
 
                 }
@@ -764,7 +898,7 @@ namespace S32PSave
                 action = true;
                 return ret;
             }
-            catch (SnpException ex)
+            catch (Exception ex)
             {
                 action = false;
                 msg = ex.Message;
@@ -819,7 +953,7 @@ namespace S32PSave
                 action = true;
                 return ret;
             }
-            catch (SnpException ex)
+            catch (Exception ex)
             {
                 action = false;
                 msg = ex.Message;

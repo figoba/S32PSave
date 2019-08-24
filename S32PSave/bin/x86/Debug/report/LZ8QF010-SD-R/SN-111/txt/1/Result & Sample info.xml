@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<general>
+	<testResult>
+		<testItem name="Result" result="OK" />
+		<testItem name="SDD21" result="OK" />
+		<testItem name="SDD11" result="OK" />
+		<testItem name="ILD" result="OK" />
+		<testItem name="NEXT" result="OK" />
+		<testItem name="FEXT" result="OK" />
+		<testItem name="TDD11" result="OK" />
+		<testItem name="TDD22" result="OK" />
+	</testResult>
+	<information>
+		<inforItem name="application" value="Yaowen Wang" />
+		<inforItem name="partDescription" value="40G QSFP+ Passive Cable Assembly " />
+		<inforItem name="partNo" value="LZ8QF010-SD-R" />
+		<inforItem name="fixtureSerialNo" value="23" />
+		<inforItem name="reportNo" value="HF-111" />
+		<inforItem name="sampleNo" value="111" />
+		<inforItem name="preparedBy" value="Quanying Niu" />
+		<inforItem name="approvedBy" value="Wave Zhang" />
+		<inforItem name="temprature" value="23" />
+		<inforItem name="rHumidity" value="60" />
+		<inforItem name="date" value="2019-05-24" />
+		<inforItem name="tdrModel" value="1.TDR:Keysight PLTS IFFT" />
+		<inforItem name="vnaModel" value="2.PNA:Keysight 26.5GHz 32Port M9375A" />
+		<inforItem name="siSpec" value="Luxshare Document SI-001(add reference document: SAS 3.0 v3.1 16th March 2016)" />
+		<inforItem name="timeDomainSetting" value="Time Domain: Risetime 30ps(20% - 80%)" />
+		<inforItem name="frequencyDomainSetting" value="Frequency Domain: 10MHz - 26.5GHz, 10MHz Step, 5KHz IF Bandwidth, 2650 Points" />
+	</information>
+</general>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<general>
+	<testResult>
+		<testItem name="SDD21" result="OK" />
+		<testItem name="SDD11" result="OK" />
+		<testItem name="ILD" result="OK" />
+		<testItem name="NEXT" result="OK" />
+		<testItem name="FEXT" result="OK" />
+		<testItem name="TDD11" result="OK" />
+		<testItem name="TDD22" result="OK" />
+	</testResult>
+	<information>
+		<inforItem name="application" value="Yaowen Wang" />
+		<inforItem name="partDescription" value="QSFP28 to 4X SFP28 28AWG 3M Passive Cable Assembly " />
+		<inforItem name="partNo" value="L7KQF006-SD-R" />
+		<inforItem name="fixtureSerialNo" value="23" />
+		<inforItem name="reportNo" value="HF-9901A1LW0217411905A30000065" />
+		<inforItem name="sampleNo" value="9901A1LW0217411905A30000065" />
+		<inforItem name="preparedBy" value="Quanying Niu" />
+		<inforItem name="approvedBy" value="Wave Zhang" />
+		<inforItem name="temprature" value="23" />
+		<inforItem name="rHumidity" value="60" />
+		<inforItem name="date" value="2019-01-28" />
+		<inforItem name="tdrModel" value="1.TDR:Keysight PLTS IFFT" />
+		<inforItem name="vnaModel" value="2.PNA:Keysight 26.5GHz 32Port M9375A" />
+	</information>
+</general>

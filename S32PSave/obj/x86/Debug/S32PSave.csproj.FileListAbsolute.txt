@@ -61,10 +61,15 @@ D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\sv\ZedGraph.WinForms.resources.dl
 D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\tr\ZedGraph.WinForms.resources.dll
 D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\zh-cn\ZedGraph.WinForms.resources.dll
 D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\zh-tw\ZedGraph.WinForms.resources.dll
-D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csprojResolveAssemblyReference.cache
 D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.frmMain.resources
 D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.Properties.Resources.resources
 D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csproj.GenerateResource.Cache
 D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.exe
 D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.pdb
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\DevComponents.DotNetBar2.dll
 D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\MathNet.Numerics.dll
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\DevComponents.DotNetBar2.xml
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Debug\System.Data.SQLite.dll.config
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csprojAssemblyReference.cache
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csproj.CoreCompileInputs.cache
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Debug\S32PSave.csproj.CopyComplete

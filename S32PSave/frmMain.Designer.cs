@@ -138,6 +138,7 @@
             // 
             this.textSN.Border.Class = "TextBoxBorder";
             this.textSN.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textSN.DisabledBackColor = System.Drawing.Color.White;
             this.textSN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textSN.ForeColor = System.Drawing.Color.Black;
             this.textSN.Location = new System.Drawing.Point(68, 43);
@@ -172,6 +173,9 @@
             this.rTextStatus.ForeColor = System.Drawing.Color.Black;
             this.rTextStatus.Location = new System.Drawing.Point(15, 470);
             this.rTextStatus.Name = "rTextStatus";
+            this.rTextStatus.Rtf = "{\\rtf1\\ansi\\ansicpg936\\deff0\\deflang1033\\deflangfe2052{\\fonttbl{\\f0\\fnil\\fcharset" +
+    "134 \\\'ce\\\'a2\\\'c8\\\'ed\\\'d1\\\'c5\\\'ba\\\'da;}}\r\n\\viewkind4\\uc1\\pard\\lang2052\\f0\\fs20\\pa" +
+    "r\r\n}\r\n";
             this.rTextStatus.Size = new System.Drawing.Size(1009, 185);
             this.rTextStatus.TabIndex = 4;
             this.rTextStatus.TextChanged += new System.EventHandler(this.rTextStatus_TextChanged);
@@ -255,6 +259,7 @@
             // 
             this.textPN.Border.Class = "TextBoxBorder";
             this.textPN.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textPN.DisabledBackColor = System.Drawing.Color.White;
             this.textPN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textPN.ForeColor = System.Drawing.Color.Black;
             this.textPN.Location = new System.Drawing.Point(393, 11);
@@ -262,7 +267,6 @@
             this.textPN.Size = new System.Drawing.Size(201, 26);
             this.textPN.TabIndex = 12;
             this.textPN.TextChanged += new System.EventHandler(this.textPN_TextChanged);
-            this.textPN.Leave += new System.EventHandler(this.textPN_Leave);
             this.textPN.Validated += new System.EventHandler(this.textPN_Validated);
             // 
             // cmbTestNo
@@ -301,8 +305,8 @@
             this.tabMain.BackColor = System.Drawing.Color.White;
             this.tabMain.CanReorderTabs = true;
             this.tabMain.ColorScheme.TabBackground = System.Drawing.Color.White;
-            this.tabMain.Controls.Add(this.tabControlPanel2);
             this.tabMain.Controls.Add(this.tabControlPanel1);
+            this.tabMain.Controls.Add(this.tabControlPanel2);
             this.tabMain.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.ForeColor = System.Drawing.Color.Black;
             this.tabMain.Location = new System.Drawing.Point(10, 67);
@@ -341,6 +345,7 @@
             this.tabControlPanel1.Controls.Add(this.labelResult);
             this.tabControlPanel1.Controls.Add(this.btnExit);
             this.tabControlPanel1.Controls.Add(this.btnStart);
+            this.tabControlPanel1.DisabledBackColor = System.Drawing.Color.Empty;
             this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlPanel1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControlPanel1.Location = new System.Drawing.Point(0, 33);
@@ -399,6 +404,7 @@
             // 
             this.txtMoSum.Border.Class = "TextBoxBorder";
             this.txtMoSum.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMoSum.DisabledBackColor = System.Drawing.Color.White;
             this.txtMoSum.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMoSum.ForeColor = System.Drawing.Color.Black;
             this.txtMoSum.Location = new System.Drawing.Point(881, 11);
@@ -540,6 +546,7 @@
             // 
             this.txtMO.Border.Class = "TextBoxBorder";
             this.txtMO.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMO.DisabledBackColor = System.Drawing.Color.White;
             this.txtMO.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMO.ForeColor = System.Drawing.Color.Black;
             this.txtMO.Location = new System.Drawing.Point(67, 11);
@@ -560,7 +567,7 @@
             // 
             // tabControlPanel2
             // 
-            this.tabControlPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+            this.tabControlPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
             this.tabControlPanel2.Controls.Add(this.groupBox3);
             this.tabControlPanel2.Controls.Add(this.groupBox4);
             this.tabControlPanel2.Controls.Add(this.groupBox2);
@@ -568,6 +575,7 @@
             this.tabControlPanel2.Controls.Add(this.rTextTCPLog);
             this.tabControlPanel2.Controls.Add(this.textPort);
             this.tabControlPanel2.Controls.Add(this.groupBox1);
+            this.tabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty;
             this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlPanel2.Location = new System.Drawing.Point(0, 33);
             this.tabControlPanel2.Name = "tabControlPanel2";
@@ -599,6 +607,7 @@
             // 
             this.panelExTestItems.CanvasColor = System.Drawing.Color.Transparent;
             this.panelExTestItems.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelExTestItems.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelExTestItems.Location = new System.Drawing.Point(6, 25);
             this.panelExTestItems.Name = "panelExTestItems";
             this.panelExTestItems.Size = new System.Drawing.Size(434, 125);
@@ -671,6 +680,7 @@
             // 
             this.textTxtSaveFolderPath.Border.Class = "TextBoxBorder";
             this.textTxtSaveFolderPath.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textTxtSaveFolderPath.DisabledBackColor = System.Drawing.Color.White;
             this.textTxtSaveFolderPath.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textTxtSaveFolderPath.ForeColor = System.Drawing.Color.Black;
             this.textTxtSaveFolderPath.Location = new System.Drawing.Point(16, 177);
@@ -788,6 +798,7 @@
             // 
             this.txtCalFile.Border.Class = "TextBoxBorder";
             this.txtCalFile.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtCalFile.DisabledBackColor = System.Drawing.Color.White;
             this.txtCalFile.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCalFile.ForeColor = System.Drawing.Color.Black;
             this.txtCalFile.Location = new System.Drawing.Point(16, 301);
@@ -817,6 +828,7 @@
             // 
             this.textS32PSaveFolderPath.Border.Class = "TextBoxBorder";
             this.textS32PSaveFolderPath.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textS32PSaveFolderPath.DisabledBackColor = System.Drawing.Color.White;
             this.textS32PSaveFolderPath.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textS32PSaveFolderPath.ForeColor = System.Drawing.Color.Black;
             this.textS32PSaveFolderPath.Location = new System.Drawing.Point(16, 65);
@@ -960,6 +972,7 @@
             // 
             this.txtVisaAddress.Border.Class = "TextBoxBorder";
             this.txtVisaAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtVisaAddress.DisabledBackColor = System.Drawing.Color.White;
             this.txtVisaAddress.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtVisaAddress.ForeColor = System.Drawing.Color.Black;
             this.txtVisaAddress.Location = new System.Drawing.Point(110, 310);
@@ -1164,6 +1177,7 @@
             // 
             this.textSend.Border.Class = "TextBoxBorder";
             this.textSend.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textSend.DisabledBackColor = System.Drawing.Color.White;
             this.textSend.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textSend.ForeColor = System.Drawing.Color.Black;
             this.textSend.Location = new System.Drawing.Point(99, 95);
@@ -1183,6 +1197,8 @@
             this.rTextTCPLog.ForeColor = System.Drawing.Color.Black;
             this.rTextTCPLog.Location = new System.Drawing.Point(441, 380);
             this.rTextTCPLog.Name = "rTextTCPLog";
+            this.rTextTCPLog.Rtf = "{\\rtf1\\ansi\\ansicpg936\\deff0\\deflang1033\\deflangfe2052{\\fonttbl{\\f0\\fnil\\fcharset" +
+    "0 Consolas;}}\r\n\\viewkind4\\uc1\\pard\\lang2052\\f0\\fs20\\par\r\n}\r\n";
             this.rTextTCPLog.Size = new System.Drawing.Size(446, 186);
             this.rTextTCPLog.TabIndex = 15;
             // 
@@ -1194,6 +1210,7 @@
             // 
             this.textPort.Border.Class = "TextBoxBorder";
             this.textPort.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textPort.DisabledBackColor = System.Drawing.Color.White;
             this.textPort.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textPort.ForeColor = System.Drawing.Color.Black;
             this.textPort.Location = new System.Drawing.Point(99, 59);
@@ -1307,6 +1324,9 @@
             this.richTextBoxEx1.ForeColor = System.Drawing.Color.Black;
             this.richTextBoxEx1.Location = new System.Drawing.Point(22, 3);
             this.richTextBoxEx1.Name = "richTextBoxEx1";
+            this.richTextBoxEx1.Rtf = "{\\rtf1\\ansi\\ansicpg936\\deff0\\deflang1033\\deflangfe2052{\\fonttbl{\\f0\\fnil\\fcharset" +
+    "134 \\\'ce\\\'a2\\\'c8\\\'ed\\\'d1\\\'c5\\\'ba\\\'da;}}\r\n\\viewkind4\\uc1\\pard\\lang2052\\f0\\fs20\\pa" +
+    "r\r\n}\r\n";
             this.richTextBoxEx1.Size = new System.Drawing.Size(582, 131);
             this.richTextBoxEx1.TabIndex = 5;
             // 
@@ -1333,7 +1353,7 @@
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(98, 24);
             this.labelX12.TabIndex = 19;
-            this.labelX12.Text = "Ver:1.50";
+            this.labelX12.Text = "Ver:1.73";
             // 
             // labelX13
             // 
@@ -1348,7 +1368,7 @@
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(150, 22);
             this.labelX13.TabIndex = 20;
-            this.labelX13.Text = "Date:20180901";
+            this.labelX13.Text = "Date:20190520";
             // 
             // picLogo
             // 
@@ -1373,6 +1393,7 @@
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.picLogo);
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "S32P Save Tool";
