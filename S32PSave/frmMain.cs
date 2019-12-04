@@ -140,14 +140,16 @@ namespace S32PSave
         /// 32:Itsn_really
         /// 33:Label_Date
         /// 34:Label_sn
-        /// 35:Decimal_sn
-        /// 36:MO
+        /// 35:Decimal_date
+        /// 36:Decimal_sn
+        /// 
         ///
         /// Other
-        /// 37:RetestReason
-        /// 38:TestType
-        /// 39:LineID
-        /// 40:QAMark
+        /// 37 MO
+        /// 38:RetestReason
+        /// 39:TestType
+        /// 40:LineID
+        /// 41:QAMark
         ///
         /// 涉及函数
         /// setDetailSN
@@ -307,13 +309,14 @@ namespace S32PSave
                 {
                     labelResult.Text = "Fail";
                     labelResult.BackColor = Color.Red;
+                    //dbRecord[32] = textSN.Text.Trim();
                     setStart(true);
                    
                     MessageBoxEx.Show("SN不能为空");
                     return false;
                 }
+                //dbRecord[32] = textSN.Text.Trim();
 
-                
             }
             saveS32pPath = pnSaveFolderPath + "\\" + Util.slashRepalce(textSN.Text) + "_" + cmbTestNo.Text + ".s32p";
             return true;
@@ -1483,7 +1486,7 @@ namespace S32PSave
            dbRecord[29] = snData.FSN;
            dbRecord[30] = "";
            dbRecord[31] = "";
-           dbRecord[32] = snData.label;
+           //dbRecord[32] = snData.label;
            dbRecord[33] = snData.customerData;
            dbRecord[34] = snData.sn;
            dbRecord[35] = snData.snDec;
@@ -1987,7 +1990,7 @@ namespace S32PSave
             dbRecord[6] = "Quanying Niu";
             dbRecord[7] = "Wave Zhang";
             dbRecord[10] = Environment.MachineName;
-            dbRecord[36] = testMO;
+            dbRecord[37] = testMO;
             return true;
         }
 
@@ -1995,6 +1998,7 @@ namespace S32PSave
             bool nextTf,bool fextTf)
         {
             dbRecord[2] = sn;
+            dbRecord[32] = sn;
             dbRecord[4] = testResult?"PASS":"FAIL";
             dbRecord[8] = DateTime.Now.ToString("HH:mm:ss yyyy/MM/dd");
             dbRecord[9] = testTime + "S";
@@ -2019,7 +2023,7 @@ namespace S32PSave
             dbRecord[27] = eepRomResult != "EEPROM:None" ? "P#" + sn + "_" + testCount + "#FextTXT.zip" : "NULL";
             dbRecord[28] = "P#" + sn + "_" + testCount + "#Summary.zip";
 
-            dbRecord[37] = "";
+            dbRecord[36] = "";
             dbRecord[38] = "NULL";
             dbRecord[39] = "S32pSave";
             dbRecord[40] = "S32P";

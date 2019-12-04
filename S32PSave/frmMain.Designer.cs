@@ -141,9 +141,10 @@
             this.textSN.DisabledBackColor = System.Drawing.Color.White;
             this.textSN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textSN.ForeColor = System.Drawing.Color.Black;
-            this.textSN.Location = new System.Drawing.Point(68, 43);
+            this.textSN.Location = new System.Drawing.Point(102, 64);
+            this.textSN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textSN.Name = "textSN";
-            this.textSN.Size = new System.Drawing.Size(267, 26);
+            this.textSN.Size = new System.Drawing.Size(400, 36);
             this.textSN.TabIndex = 1;
             // 
             // labelX1
@@ -155,9 +156,10 @@
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX1.ForeColor = System.Drawing.Color.Black;
-            this.labelX1.Location = new System.Drawing.Point(26, 41);
+            this.labelX1.Location = new System.Drawing.Point(39, 62);
+            this.labelX1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(34, 33);
+            this.labelX1.Size = new System.Drawing.Size(51, 50);
             this.labelX1.TabIndex = 2;
             this.labelX1.Text = "SN";
             // 
@@ -171,12 +173,13 @@
             this.rTextStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.rTextStatus.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rTextStatus.ForeColor = System.Drawing.Color.Black;
-            this.rTextStatus.Location = new System.Drawing.Point(15, 470);
+            this.rTextStatus.Location = new System.Drawing.Point(22, 705);
+            this.rTextStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rTextStatus.Name = "rTextStatus";
             this.rTextStatus.Rtf = "{\\rtf1\\ansi\\ansicpg936\\deff0\\deflang1033\\deflangfe2052{\\fonttbl{\\f0\\fnil\\fcharset" +
     "134 \\\'ce\\\'a2\\\'c8\\\'ed\\\'d1\\\'c5\\\'ba\\\'da;}}\r\n\\viewkind4\\uc1\\pard\\lang2052\\f0\\fs20\\pa" +
     "r\r\n}\r\n";
-            this.rTextStatus.Size = new System.Drawing.Size(1009, 185);
+            this.rTextStatus.Size = new System.Drawing.Size(1514, 278);
             this.rTextStatus.TabIndex = 4;
             this.rTextStatus.TextChanged += new System.EventHandler(this.rTextStatus_TextChanged);
             // 
@@ -189,9 +192,10 @@
             this.labelResult.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelResult.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelResult.ForeColor = System.Drawing.Color.Black;
-            this.labelResult.Location = new System.Drawing.Point(1034, 100);
+            this.labelResult.Location = new System.Drawing.Point(1551, 150);
+            this.labelResult.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelResult.Name = "labelResult";
-            this.labelResult.Size = new System.Drawing.Size(324, 163);
+            this.labelResult.Size = new System.Drawing.Size(486, 244);
             this.labelResult.TabIndex = 5;
             this.labelResult.Text = "PASS";
             // 
@@ -200,9 +204,10 @@
             this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnExit.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(1273, 582);
+            this.btnExit.Location = new System.Drawing.Point(1910, 873);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(147, 73);
+            this.btnExit.Size = new System.Drawing.Size(220, 110);
             this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
             this.btnExit.TabIndex = 6;
             this.btnExit.Text = "Exit";
@@ -213,9 +218,10 @@
             this.btnStart.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnStart.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnStart.Font = new System.Drawing.Font("Consolas", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(1041, 470);
+            this.btnStart.Location = new System.Drawing.Point(1562, 705);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(222, 183);
+            this.btnStart.Size = new System.Drawing.Size(333, 274);
             this.btnStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnStart.TabIndex = 8;
             this.btnStart.Text = "Start";
@@ -230,9 +236,10 @@
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.Font = new System.Drawing.Font("Cambria", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX2.ForeColor = System.Drawing.Color.Aquamarine;
-            this.labelX2.Location = new System.Drawing.Point(280, -16);
+            this.labelX2.Location = new System.Drawing.Point(420, -24);
+            this.labelX2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(972, 84);
+            this.labelX2.Size = new System.Drawing.Size(1458, 126);
             this.labelX2.TabIndex = 10;
             this.labelX2.Text = "HPTS Of  32Port Automatic Measurement System";
             // 
@@ -245,9 +252,10 @@
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX3.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX3.ForeColor = System.Drawing.Color.Black;
-            this.labelX3.Location = new System.Drawing.Point(353, 4);
+            this.labelX3.Location = new System.Drawing.Point(530, 6);
+            this.labelX3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(34, 33);
+            this.labelX3.Size = new System.Drawing.Size(51, 50);
             this.labelX3.TabIndex = 11;
             this.labelX3.Text = "PN";
             // 
@@ -262,9 +270,10 @@
             this.textPN.DisabledBackColor = System.Drawing.Color.White;
             this.textPN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textPN.ForeColor = System.Drawing.Color.Black;
-            this.textPN.Location = new System.Drawing.Point(393, 11);
+            this.textPN.Location = new System.Drawing.Point(590, 16);
+            this.textPN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textPN.Name = "textPN";
-            this.textPN.Size = new System.Drawing.Size(201, 26);
+            this.textPN.Size = new System.Drawing.Size(302, 36);
             this.textPN.TabIndex = 12;
             this.textPN.TextChanged += new System.EventHandler(this.textPN_TextChanged);
             this.textPN.Validated += new System.EventHandler(this.textPN_Validated);
@@ -277,9 +286,10 @@
             this.cmbTestNo.ForeColor = System.Drawing.Color.Black;
             this.cmbTestNo.FormattingEnabled = true;
             this.cmbTestNo.ItemHeight = 20;
-            this.cmbTestNo.Location = new System.Drawing.Point(674, 9);
+            this.cmbTestNo.Location = new System.Drawing.Point(1011, 14);
+            this.cmbTestNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTestNo.Name = "cmbTestNo";
-            this.cmbTestNo.Size = new System.Drawing.Size(88, 26);
+            this.cmbTestNo.Size = new System.Drawing.Size(130, 26);
             this.cmbTestNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbTestNo.TabIndex = 16;
             this.cmbTestNo.SelectedIndexChanged += new System.EventHandler(this.cmbTestNo_SelectedIndexChanged);
@@ -293,9 +303,10 @@
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX4.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX4.ForeColor = System.Drawing.Color.Black;
-            this.labelX4.Location = new System.Drawing.Point(632, 4);
+            this.labelX4.Location = new System.Drawing.Point(948, 6);
+            this.labelX4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(36, 38);
+            this.labelX4.Size = new System.Drawing.Size(54, 57);
             this.labelX4.TabIndex = 17;
             this.labelX4.Text = "No.";
             // 
@@ -309,11 +320,12 @@
             this.tabMain.Controls.Add(this.tabControlPanel2);
             this.tabMain.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.ForeColor = System.Drawing.Color.Black;
-            this.tabMain.Location = new System.Drawing.Point(10, 67);
+            this.tabMain.Location = new System.Drawing.Point(15, 100);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedTabFont = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.SelectedTabIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(1425, 700);
+            this.tabMain.Size = new System.Drawing.Size(2152, 1050);
             this.tabMain.TabIndex = 18;
             this.tabMain.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabMain.Tabs.Add(this.tabItem1);
@@ -348,10 +360,11 @@
             this.tabControlPanel1.DisabledBackColor = System.Drawing.Color.Empty;
             this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlPanel1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControlPanel1.Location = new System.Drawing.Point(0, 33);
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 49);
+            this.tabControlPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControlPanel1.Name = "tabControlPanel1";
-            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(1425, 667);
+            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControlPanel1.Size = new System.Drawing.Size(2152, 1001);
             this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.White;
             this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.White;
             this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -371,9 +384,10 @@
             this.chkUpload.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkUpload.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUpload.ForeColor = System.Drawing.Color.Black;
-            this.chkUpload.Location = new System.Drawing.Point(585, 50);
+            this.chkUpload.Location = new System.Drawing.Point(878, 75);
+            this.chkUpload.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkUpload.Name = "chkUpload";
-            this.chkUpload.Size = new System.Drawing.Size(107, 24);
+            this.chkUpload.Size = new System.Drawing.Size(160, 36);
             this.chkUpload.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkUpload.TabIndex = 34;
             this.chkUpload.Text = "Upload";
@@ -388,9 +402,10 @@
             this.chkSaveTxt.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkSaveTxt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSaveTxt.ForeColor = System.Drawing.Color.Black;
-            this.chkSaveTxt.Location = new System.Drawing.Point(461, 50);
+            this.chkSaveTxt.Location = new System.Drawing.Point(692, 75);
+            this.chkSaveTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkSaveTxt.Name = "chkSaveTxt";
-            this.chkSaveTxt.Size = new System.Drawing.Size(107, 24);
+            this.chkSaveTxt.Size = new System.Drawing.Size(160, 36);
             this.chkSaveTxt.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkSaveTxt.TabIndex = 33;
             this.chkSaveTxt.Text = "Save Data";
@@ -407,9 +422,10 @@
             this.txtMoSum.DisabledBackColor = System.Drawing.Color.White;
             this.txtMoSum.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMoSum.ForeColor = System.Drawing.Color.Black;
-            this.txtMoSum.Location = new System.Drawing.Point(881, 11);
+            this.txtMoSum.Location = new System.Drawing.Point(1322, 16);
+            this.txtMoSum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMoSum.Name = "txtMoSum";
-            this.txtMoSum.Size = new System.Drawing.Size(141, 26);
+            this.txtMoSum.Size = new System.Drawing.Size(212, 36);
             this.txtMoSum.TabIndex = 31;
             // 
             // labelX18
@@ -421,9 +437,10 @@
             this.labelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX18.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX18.ForeColor = System.Drawing.Color.Black;
-            this.labelX18.Location = new System.Drawing.Point(797, 9);
+            this.labelX18.Location = new System.Drawing.Point(1196, 14);
+            this.labelX18.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX18.Name = "labelX18";
-            this.labelX18.Size = new System.Drawing.Size(77, 33);
+            this.labelX18.Size = new System.Drawing.Size(116, 50);
             this.labelX18.TabIndex = 30;
             this.labelX18.Text = "MO sum";
             // 
@@ -453,11 +470,12 @@
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
             this.tabControlChart.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControlChart.ForeColor = System.Drawing.Color.Black;
-            this.tabControlChart.Location = new System.Drawing.Point(15, 75);
+            this.tabControlChart.Location = new System.Drawing.Point(22, 112);
+            this.tabControlChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControlChart.Name = "tabControlChart";
             this.tabControlChart.SelectedTabFont = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControlChart.SelectedTabIndex = 0;
-            this.tabControlChart.Size = new System.Drawing.Size(1007, 367);
+            this.tabControlChart.Size = new System.Drawing.Size(1510, 550);
             this.tabControlChart.TabIndex = 29;
             this.tabControlChart.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControlChart.Text = "tabControl2";
@@ -471,9 +489,10 @@
             this.labelCableStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelCableStatus.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelCableStatus.ForeColor = System.Drawing.Color.Black;
-            this.labelCableStatus.Location = new System.Drawing.Point(1034, 298);
+            this.labelCableStatus.Location = new System.Drawing.Point(1551, 447);
+            this.labelCableStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelCableStatus.Name = "labelCableStatus";
-            this.labelCableStatus.Size = new System.Drawing.Size(324, 81);
+            this.labelCableStatus.Size = new System.Drawing.Size(486, 122);
             this.labelCableStatus.TabIndex = 27;
             this.labelCableStatus.Text = "请拔出线缆";
             // 
@@ -485,10 +504,11 @@
             // 
             this.progressBarX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.progressBarX1.ForeColor = System.Drawing.Color.Black;
-            this.progressBarX1.Location = new System.Drawing.Point(15, 445);
+            this.progressBarX1.Location = new System.Drawing.Point(22, 668);
+            this.progressBarX1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBarX1.Maximum = 200;
             this.progressBarX1.Name = "progressBarX1";
-            this.progressBarX1.Size = new System.Drawing.Size(1009, 17);
+            this.progressBarX1.Size = new System.Drawing.Size(1514, 26);
             this.progressBarX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
             this.progressBarX1.TabIndex = 26;
             this.progressBarX1.Text = "progressBarX1";
@@ -498,9 +518,10 @@
             this.btn_Calibrate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btn_Calibrate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btn_Calibrate.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Calibrate.Location = new System.Drawing.Point(1274, 472);
+            this.btn_Calibrate.Location = new System.Drawing.Point(1911, 708);
+            this.btn_Calibrate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_Calibrate.Name = "btn_Calibrate";
-            this.btn_Calibrate.Size = new System.Drawing.Size(147, 88);
+            this.btn_Calibrate.Size = new System.Drawing.Size(220, 132);
             this.btn_Calibrate.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
             this.btn_Calibrate.TabIndex = 24;
             this.btn_Calibrate.Text = "Calibrate";
@@ -515,9 +536,10 @@
             this.chkAutoSN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkAutoSN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAutoSN.ForeColor = System.Drawing.Color.Black;
-            this.chkAutoSN.Location = new System.Drawing.Point(370, 46);
+            this.chkAutoSN.Location = new System.Drawing.Point(555, 69);
+            this.chkAutoSN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkAutoSN.Name = "chkAutoSN";
-            this.chkAutoSN.Size = new System.Drawing.Size(85, 31);
+            this.chkAutoSN.Size = new System.Drawing.Size(128, 46);
             this.chkAutoSN.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkAutoSN.TabIndex = 21;
             this.chkAutoSN.Text = "AutoSN";
@@ -532,9 +554,10 @@
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX8.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX8.ForeColor = System.Drawing.Color.Black;
-            this.labelX8.Location = new System.Drawing.Point(26, 6);
+            this.labelX8.Location = new System.Drawing.Point(39, 9);
+            this.labelX8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(34, 33);
+            this.labelX8.Size = new System.Drawing.Size(51, 50);
             this.labelX8.TabIndex = 19;
             this.labelX8.Text = "MO";
             // 
@@ -549,9 +572,10 @@
             this.txtMO.DisabledBackColor = System.Drawing.Color.White;
             this.txtMO.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMO.ForeColor = System.Drawing.Color.Black;
-            this.txtMO.Location = new System.Drawing.Point(67, 11);
+            this.txtMO.Location = new System.Drawing.Point(100, 16);
+            this.txtMO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMO.Name = "txtMO";
-            this.txtMO.Size = new System.Drawing.Size(268, 26);
+            this.txtMO.Size = new System.Drawing.Size(402, 36);
             this.txtMO.TabIndex = 20;
             this.txtMO.TextChanged += new System.EventHandler(this.txtMO_TextChanged);
             // 
@@ -577,10 +601,11 @@
             this.tabControlPanel2.Controls.Add(this.groupBox1);
             this.tabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty;
             this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel2.Location = new System.Drawing.Point(0, 33);
+            this.tabControlPanel2.Location = new System.Drawing.Point(0, 49);
+            this.tabControlPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControlPanel2.Name = "tabControlPanel2";
-            this.tabControlPanel2.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel2.Size = new System.Drawing.Size(1425, 667);
+            this.tabControlPanel2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControlPanel2.Size = new System.Drawing.Size(2152, 1001);
             this.tabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.White;
             this.tabControlPanel2.Style.BackColor2.Color = System.Drawing.Color.White;
             this.tabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -596,9 +621,11 @@
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.panelExTestItems);
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
-            this.groupBox3.Location = new System.Drawing.Point(441, 25);
+            this.groupBox3.Location = new System.Drawing.Point(662, 38);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(446, 156);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Size = new System.Drawing.Size(669, 234);
             this.groupBox3.TabIndex = 29;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "TestItems";
@@ -608,9 +635,10 @@
             this.panelExTestItems.CanvasColor = System.Drawing.Color.Transparent;
             this.panelExTestItems.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelExTestItems.DisabledBackColor = System.Drawing.Color.Empty;
-            this.panelExTestItems.Location = new System.Drawing.Point(6, 25);
+            this.panelExTestItems.Location = new System.Drawing.Point(9, 38);
+            this.panelExTestItems.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelExTestItems.Name = "panelExTestItems";
-            this.panelExTestItems.Size = new System.Drawing.Size(434, 125);
+            this.panelExTestItems.Size = new System.Drawing.Size(651, 188);
             this.panelExTestItems.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelExTestItems.Style.BackColor1.Color = System.Drawing.Color.Transparent;
             this.panelExTestItems.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -637,9 +665,11 @@
             this.groupBox4.Controls.Add(this.labelX15);
             this.groupBox4.Controls.Add(this.labelX14);
             this.groupBox4.ForeColor = System.Drawing.Color.Black;
-            this.groupBox4.Location = new System.Drawing.Point(900, 25);
+            this.groupBox4.Location = new System.Drawing.Point(1350, 38);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(415, 541);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Size = new System.Drawing.Size(622, 812);
             this.groupBox4.TabIndex = 28;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Config";
@@ -652,9 +682,10 @@
             this.chkDBOffline.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkDBOffline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDBOffline.ForeColor = System.Drawing.Color.Black;
-            this.chkDBOffline.Location = new System.Drawing.Point(199, 100);
+            this.chkDBOffline.Location = new System.Drawing.Point(298, 150);
+            this.chkDBOffline.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkDBOffline.Name = "chkDBOffline";
-            this.chkDBOffline.Size = new System.Drawing.Size(108, 37);
+            this.chkDBOffline.Size = new System.Drawing.Size(162, 56);
             this.chkDBOffline.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkDBOffline.TabIndex = 32;
             this.chkDBOffline.Text = "Local DB";
@@ -664,9 +695,10 @@
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonX1.Location = new System.Drawing.Point(326, 178);
+            this.buttonX1.Location = new System.Drawing.Point(489, 267);
+            this.buttonX1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(77, 29);
+            this.buttonX1.Size = new System.Drawing.Size(116, 44);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX1.TabIndex = 31;
             this.buttonX1.Text = "Open";
@@ -683,9 +715,10 @@
             this.textTxtSaveFolderPath.DisabledBackColor = System.Drawing.Color.White;
             this.textTxtSaveFolderPath.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textTxtSaveFolderPath.ForeColor = System.Drawing.Color.Black;
-            this.textTxtSaveFolderPath.Location = new System.Drawing.Point(16, 177);
+            this.textTxtSaveFolderPath.Location = new System.Drawing.Point(24, 266);
+            this.textTxtSaveFolderPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textTxtSaveFolderPath.Name = "textTxtSaveFolderPath";
-            this.textTxtSaveFolderPath.Size = new System.Drawing.Size(291, 29);
+            this.textTxtSaveFolderPath.Size = new System.Drawing.Size(436, 39);
             this.textTxtSaveFolderPath.TabIndex = 30;
             // 
             // labelX19
@@ -697,9 +730,10 @@
             this.labelX19.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX19.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX19.ForeColor = System.Drawing.Color.Black;
-            this.labelX19.Location = new System.Drawing.Point(16, 143);
+            this.labelX19.Location = new System.Drawing.Point(24, 214);
+            this.labelX19.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX19.Name = "labelX19";
-            this.labelX19.Size = new System.Drawing.Size(152, 27);
+            this.labelX19.Size = new System.Drawing.Size(228, 40);
             this.labelX19.TabIndex = 29;
             this.labelX19.Text = "txt Save Folder";
             // 
@@ -711,9 +745,10 @@
             this.chkCalFileEnable.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkCalFileEnable.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCalFileEnable.ForeColor = System.Drawing.Color.Black;
-            this.chkCalFileEnable.Location = new System.Drawing.Point(16, 336);
+            this.chkCalFileEnable.Location = new System.Drawing.Point(24, 504);
+            this.chkCalFileEnable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkCalFileEnable.Name = "chkCalFileEnable";
-            this.chkCalFileEnable.Size = new System.Drawing.Size(100, 37);
+            this.chkCalFileEnable.Size = new System.Drawing.Size(150, 56);
             this.chkCalFileEnable.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkCalFileEnable.TabIndex = 28;
             this.chkCalFileEnable.Text = "Enable";
@@ -728,9 +763,10 @@
             this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX9.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX9.ForeColor = System.Drawing.Color.Black;
-            this.labelX9.Location = new System.Drawing.Point(16, 406);
+            this.labelX9.Location = new System.Drawing.Point(24, 609);
+            this.labelX9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX9.Name = "labelX9";
-            this.labelX9.Size = new System.Drawing.Size(56, 34);
+            this.labelX9.Size = new System.Drawing.Size(84, 51);
             this.labelX9.TabIndex = 24;
             this.labelX9.Text = "Skin";
             // 
@@ -742,9 +778,10 @@
             this.cmbSkin.ForeColor = System.Drawing.Color.Black;
             this.cmbSkin.FormattingEnabled = true;
             this.cmbSkin.ItemHeight = 18;
-            this.cmbSkin.Location = new System.Drawing.Point(16, 446);
+            this.cmbSkin.Location = new System.Drawing.Point(24, 669);
+            this.cmbSkin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbSkin.Name = "cmbSkin";
-            this.cmbSkin.Size = new System.Drawing.Size(360, 24);
+            this.cmbSkin.Size = new System.Drawing.Size(538, 24);
             this.cmbSkin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbSkin.TabIndex = 23;
             this.cmbSkin.SelectedIndexChanged += new System.EventHandler(this.cmbSkin_SelectedIndexChanged);
@@ -754,9 +791,10 @@
             this.btnCalBrowse.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCalBrowse.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnCalBrowse.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalBrowse.Location = new System.Drawing.Point(326, 302);
+            this.btnCalBrowse.Location = new System.Drawing.Point(489, 453);
+            this.btnCalBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCalBrowse.Name = "btnCalBrowse";
-            this.btnCalBrowse.Size = new System.Drawing.Size(77, 29);
+            this.btnCalBrowse.Size = new System.Drawing.Size(116, 44);
             this.btnCalBrowse.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCalBrowse.TabIndex = 27;
             this.btnCalBrowse.Text = "Open";
@@ -767,9 +805,10 @@
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(326, 494);
+            this.btnSave.Location = new System.Drawing.Point(489, 741);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(77, 29);
+            this.btnSave.Size = new System.Drawing.Size(116, 44);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
@@ -783,9 +822,10 @@
             this.chkSNClear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkSNClear.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSNClear.ForeColor = System.Drawing.Color.Black;
-            this.chkSNClear.Location = new System.Drawing.Point(16, 100);
+            this.chkSNClear.Location = new System.Drawing.Point(24, 150);
+            this.chkSNClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkSNClear.Name = "chkSNClear";
-            this.chkSNClear.Size = new System.Drawing.Size(100, 37);
+            this.chkSNClear.Size = new System.Drawing.Size(150, 56);
             this.chkSNClear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkSNClear.TabIndex = 7;
             this.chkSNClear.Text = "ClearSN";
@@ -801,9 +841,10 @@
             this.txtCalFile.DisabledBackColor = System.Drawing.Color.White;
             this.txtCalFile.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCalFile.ForeColor = System.Drawing.Color.Black;
-            this.txtCalFile.Location = new System.Drawing.Point(16, 301);
+            this.txtCalFile.Location = new System.Drawing.Point(24, 452);
+            this.txtCalFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCalFile.Name = "txtCalFile";
-            this.txtCalFile.Size = new System.Drawing.Size(291, 29);
+            this.txtCalFile.Size = new System.Drawing.Size(436, 39);
             this.txtCalFile.TabIndex = 26;
             this.txtCalFile.TextChanged += new System.EventHandler(this.txtCalFile_TextChanged);
             // 
@@ -812,9 +853,10 @@
             this.btnSaveFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSaveFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnSaveFolder.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveFolder.Location = new System.Drawing.Point(326, 66);
+            this.btnSaveFolder.Location = new System.Drawing.Point(489, 99);
+            this.btnSaveFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSaveFolder.Name = "btnSaveFolder";
-            this.btnSaveFolder.Size = new System.Drawing.Size(77, 29);
+            this.btnSaveFolder.Size = new System.Drawing.Size(116, 44);
             this.btnSaveFolder.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSaveFolder.TabIndex = 4;
             this.btnSaveFolder.Text = "Open";
@@ -831,9 +873,10 @@
             this.textS32PSaveFolderPath.DisabledBackColor = System.Drawing.Color.White;
             this.textS32PSaveFolderPath.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textS32PSaveFolderPath.ForeColor = System.Drawing.Color.Black;
-            this.textS32PSaveFolderPath.Location = new System.Drawing.Point(16, 65);
+            this.textS32PSaveFolderPath.Location = new System.Drawing.Point(24, 98);
+            this.textS32PSaveFolderPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textS32PSaveFolderPath.Name = "textS32PSaveFolderPath";
-            this.textS32PSaveFolderPath.Size = new System.Drawing.Size(291, 29);
+            this.textS32PSaveFolderPath.Size = new System.Drawing.Size(436, 39);
             this.textS32PSaveFolderPath.TabIndex = 3;
             // 
             // labelX15
@@ -845,9 +888,10 @@
             this.labelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX15.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX15.ForeColor = System.Drawing.Color.Black;
-            this.labelX15.Location = new System.Drawing.Point(16, 267);
+            this.labelX15.Location = new System.Drawing.Point(24, 400);
+            this.labelX15.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX15.Name = "labelX15";
-            this.labelX15.Size = new System.Drawing.Size(123, 27);
+            this.labelX15.Size = new System.Drawing.Size(184, 40);
             this.labelX15.TabIndex = 25;
             this.labelX15.Text = "CalFile";
             // 
@@ -860,9 +904,10 @@
             this.labelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX14.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX14.ForeColor = System.Drawing.Color.Black;
-            this.labelX14.Location = new System.Drawing.Point(16, 31);
+            this.labelX14.Location = new System.Drawing.Point(24, 46);
+            this.labelX14.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX14.Name = "labelX14";
-            this.labelX14.Size = new System.Drawing.Size(152, 27);
+            this.labelX14.Size = new System.Drawing.Size(228, 40);
             this.labelX14.TabIndex = 2;
             this.labelX14.Text = "S32P Save Folder";
             // 
@@ -886,9 +931,11 @@
             this.groupBox2.Controls.Add(this.labelX10);
             this.groupBox2.Controls.Add(this.labelX6);
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(17, 186);
+            this.groupBox2.Location = new System.Drawing.Point(26, 279);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(413, 380);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(620, 570);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "System";
@@ -908,9 +955,10 @@
             this.comboItem9,
             this.comboItem10,
             this.comboItem11});
-            this.cmbResolution.Location = new System.Drawing.Point(235, 348);
+            this.cmbResolution.Location = new System.Drawing.Point(352, 522);
+            this.cmbResolution.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbResolution.Name = "cmbResolution";
-            this.cmbResolution.Size = new System.Drawing.Size(163, 24);
+            this.cmbResolution.Size = new System.Drawing.Size(242, 24);
             this.cmbResolution.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbResolution.TabIndex = 37;
             // 
@@ -943,9 +991,10 @@
             this.labelX17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX17.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX17.ForeColor = System.Drawing.Color.Black;
-            this.labelX17.Location = new System.Drawing.Point(10, 348);
+            this.labelX17.Location = new System.Drawing.Point(15, 522);
+            this.labelX17.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX17.Name = "labelX17";
-            this.labelX17.Size = new System.Drawing.Size(116, 26);
+            this.labelX17.Size = new System.Drawing.Size(174, 39);
             this.labelX17.TabIndex = 36;
             this.labelX17.Text = "SNP Resolution";
             // 
@@ -958,9 +1007,10 @@
             this.labelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX16.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX16.ForeColor = System.Drawing.Color.Black;
-            this.labelX16.Location = new System.Drawing.Point(11, 307);
+            this.labelX16.Location = new System.Drawing.Point(16, 460);
+            this.labelX16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX16.Name = "labelX16";
-            this.labelX16.Size = new System.Drawing.Size(93, 26);
+            this.labelX16.Size = new System.Drawing.Size(140, 39);
             this.labelX16.TabIndex = 35;
             this.labelX16.Text = "PNA Address";
             // 
@@ -975,9 +1025,10 @@
             this.txtVisaAddress.DisabledBackColor = System.Drawing.Color.White;
             this.txtVisaAddress.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtVisaAddress.ForeColor = System.Drawing.Color.Black;
-            this.txtVisaAddress.Location = new System.Drawing.Point(110, 310);
+            this.txtVisaAddress.Location = new System.Drawing.Point(165, 465);
+            this.txtVisaAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVisaAddress.Name = "txtVisaAddress";
-            this.txtVisaAddress.Size = new System.Drawing.Size(288, 24);
+            this.txtVisaAddress.Size = new System.Drawing.Size(432, 32);
             this.txtVisaAddress.TabIndex = 34;
             this.txtVisaAddress.TextChanged += new System.EventHandler(this.txtVisaAddress_TextChanged);
             // 
@@ -990,9 +1041,10 @@
             this.chkSerialPortChoose.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkSerialPortChoose.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSerialPortChoose.ForeColor = System.Drawing.Color.Black;
-            this.chkSerialPortChoose.Location = new System.Drawing.Point(14, 32);
+            this.chkSerialPortChoose.Location = new System.Drawing.Point(21, 48);
+            this.chkSerialPortChoose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkSerialPortChoose.Name = "chkSerialPortChoose";
-            this.chkSerialPortChoose.Size = new System.Drawing.Size(89, 28);
+            this.chkSerialPortChoose.Size = new System.Drawing.Size(134, 42);
             this.chkSerialPortChoose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkSerialPortChoose.TabIndex = 33;
             this.chkSerialPortChoose.Text = "Manual";
@@ -1007,9 +1059,10 @@
             this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX11.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX11.ForeColor = System.Drawing.Color.Black;
-            this.labelX11.Location = new System.Drawing.Point(14, 136);
+            this.labelX11.Location = new System.Drawing.Point(21, 204);
+            this.labelX11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX11.Name = "labelX11";
-            this.labelX11.Size = new System.Drawing.Size(100, 32);
+            this.labelX11.Size = new System.Drawing.Size(150, 48);
             this.labelX11.TabIndex = 32;
             this.labelX11.Text = "Connect Map";
             // 
@@ -1021,9 +1074,10 @@
             this.cmbPorts.ForeColor = System.Drawing.Color.Black;
             this.cmbPorts.FormattingEnabled = true;
             this.cmbPorts.ItemHeight = 18;
-            this.cmbPorts.Location = new System.Drawing.Point(86, 106);
+            this.cmbPorts.Location = new System.Drawing.Point(129, 159);
+            this.cmbPorts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbPorts.Name = "cmbPorts";
-            this.cmbPorts.Size = new System.Drawing.Size(163, 24);
+            this.cmbPorts.Size = new System.Drawing.Size(242, 24);
             this.cmbPorts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbPorts.TabIndex = 31;
             this.cmbPorts.SelectedIndexChanged += new System.EventHandler(this.cmbPorts_SelectedIndexChanged);
@@ -1032,9 +1086,10 @@
             // 
             this.pictureBox3.ForeColor = System.Drawing.Color.Black;
             this.pictureBox3.Image = global::S32PSave.Properties.Resources._1;
-            this.pictureBox3.Location = new System.Drawing.Point(204, 169);
+            this.pictureBox3.Location = new System.Drawing.Point(306, 254);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(123, 63);
+            this.pictureBox3.Size = new System.Drawing.Size(184, 94);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 30;
             this.pictureBox3.TabStop = false;
@@ -1043,9 +1098,10 @@
             // 
             this.pictureBox2.ForeColor = System.Drawing.Color.Black;
             this.pictureBox2.Image = global::S32PSave.Properties.Resources._0;
-            this.pictureBox2.Location = new System.Drawing.Point(19, 169);
+            this.pictureBox2.Location = new System.Drawing.Point(28, 254);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(123, 63);
+            this.pictureBox2.Size = new System.Drawing.Size(184, 94);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 29;
             this.pictureBox2.TabStop = false;
@@ -1054,9 +1110,10 @@
             // 
             this.rbtPort1.AutoSize = true;
             this.rbtPort1.ForeColor = System.Drawing.Color.Black;
-            this.rbtPort1.Location = new System.Drawing.Point(204, 237);
+            this.rbtPort1.Location = new System.Drawing.Point(306, 356);
+            this.rbtPort1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbtPort1.Name = "rbtPort1";
-            this.rbtPort1.Size = new System.Drawing.Size(36, 23);
+            this.rbtPort1.Size = new System.Drawing.Size(50, 32);
             this.rbtPort1.TabIndex = 28;
             this.rbtPort1.TabStop = true;
             this.rbtPort1.Text = "1";
@@ -1067,9 +1124,10 @@
             // 
             this.rbtPort0.AutoSize = true;
             this.rbtPort0.ForeColor = System.Drawing.Color.Black;
-            this.rbtPort0.Location = new System.Drawing.Point(20, 237);
+            this.rbtPort0.Location = new System.Drawing.Point(30, 356);
+            this.rbtPort0.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbtPort0.Name = "rbtPort0";
-            this.rbtPort0.Size = new System.Drawing.Size(36, 23);
+            this.rbtPort0.Size = new System.Drawing.Size(50, 32);
             this.rbtPort0.TabIndex = 27;
             this.rbtPort0.TabStop = true;
             this.rbtPort0.Text = "0";
@@ -1085,9 +1143,10 @@
             this.chkWriteSN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkWriteSN.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkWriteSN.ForeColor = System.Drawing.Color.Black;
-            this.chkWriteSN.Location = new System.Drawing.Point(15, 256);
+            this.chkWriteSN.Location = new System.Drawing.Point(22, 384);
+            this.chkWriteSN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkWriteSN.Name = "chkWriteSN";
-            this.chkWriteSN.Size = new System.Drawing.Size(88, 35);
+            this.chkWriteSN.Size = new System.Drawing.Size(132, 52);
             this.chkWriteSN.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkWriteSN.TabIndex = 26;
             this.chkWriteSN.Text = "WriteSN";
@@ -1101,9 +1160,10 @@
             this.chkEEPROM.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkEEPROM.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEEPROM.ForeColor = System.Drawing.Color.Black;
-            this.chkEEPROM.Location = new System.Drawing.Point(204, 253);
+            this.chkEEPROM.Location = new System.Drawing.Point(306, 380);
+            this.chkEEPROM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkEEPROM.Name = "chkEEPROM";
-            this.chkEEPROM.Size = new System.Drawing.Size(147, 38);
+            this.chkEEPROM.Size = new System.Drawing.Size(220, 57);
             this.chkEEPROM.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkEEPROM.TabIndex = 18;
             this.chkEEPROM.Text = "Write EEPROM";
@@ -1120,9 +1180,10 @@
             this.comboItem1,
             this.comboItem3,
             this.comboItem4});
-            this.cmbAdapter.Location = new System.Drawing.Point(86, 66);
+            this.cmbAdapter.Location = new System.Drawing.Point(129, 99);
+            this.cmbAdapter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbAdapter.Name = "cmbAdapter";
-            this.cmbAdapter.Size = new System.Drawing.Size(163, 24);
+            this.cmbAdapter.Size = new System.Drawing.Size(242, 24);
             this.cmbAdapter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbAdapter.TabIndex = 24;
             this.cmbAdapter.SelectedIndexChanged += new System.EventHandler(this.cmbAdapter_SelectedIndexChanged);
@@ -1148,9 +1209,10 @@
             this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX10.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX10.ForeColor = System.Drawing.Color.Black;
-            this.labelX10.Location = new System.Drawing.Point(15, 98);
+            this.labelX10.Location = new System.Drawing.Point(22, 147);
+            this.labelX10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX10.Name = "labelX10";
-            this.labelX10.Size = new System.Drawing.Size(48, 32);
+            this.labelX10.Size = new System.Drawing.Size(72, 48);
             this.labelX10.TabIndex = 16;
             this.labelX10.Text = "Port";
             // 
@@ -1163,9 +1225,10 @@
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX6.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX6.ForeColor = System.Drawing.Color.Black;
-            this.labelX6.Location = new System.Drawing.Point(14, 63);
+            this.labelX6.Location = new System.Drawing.Point(21, 94);
+            this.labelX6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX6.Name = "labelX6";
-            this.labelX6.Size = new System.Drawing.Size(62, 32);
+            this.labelX6.Size = new System.Drawing.Size(93, 48);
             this.labelX6.TabIndex = 15;
             this.labelX6.Text = "Adapter";
             // 
@@ -1180,9 +1243,10 @@
             this.textSend.DisabledBackColor = System.Drawing.Color.White;
             this.textSend.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textSend.ForeColor = System.Drawing.Color.Black;
-            this.textSend.Location = new System.Drawing.Point(99, 95);
+            this.textSend.Location = new System.Drawing.Point(148, 142);
+            this.textSend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textSend.Name = "textSend";
-            this.textSend.Size = new System.Drawing.Size(265, 24);
+            this.textSend.Size = new System.Drawing.Size(398, 32);
             this.textSend.TabIndex = 17;
             // 
             // rTextTCPLog
@@ -1195,11 +1259,12 @@
             this.rTextTCPLog.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.rTextTCPLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rTextTCPLog.ForeColor = System.Drawing.Color.Black;
-            this.rTextTCPLog.Location = new System.Drawing.Point(441, 380);
+            this.rTextTCPLog.Location = new System.Drawing.Point(662, 570);
+            this.rTextTCPLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rTextTCPLog.Name = "rTextTCPLog";
             this.rTextTCPLog.Rtf = "{\\rtf1\\ansi\\ansicpg936\\deff0\\deflang1033\\deflangfe2052{\\fonttbl{\\f0\\fnil\\fcharset" +
     "0 Consolas;}}\r\n\\viewkind4\\uc1\\pard\\lang2052\\f0\\fs20\\par\r\n}\r\n";
-            this.rTextTCPLog.Size = new System.Drawing.Size(446, 186);
+            this.rTextTCPLog.Size = new System.Drawing.Size(669, 279);
             this.rTextTCPLog.TabIndex = 15;
             // 
             // textPort
@@ -1213,9 +1278,10 @@
             this.textPort.DisabledBackColor = System.Drawing.Color.White;
             this.textPort.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textPort.ForeColor = System.Drawing.Color.Black;
-            this.textPort.Location = new System.Drawing.Point(99, 59);
+            this.textPort.Location = new System.Drawing.Point(148, 88);
+            this.textPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textPort.Name = "textPort";
-            this.textPort.Size = new System.Drawing.Size(265, 24);
+            this.textPort.Size = new System.Drawing.Size(398, 32);
             this.textPort.TabIndex = 13;
             // 
             // groupBox1
@@ -1227,9 +1293,11 @@
             this.groupBox1.Controls.Add(this.labelX7);
             this.groupBox1.Controls.Add(this.labelX5);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(17, 25);
+            this.groupBox1.Location = new System.Drawing.Point(26, 38);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(413, 156);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(620, 234);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "TCP/IP";
@@ -1239,9 +1307,10 @@
             this.btnTCPSend.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnTCPSend.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnTCPSend.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTCPSend.Location = new System.Drawing.Point(184, 108);
+            this.btnTCPSend.Location = new System.Drawing.Point(276, 162);
+            this.btnTCPSend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTCPSend.Name = "btnTCPSend";
-            this.btnTCPSend.Size = new System.Drawing.Size(60, 33);
+            this.btnTCPSend.Size = new System.Drawing.Size(90, 50);
             this.btnTCPSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnTCPSend.TabIndex = 19;
             this.btnTCPSend.Text = "Send";
@@ -1252,9 +1321,10 @@
             this.btnTCPStart.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnTCPStart.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnTCPStart.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTCPStart.Location = new System.Drawing.Point(82, 108);
+            this.btnTCPStart.Location = new System.Drawing.Point(123, 162);
+            this.btnTCPStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTCPStart.Name = "btnTCPStart";
-            this.btnTCPStart.Size = new System.Drawing.Size(60, 33);
+            this.btnTCPStart.Size = new System.Drawing.Size(90, 50);
             this.btnTCPStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnTCPStart.TabIndex = 9;
             this.btnTCPStart.Text = "Start";
@@ -1265,9 +1335,10 @@
             this.btnTCPStop.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnTCPStop.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnTCPStop.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTCPStop.Location = new System.Drawing.Point(286, 108);
+            this.btnTCPStop.Location = new System.Drawing.Point(429, 162);
+            this.btnTCPStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTCPStop.Name = "btnTCPStop";
-            this.btnTCPStop.Size = new System.Drawing.Size(60, 33);
+            this.btnTCPStop.Size = new System.Drawing.Size(90, 50);
             this.btnTCPStop.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnTCPStop.TabIndex = 20;
             this.btnTCPStop.Text = "Stop";
@@ -1282,9 +1353,10 @@
             this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX7.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX7.ForeColor = System.Drawing.Color.Black;
-            this.labelX7.Location = new System.Drawing.Point(17, 66);
+            this.labelX7.Location = new System.Drawing.Point(26, 99);
+            this.labelX7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX7.Name = "labelX7";
-            this.labelX7.Size = new System.Drawing.Size(39, 24);
+            this.labelX7.Size = new System.Drawing.Size(58, 36);
             this.labelX7.TabIndex = 18;
             this.labelX7.Text = "Msg";
             // 
@@ -1297,9 +1369,10 @@
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX5.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX5.ForeColor = System.Drawing.Color.Black;
-            this.labelX5.Location = new System.Drawing.Point(17, 28);
+            this.labelX5.Location = new System.Drawing.Point(26, 42);
+            this.labelX5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX5.Name = "labelX5";
-            this.labelX5.Size = new System.Drawing.Size(39, 32);
+            this.labelX5.Size = new System.Drawing.Size(58, 48);
             this.labelX5.TabIndex = 14;
             this.labelX5.Text = "Port";
             // 
@@ -1349,11 +1422,12 @@
             this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX12.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX12.ForeColor = System.Drawing.Color.Black;
-            this.labelX12.Location = new System.Drawing.Point(1154, 37);
+            this.labelX12.Location = new System.Drawing.Point(1731, 56);
+            this.labelX12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX12.Name = "labelX12";
-            this.labelX12.Size = new System.Drawing.Size(98, 24);
+            this.labelX12.Size = new System.Drawing.Size(147, 36);
             this.labelX12.TabIndex = 19;
-            this.labelX12.Text = "Ver:1.73";
+            this.labelX12.Text = "Ver:1.75";
             // 
             // labelX13
             // 
@@ -1364,29 +1438,31 @@
             this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX13.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX13.ForeColor = System.Drawing.Color.Black;
-            this.labelX13.Location = new System.Drawing.Point(1154, 67);
+            this.labelX13.Location = new System.Drawing.Point(1731, 100);
+            this.labelX13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelX13.Name = "labelX13";
-            this.labelX13.Size = new System.Drawing.Size(150, 22);
+            this.labelX13.Size = new System.Drawing.Size(225, 33);
             this.labelX13.TabIndex = 20;
-            this.labelX13.Text = "Date:20190520";
+            this.labelX13.Text = "Date:20191030";
             // 
             // picLogo
             // 
             this.picLogo.BackColor = System.Drawing.Color.White;
             this.picLogo.ForeColor = System.Drawing.Color.Black;
             this.picLogo.Image = global::S32PSave.Properties.Resources.LUXSHARE_ICT_LOGO_透明底_400x90;
-            this.picLogo.Location = new System.Drawing.Point(12, 0);
+            this.picLogo.Location = new System.Drawing.Point(18, 0);
+            this.picLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(250, 50);
+            this.picLogo.Size = new System.Drawing.Size(375, 75);
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picLogo.TabIndex = 9;
             this.picLogo.TabStop = false;
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1442, 773);
+            this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.labelX12);
             this.Controls.Add(this.labelX13);
             this.Controls.Add(this.tabMain);
@@ -1395,6 +1471,7 @@
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmMain";
             this.Text = "S32P Save Tool";
             this.Load += new System.EventHandler(this.frmMain_Load);

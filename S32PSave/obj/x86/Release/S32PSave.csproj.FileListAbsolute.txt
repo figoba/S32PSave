@@ -54,4 +54,9 @@ D:\gitProjects\S32PSave\S32PSave\obj\x86\Release\S32PSave.pdb
 D:\gitProjects\S32PSave\S32PSave\bin\x86\Release\ClassLibrary_Burn.dll
 D:\gitProjects\S32PSave\S32PSave\bin\x86\Release\RomMapConvert.dll
 D:\gitProjects\S32PSave\S32PSave\bin\x86\Release\MathNet.Numerics.dll
-D:\gitProjects\S32PSave\S32PSave\obj\x86\Release\S32PSave.csprojResolveAssemblyReference.cache
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Release\DevComponents.DotNetBar2.dll
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Release\DevComponents.DotNetBar2.xml
+D:\gitProjects\S32PSave\S32PSave\bin\x86\Release\System.Data.SQLite.dll.config
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Release\S32PSave.csprojAssemblyReference.cache
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Release\S32PSave.csproj.CoreCompileInputs.cache
+D:\gitProjects\S32PSave\S32PSave\obj\x86\Release\S32PSave.csproj.CopyComplete
